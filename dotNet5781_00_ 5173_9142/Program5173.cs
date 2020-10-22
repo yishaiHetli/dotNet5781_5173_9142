@@ -22,6 +22,6 @@ namespace dotNet5781_00__5173_9142
             Console.WriteLine("{0}, welcome to my first console application", a);
         }
 
-        private static void Welcome9142() { }
+        static partial void Welcome9142();
     }
 }
