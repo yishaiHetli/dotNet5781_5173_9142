@@ -1,4 +1,3 @@
-# I am writing somting
+# I'm writing somting
 # dotNet5781_5173_9142
 # Hello World 
-# World Mavo 
