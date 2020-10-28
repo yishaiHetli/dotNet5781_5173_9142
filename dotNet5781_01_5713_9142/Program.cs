@@ -90,7 +90,7 @@ namespace dotNet5781_01_5713_9142
                 busList.Add(new Bus(license, activDate));//adding the new bus to 'busList' 
             }
         }
-        /// <summary>the function picks in a random way a number between 0 to 1200 to be the 
+        /// <summary>the function picks in a random way a number between 0 to 1200 for the 
         /// amount the kilometer of the drive and (in codition the bus exist)
         /// checks the mileage of the bus and he's fuel
         /// and output if he can make this drive</summary>
