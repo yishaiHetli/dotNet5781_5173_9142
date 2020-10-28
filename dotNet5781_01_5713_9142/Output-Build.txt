@@ -1,0 +1,3 @@
+﻿1>------ Build started: Project: dotNet5781_01_5713_9142, Configuration: Debug Any CPU ------
+1>  dotNet5781_01_5713_9142 -> C:\Users\User\source\repos\dotNet5781_5173_9142\dotNet5781_01_5713_9142\bin\Debug\dotNet5781_01_5713_9142.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
