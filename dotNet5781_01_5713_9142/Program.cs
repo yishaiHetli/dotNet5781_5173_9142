@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/// <summary>
+/// the program create a list of buses and give the user a number of options:
+/// add a new bus, select a bus for a drive,
+/// fix the bus, refuel, print all the buses in list.
+/// </summary>
 namespace dotNet5781_01_5713_9142
 {
     class Program
