@@ -17,6 +17,14 @@ namespace ConsoleApp3
         }
 
     }
+   using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp3
+{
     class busStation
     {
         int busStationKey;
@@ -36,9 +44,10 @@ namespace ConsoleApp3
                     busStationKey *= 10;
             }
         }
-        public double Latitude { get; }
-        public double Longitude { get; }
-        public int BusStationKey { get; }
+        public double Latitude { get { return latitude; } }
+        public double Longitude { get { return longitude; } }
+        public int BusStationKey { get { return busStationKey; } }
+
         public override string ToString()
         {
             string station = "";
@@ -47,6 +56,56 @@ namespace ConsoleApp3
             station += string.Format("{0:0.000000}", longitude).ToString() + "°E";
             return station;
         }
+    }
+    class stationLine
+    {
+        busStation currentStation;
+        double distanceFromLast;//מרחק
+        double timeFromLast;//זמן נסיעה
+        public double DistanceFromLast { get; set; }
+        public double TimeFromLast { get; set; }
+    }
+    class BusLine
+    {
+        List<stationLine> listBusLine;
+        int BusNumber;
+        busStation FirstStation;
+        busStation LastStation;
+        string Area;
+        public BusLine() { listBusLine = new List<stationLine>(); }
+        public void ListBusLine(stationLine a) { listBusLine.Add(a); }
+        public void DistanceFromLast()
+        {
+            for (int i = 0; i < listBusLine.Count; i++)
+            { 
+                if (i == 0)
+                {
+                    listBusLine[i].DistanceFromLast = 0;
+                    listBusLine[i].TimeFromLast = 0;
+                }
+                else
+                {
+
+                }
+
+            }
+        }
+        public override string ToString()
+        {
+            string station = "Bus Line: ";
+            station += BusNumber.ToString() + ", Area: ";
+            station += string.Format("{0:0.000000}", latitude).ToString() + "°N ";
+            station += string.Format("{0:0.000000}", longitude).ToString() + "°E";
+            return station;
+        }
+    }
+    class colactionBusLine: 
+    {
+        public List<BusLine> list;
+        public List<BusLine> a;
+        public int code;
 
     }
+}
+
 }
