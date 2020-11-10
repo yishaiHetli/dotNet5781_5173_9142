@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_5713_9142
 {
-    class Program
+    public enum Menu
     {
-        static void Main(string[] args)
-        {
-        }
+        GENERAL, NORTH, SOUTH, CENTER, JERUSALEM
     }
 }

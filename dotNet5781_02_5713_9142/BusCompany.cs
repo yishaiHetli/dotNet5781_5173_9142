@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_5713_9142
 {
-    class Program
+    public class BusCompany
     {
-        static void Main(string[] args)
+        private List<BusLine> buses = new List<BusLine>();
+        public List<BusLine> Buses
         {
+            get;
         }
+
     }
 }
