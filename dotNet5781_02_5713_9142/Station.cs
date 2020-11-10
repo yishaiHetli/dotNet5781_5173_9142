@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace dotNet5781_02_5713_9142
 {
@@ -48,6 +44,7 @@ namespace dotNet5781_02_5713_9142
             }
             keyList.Add(busStationKey);
         }
+        public String Address { get; set; }
         public override string ToString()
         {
             string station = "Bus Station Code: ";
