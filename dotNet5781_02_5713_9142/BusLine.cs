@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace dotNet5781_02_5713_9142
 {
-     public class BusLine : IComparable<BusLine>
+    public class BusLine : IComparable<BusLine>
     {
         private List<BusStation> busStations = new List<BusStation>();
         public List<BusStation> BusStations { get; }
@@ -21,7 +21,7 @@ namespace dotNet5781_02_5713_9142
         {
             busStations.Add(sta);
             LastStation = busStations[busStations.Count - 1];
-            if (busStations.Count - 1 == 0)
+            if (busStations.Count == 1)
                 FirstStation = LastStation;
         }
         public void Add(int index, BusStation sta)
@@ -60,14 +60,14 @@ namespace dotNet5781_02_5713_9142
             b1 = CheckStation(s1);
             b2 = CheckStation(s2);
             if (b1 == false || b2 == false) //need to throw an exeption
-                throw new KeyNotFoundException(string.Format (b1 && b2 == false ? "{0} and {1}" : (b1 == false ? "{0}" : "{1}")
-                    + " is not foune in the list\n ",s1,s2));
+                throw new KeyNotFoundException(string.Format(b1 && b2 == false ? "{0} and {1}" :
+                  (b1 == false ? "{0}" : "{1}") + " is not foune in the list\n ", s1, s2));
             b1 = b2 = false;
             foreach (var x in busStations)
             {
                 if (b1 == true || b2 == true)
                     sum += x.Distance;
-                if(x.BusStationKey == s1)
+                if (x.BusStationKey == s1)
                 {
                     if (b2 == true)
                         break;
@@ -110,6 +110,21 @@ namespace dotNet5781_02_5713_9142
                 }
             }
             return sum;
+        }
+        public void Remove(int s1)
+        {
+            bool b1;
+            b1 = CheckStation(s1);
+            if (b1 == false) //need to throw an exeption
+                throw new KeyNotFoundException(string.Format("{0} is not foune in the list\n ", s1));
+            foreach (var x in busStations)
+            {
+                if(x.BusStationKey == s1)
+                {
+                    busStations.Remove(x);
+                    break;
+                }
+            }
         }
 
         public int CompareTo(BusLine other)

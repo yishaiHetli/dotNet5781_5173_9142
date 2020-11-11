@@ -4,41 +4,51 @@ using System.Collections.Generic;
 
 namespace dotNet5781_02_5713_9142
 {
-        public class BusCompany : IEnumerable<Bus>
+    public class BusCompany : IEnumerable<Bus>
+    {
+        private List<BusLine> busses = new List<BusLine>;
+        public int NumLine { get; set; }
+        public BusCompany()
         {
-            private List<int> numbers = new List<int>();
 
-            private List<Bus> busses;
-
-            public BusCompany()
-            {
-                busses = new List<Bus>();
-            }
-            public void Add(Bus bus)
-            {
-                if (numbers.Count != 0 && numbers.Contains(bus.Mispar))
-                {
-                    throw new ArgumentException("mispar kvar kayam bachevra");
-                }
-                busses.Add(bus);
-                numbers.Add(bus.Mispar);
-            }
-
-            public IEnumerator<Bus> GetEnumerator()
-            {
-                return busses.GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return this.GetEnumerator();
-            }
-
-            //private List<BusLine> buses = new List<BusLine>();
-
-            //public List<BusLine> Busses
-            //{
-            //    get { return buses; }
-            //}
         }
+        public void Add(int key)
+        {
+            int j = 0;
+            for (int i = 0; i < busses.Count; i++)
+            {
+                if ( busses[i].Number == key)
+                    ++j;
+            }
+            if (j >= 2)
+                throw new ArgumentException("the number is already exist");
+            busses.Add();
+        }
+        public List<int> CheckLines(int key)
+        {
+            List<int> lines = new List<int>();
+            foreach(var item in busses)
+            {
+                if(item.)
+            }
+
+            return lines;
+        }
+        public IEnumerator<Bus> GetEnumerator()
+        {
+            return busses.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        //private List<BusLine> buses = new List<BusLine>();
+
+        //public List<BusLine> Busses
+        //{
+        //    get { return buses; }
+        //}
     }
+}
