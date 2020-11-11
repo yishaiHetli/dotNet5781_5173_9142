@@ -2,6 +2,6 @@
 {
     public enum Area
     {
-        GENERAL, NORTH, SOUTH, CENTER, JERUSALEM
+        GENERAL, NORTH, SOUTH, CENTER, JERUSALEM,NON
     }
 }
