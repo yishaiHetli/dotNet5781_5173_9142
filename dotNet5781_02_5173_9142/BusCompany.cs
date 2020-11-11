@@ -11,6 +11,7 @@ namespace dotNet5781_02_5713_9142
 
         public override string ToString()
         {
+
             return String.Format("Bus {0} was klita be {1}", NumLine, StartYear.Year.ToString());
         }
 
