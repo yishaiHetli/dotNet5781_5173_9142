@@ -3,11 +3,16 @@ using System.Collections.Generic;
 
 namespace dotNet5781_02_5713_9142
 {
+
+    
     /// <summary>
     /// station for bus
     /// </summary>
     public class Station
     {
+        private double latitude;
+        private double longitude;
+        private int busStationKey;
         /// <summary>
         /// Station key should be unique
         /// </summary>
@@ -28,9 +33,9 @@ namespace dotNet5781_02_5713_9142
             }
 
         }
-        private double latitude;
-        private double longitude;
-        private int busStationKey;
+        public double Latitude{ get; set; }
+        public double Longitude { get; set; }
+
         private static List<int> keyList = new List<int>();
         public Station()
         {
