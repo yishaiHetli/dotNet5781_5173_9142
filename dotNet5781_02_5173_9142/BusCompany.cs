@@ -19,8 +19,6 @@ namespace dotNet5781_02_5173_9142
                 return temp;
             }
         }
-        public BusLine this[int index, int first]
-
         /// <summary>
         ///  the function adding a line to the list myBusses
         /// </summary>
