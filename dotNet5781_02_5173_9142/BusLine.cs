@@ -252,7 +252,8 @@ namespace dotNet5781_02_5173_9142
                     b = item;
                     index2++;
                 }
-            }
+            } 
+
             if (index1 > 0 && index2 > 0)//if the line hav both of the stations in his route
                 return Time(a, b);//send to Time
             TimeSpan c = new TimeSpan(0);//send TimeSpan with the value zero
