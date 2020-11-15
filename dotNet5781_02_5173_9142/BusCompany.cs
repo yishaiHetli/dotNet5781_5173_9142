@@ -19,6 +19,18 @@ namespace dotNet5781_02_5173_9142
                 return temp;
             }
         }
+        public BusLine this[int index, int first]
+        {
+            get
+            {
+                foreach (var item in myBusses)
+                {
+                    if (item.Number == index && item.FirstStation.BusStationKey == first)
+                        return item;
+                }
+                throw new ArgumentException("this line number is not exist in the list");
+            }
+        }
         /// <summary>
         ///  the function adding a line to the list myBusses
         /// </summary>
