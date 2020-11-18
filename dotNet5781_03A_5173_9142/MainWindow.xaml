@@ -5,19 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03A_5173_9142"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="403*"/>
-            <ColumnDefinition Width="389*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Name="MainGrid" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="400*"/>
-            </Grid.RowDefinitions>
-            <Grid HorizontalAlignment="Left" Height="100" Margin="423,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
+        Title="MainWindow" Height="640" Width="800">
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
+VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
         </Grid>
-
     </Grid>
 </Window>
