@@ -40,7 +40,7 @@ namespace dotNet5781_03A_5173_9142
             foreach (var item in company)
             {
                 if (item.Number == index)
-                    currentDisplayBusLine = item;
+                    currentDisplayBusLine = item;//
             }
             UpGrid.DataContext = currentDisplayBusLine;
             lbBusLineStations.DataContext = currentDisplayBusLine.BusStations;
