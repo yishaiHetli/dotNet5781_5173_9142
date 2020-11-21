@@ -19,7 +19,7 @@ namespace dotNet5781_02_5173_9142
                 return temp;
             }
         }
-        public BusLine this[int index, int first]
+        public BusLine this[int index, int first] 
         {
             get
             {
