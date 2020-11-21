@@ -31,7 +31,7 @@ namespace dotNet5781_03A_5173_9142
             foreach (var item in myLines)
                 company.AddNewLine(item);
             cbBusLines.ItemsSource = company;
-            cbBusLines.DisplayMemberPath = "Number";            
+            cbBusLines.DisplayMemberPath = "Number";  
         }
 
         private BusLine currentDisplayBusLine;
@@ -40,7 +40,7 @@ namespace dotNet5781_03A_5173_9142
             foreach (var item in company)
             {
                 if (item.Number == index)
-                    currentDisplayBusLine = item;//
+                    currentDisplayBusLine = item;
             }
             UpGrid.DataContext = currentDisplayBusLine;
             lbBusLineStations.DataContext = currentDisplayBusLine.BusStations;
