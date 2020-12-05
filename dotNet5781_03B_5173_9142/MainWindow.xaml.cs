@@ -85,7 +85,6 @@ namespace dotNet5781_03B_5173_9142
                             bus.Helper = false;//notify if  ther was change in the property countDown
                             bus.countDown = string.Format(" ", time);//Hide the count down
                         });
-
                         count.Start();//starting the thread 'count'
                         bus.condition = new Thread(() =>
                         {
@@ -101,6 +100,7 @@ namespace dotNet5781_03B_5173_9142
                     MessageBox.Show("This bus allready has a full tank");
             }
         }
+        
         private void Drive_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender; //convert the sender to button  
