@@ -1,0 +1,27 @@
+﻿<Window x:Class="dotNet5781_03B_5173_9142.Window3"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" FontSize="18" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Drive" Height="150" Width="250"  >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="drive" 
+                 materialDesign:HintAssist.Hint="enter the drive distance:" FontSize="20"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                 Margin="1,1,1,1" PreviewKeyDown ="drive_PreviewKeyDown"/>
+        <Button x:Name="ended" Grid.Row="1" Height="25" Width="150"  Content="end"  Click="ended_Click"/>
+    </Grid>
+</Window>

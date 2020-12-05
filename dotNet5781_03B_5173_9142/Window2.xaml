@@ -1,0 +1,38 @@
+﻿<Window x:Class="dotNet5781_03B_5173_9142.Window2"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" FontSize="20" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Detail" Height="300" Width="255"  >
+    <Grid x:Name="myGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="4*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="myText"  Grid.Row="0" Margin="6">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel x:Name="myBlock">
+                        <TextBlock>Bus details:</TextBlock>
+                        <TextBlock Text ="{Binding Printer}" />
+                        <TextBlock Text="{Binding CountDown}" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button  Content="Repair" Grid.Row= "1" Click ="Repair_Click"  Background="#FF03D3F8" Margin="1,1,1,1" />
+        <Button  Content="Refule" Grid.Row= "2" Click ="Refule_Click" Margin="1,1,1,1"/>
+        <Button  Grid.Row="3" Click="finish_click" Content="finish" Background="#FF037CF4" Margin="1,1,1,1"/>
+    </Grid>
+</Window>
