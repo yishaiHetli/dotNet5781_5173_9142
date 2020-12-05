@@ -107,7 +107,7 @@ namespace dotNet5781_03B_5173_9142
             if (btn.DataContext is Bus) // check if date context is a bus
             {
                 Bus buss = (Bus)btn.DataContext;//creating a bus with the values of the bus that his button was pressed 
-                if (buss.BusStatus == Status.READY)//if the bus status is 'READY'
+                if (buss.BusStatus != Status.READY)//if the bus status is 'READY'
                     MessageBox.Show(String.Format($"this bus is {buss.BusStatus}"));
 
                 //check if the bus need a repair or a refuel
