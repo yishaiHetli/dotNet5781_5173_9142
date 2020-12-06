@@ -28,7 +28,8 @@
         <DatePicker x:Name="myDate" Grid.Row="0"  
          FontSize="24"  SelectedDateFormat="Long" AllowDrop="True" 
                     materialDesign:HintAssist.Hint=" Select A Date"
-                    PreviewKeyDown="myDate_PreviewKeyDown">
+                    PreviewKeyDown="myDate_PreviewKeyDown" 
+                    >
         </DatePicker>
         <!-- License text and  button -->
         <TextBox x:Name="lisence" Grid.Row=" 1" 

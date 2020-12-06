@@ -76,7 +76,7 @@ namespace dotNet5781_03B_5173_9142
                                     bus.TreatKms += drives;//changing the the kilometers the bus has traveled since its last repair
                                     bus.TotalKm += drives;//addng the current drive to the total kilometers the bus has traveled
                                     bus.BusStatus = Status.READY;//changing the bus status to 'READY'
-                                    bus.FuelInKm = 1200;//reseting the fuel in the bus to 1200
+                                    bus.FuelInKm -= drives;// subtract this drive fuel time
                                     bus.StrHelp = false; //notify if  ther was change in the property printer
                                     bus.Helper = false;//notify if  ther was change in the property countDown
                                     bus.countDown = string.Format(" ", time);//Hide the count down
@@ -91,6 +91,8 @@ namespace dotNet5781_03B_5173_9142
                     else//if the value is not courect
                         MessageBox.Show("the value is not courect");
                 }
+                else//if the value is not courect
+                    MessageBox.Show("the value is not courect");
             }
         }
 

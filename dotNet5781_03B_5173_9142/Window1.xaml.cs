@@ -141,6 +141,7 @@ namespace dotNet5781_03B_5173_9142
                     }
                     else { MessageBox.Show("lisence number does not match the year of manufacture"); } 
                 }
+                else { MessageBox.Show("the value is not courect"); } // if isn't a number
             }
         }
     }
