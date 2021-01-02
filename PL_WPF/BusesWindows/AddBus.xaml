@@ -1,0 +1,39 @@
+﻿<Window x:Class="PL_WPF.AddBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL_WPF"
+        mc:Ignorable="d" Title="Add bus" Height="400" Width="320">
+    <Grid x:Name="myGrid" Background="Firebrick">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Date Picker and  button -->
+        <DatePicker x:Name="myDate" Grid.Row="0" DatePicker.SelectedDateChanged="myDate_SelectedDateChanged"
+         FontSize="24"  SelectedDateFormat="Long" AllowDrop="True"  
+           Text ="Select A Date" PreviewKeyDown="myDate_PreviewKeyDown" Focusable="True" />
+        <!-- License text and  button -->
+        <TextBox x:Name="lisence" Grid.Row=" 1"  
+                 Text ="enter the licence plate:" FontSize="20" VerticalAlignment="Center"
+                 PreviewKeyDown="lisence_PreviewKeyDown" Focusable="True"/>
+        <!-- Fuel text and  button -->
+        <TextBox x:Name="fuels" Grid.Row="2" Grid.Column="0"  
+         Text ="enter the amount of fuel:"  FontSize="20"
+         VerticalAlignment="Center"  
+                 PreviewKeyDown ="fuels_PreviewKeyDown"  Focusable="True"/>
+        <!-- Fuel text and  button -->
+        <TextBox x:Name="milages" Grid.Row="3"
+         Text =" enter milages of the bus:" FontSize="20"  
+         VerticalAlignment="Center" PreviewKeyDown ="milages_PreviewKeyDown" Focusable="True"/>
+        <!--Create a Bus click-->
+        <Button x:Name="createBus" Content=" Create a bus "
+          Grid.Row="4"  Margin="20,10,20,10"  Focusable="True" 
+         VerticalAlignment="Stretch"  Height="Auto" Click="createBusLine" Background="Red" />
+    </Grid>
+</Window>

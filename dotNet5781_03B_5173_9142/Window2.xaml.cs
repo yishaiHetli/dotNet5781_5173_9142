@@ -29,12 +29,10 @@ namespace dotNet5781_03B_5173_9142
             buses.Add(bus);
             bus.StrHelp = false;
             InitializeComponent();
-            this.myGrid.Background = Brushes.BlueViolet;
             myText.ItemsSource = buses;
         }
 
         private void finish_click(object sender, RoutedEventArgs e)//Closing the window
-
         {
             this.Close();
         }

@@ -33,7 +33,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid x:Name="myGrid">
+    <Grid x:Name="myGrid" Background="Gray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
@@ -57,10 +57,11 @@
                 <ListBox x:Name="list"  MouseDoubleClick ="list_Statue_Click"
                     Height="500" ItemContainerStyle="{StaticResource TBStyle}"
                 ItemsSource="{Binding company, Mode=OneWayToSource, 
-                    UpdateSourceTrigger =PropertyChanged}">
+                    UpdateSourceTrigger =PropertyChanged}"
+                         Background="Gray">
                     <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                        <DataTemplate >
+                            <StackPanel Orientation="Horizontal" >
                                 <TextBlock Text="Bus Number: " FontSize="18"/>
                                 <TextBlock Text="{Binding LicenceInString}" FontSize="18"/>
                                 <TextBlock Text="  " FontSize="18"/>

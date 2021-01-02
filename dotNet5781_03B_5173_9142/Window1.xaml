@@ -13,8 +13,8 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Window1" Height="400" Width="300">
-    <Grid>
+        Title="Window1" Height="400" Width="320">
+    <Grid x:Name="myGrid" Background="Firebrick">
         <Grid.RowDefinitions>
             <RowDefinition Height ="*"/>
             <RowDefinition Height ="*"/>
@@ -22,36 +22,33 @@
             <RowDefinition Height ="*"/>
             <RowDefinition Height ="*"/>
         </Grid.RowDefinitions>
-
-
-        <!-- Date Picker and  button   materialDesign:HintAssist.Hint= -->
-        <DatePicker x:Name="myDate" Grid.Row="0"  
+        
+        <!-- Date Picker and  button -->
+        <DatePicker x:Name="myDate" Grid.Row="0"  DatePicker.SelectedDateChanged="myDate_SelectedDateChanged"
          FontSize="24"  SelectedDateFormat="Long" AllowDrop="True" 
                     materialDesign:HintAssist.Hint=" Select A Date"
-                    PreviewKeyDown="myDate_PreviewKeyDown" 
-                    >
-        </DatePicker>
+                    PreviewKeyDown="myDate_PreviewKeyDown" Focusable="True" />
         <!-- License text and  button -->
         <TextBox x:Name="lisence" Grid.Row=" 1" 
                  materialDesign:HintAssist.Hint="enter the licence plate:" FontSize="20"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                 PreviewKeyDown="lisence_PreviewKeyDown"/>
+                 PreviewKeyDown="lisence_PreviewKeyDown" Focusable="True"/>
 
         <!-- Fuel text and  button -->
         <TextBox x:Name="fuels" Grid.Row="2" Grid.Column="0"  
          materialDesign:HintAssist.Hint="enter the amount of fuel:"  FontSize="20"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                 PreviewKeyDown ="fuels_PreviewKeyDown"/>
+                 PreviewKeyDown ="fuels_PreviewKeyDown"  Focusable="True"/>
 
         <!-- Fuel text and  button -->
         <TextBox x:Name="milages" Grid.Row="3"
          materialDesign:HintAssist.Hint=" enter milages of the bus:" FontSize="20"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                 PreviewKeyDown ="milages_PreviewKeyDown"/>
+                 PreviewKeyDown ="milages_PreviewKeyDown" Focusable="True"/>
 
         <!--Create a Bus click-->
-        <Button x:Name="createBus" Content=" Create a bus "
-          Grid.Row="4"   Margin="20,10,20,10" 
-         VerticalAlignment="Stretch"  Height="Auto" Click="createBusLine" />
+            <Button x:Name="createBus" Content=" Create a bus "
+          Grid.Row="4"  Margin="20,10,20,10"  Focusable="True"
+         VerticalAlignment="Stretch"  Height="Auto" Click="createBusLine" Background="Red" />
     </Grid>
 </Window>

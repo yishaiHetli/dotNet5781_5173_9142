@@ -12,16 +12,12 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Drive" Height="150" Width="250"  >
+        Title="Drive" Height="120" Width="250"  >
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBox x:Name="drive" 
+        <TextBox x:Name="drive" Focusable="True"
                  materialDesign:HintAssist.Hint="enter the drive distance:" FontSize="20"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                  Margin="1,1,1,1" PreviewKeyDown ="drive_PreviewKeyDown"/>
-        <Button x:Name="ended" Grid.Row="1" Height="25" Width="150"  Content="end"  Click="ended_Click"/>
+        <Button x:Name="ended" Height="0" Click="ended_Click" Focusable="True"/>
     </Grid>
 </Window>

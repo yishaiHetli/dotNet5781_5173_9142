@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,57 +11,66 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
+using BLApi;
+using System.Text.RegularExpressions;
 
-namespace dotNet5781_03B_5173_9142
+namespace PL_WPF
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for AddBus.xaml
     /// </summary>
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
-    public partial class Window1 : Window
+    public partial class AddBus : Window
     {
-        private static readonly Regex _regex = new Regex("[^0-9.-]+"); 
-        private ObservableCollection<Bus> _ppList;
+        private static readonly Regex _regex = new Regex("[^0-9.-]+");
+        IBL bl;
         private DateTime startTime;
         private int licenceNum = 0;
         private double fuelTime = -1;
         private double milage = -1;
-
-        public Window1(ObservableCollection<Bus> ppList)
+        ListBox list;
+        List<Bus> listOfBuses;
+        public AddBus(IBL _bl,List<Bus> _listOfBuses,ListBox _list)
         {
-            _ppList = ppList; // get the list of bus from the main window
+            bl = _bl;
+            list = _list;
+            listOfBuses = _listOfBuses;
             InitializeComponent();
             myDate.Focus();
         }
-
-        /// <summary>
-        /// check if the text is a number
-        /// </summary>
-        /// <param name="text">the text entered by the user</param>
-        /// <returns>return true if is a number</returns>
-        private static bool IsTextAllowed(string text) 
+        private static bool IsTextAllowed(string text)
         {
             return !_regex.IsMatch(text);
         }
-        /// <summary>
-        /// butten to create a new bus 
-        /// </summary>
+
         private void createBusLine(object sender, RoutedEventArgs e)
         {
             // check if the user enter at least the start time and the licence plate
             if (startTime != DateTime.MinValue && licenceNum != 0)
             {
-                _ppList.Add(new Bus(licenceNum, startTime, milage, fuelTime));// add to the list from main this new bus
-                this.Close();
+                Bus bus = (new Bus
+                {
+                    LicenseNum = licenceNum,
+                    StartActivity = startTime,
+                    BusStatus = Status.READY,
+                    FuelInKm = fuelTime,
+                    TotalKm = milage
+                });
+                try
+                {
+                    bl.AddNewBus(bus);
+                    listOfBuses = (from number in bl.GetAllBuss()
+                                 orderby number.LicenseNum
+                                 select number).ToList();
+                    list.ItemsSource = null;
+                    list.ItemsSource = listOfBuses;
+                    this.Close();
+                }
+                catch (BO.BadLisenceException ex)
+                { MessageBox.Show(ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error); next(); }
             }
             else { MessageBox.Show("enter at least start activity \ndate and lisence plate courect"); next(); }
         }
-
-        /// <summary>
-        /// get the start activity date
-        /// </summary>
         private void myDate_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)//if the user press on enter
@@ -74,13 +81,13 @@ namespace dotNet5781_03B_5173_9142
                     {
                         DateTime x = new DateTime();
                         x = Convert.ToDateTime(myDate.Text); // convert to a date
-                        if (licenceNum == 0 || x.Year >= 2018 && (licenceNum >= 10000000 && licenceNum < 100000000)
-                       || x.Year < 2018 && (licenceNum < 10000000 && licenceNum >= 1000000)) // if the user enter a licence and they are not match to this date
+                        if (x > DateTime.Now)
+                            MessageBox.Show($"the date canot be grater than{DateTime.Now}");
+                        else
                         {
                             startTime = x;
                             next(); // set the focus by some order
                         }
-                        else { MessageBox.Show("lisence number does not match the year of manufacture"); }
                     }
                     catch // if is not a date
                     {
@@ -90,10 +97,12 @@ namespace dotNet5781_03B_5173_9142
                 else { MessageBox.Show("the value is not courect"); }
             }
         }
-        /// <summary>
-        // get the milage 
         private void milages_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (milages != null && !IsTextAllowed(milages.Text))
+            {
+                milages.Text = string.Empty;
+            }
             if (e.Key == Key.Enter) // if the user press enter
             {
                 if (milages != null && IsTextAllowed(milages.Text)) // check if there is  a text and if is a number 
@@ -103,58 +112,45 @@ namespace dotNet5781_03B_5173_9142
                     {
                         milage = x;//set the milage 
                         next(); // set the focus by some order
-                    } 
+                    }
                     else { MessageBox.Show("the value is not courect"); } // if is small than 0
                 }
                 else { MessageBox.Show("the value is not courect"); } // if is not a number
             }
         }
-        /// <summary>
-        // get the fuel
         private void fuels_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (fuels != null && !IsTextAllowed(fuels.Text))
+            {
+                fuels.Text = string.Empty;
+            }
             if (e.Key == Key.Enter)
             {
                 if (fuels != null && IsTextAllowed(fuels.Text))// check if there is  a text and if is a number 
                 {
                     double x = double.Parse(fuels.Text); // convert the text to double
-                    if (x >= 0 && x <= 1200) // if is in between 0 to 1200
-                    { 
-                        fuelTime = x;// set fuel
-                        next(); // set the focus by some order
-                    } 
-                    else { MessageBox.Show("the value is not courect"); } // if is not in the range 
-                }
-                else { MessageBox.Show("the value is not courect"); } // if isn't a number
+                    fuelTime = x;// set fuel
+                    next(); // set the focus by some order
+                }   
             }
         }
-        /// <summary>
-        // get the lisence 
         private void lisence_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (lisence != null && !IsTextAllowed(lisence.Text))
+            {
+                lisence.Text = string.Empty;
+            }
             if (e.Key == Key.Enter) // if the user press enter
             {
                 if (lisence != null && IsTextAllowed(lisence.Text))// check if there is  a text and if is a number 
                 {
                     int x = int.Parse(lisence.Text); // convert the text to double
-                    if (startTime != DateTime.MinValue && (startTime.Year >= 2018 && (x >= 10000000 && x < 100000000)
-                        || startTime.Year < 2018 && (x < 10000000 && x >= 1000000))) // if the lisence match to start activity date 
-                    {
-                        licenceNum = x;
-                        next(); // set the focus by some order
-                    }
-                    else if (startTime == DateTime.MinValue && x >= 1000000 && x < 100000000) // if date isn't initialized and lisence is between 7-8 digits
-                    {
-                        licenceNum = x;//set lisence
-                    }
-                    else { MessageBox.Show("lisence number does not match the year of manufacture"); } 
+                    licenceNum = x;
+                    next(); // set the focus by some order
                 }
                 else { MessageBox.Show("the value is not courect"); } // if isn't a number
             }
         }
-        /// <summary>
-        /// to add a date from DatePicker  
-        /// </summary>
         private void myDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DateTime? selectedDate = myDate.SelectedDate;
@@ -162,16 +158,15 @@ namespace dotNet5781_03B_5173_9142
             {
                 DateTime x = new DateTime();
                 x = Convert.ToDateTime(selectedDate.Value); // convert to a date
-                if (licenceNum == 0 || x.Year >= 2018 && (licenceNum >= 10000000 && licenceNum < 100000000)
-               || x.Year < 2018 && (licenceNum < 10000000 && licenceNum > 1000000)) // if the user enter a licence and they are not match to this date
+                if (x > DateTime.Now)
+                    MessageBox.Show($"the date canot be grater than{DateTime.Now}");
+                else
                 {
                     startTime = x;
                     next(); // set the focus by some order
                 }
-                else { MessageBox.Show("lisence number does not match the year of manufacture"); }
             }
         }
-
         void next()
         {
             if (startTime == DateTime.MinValue)
@@ -193,5 +188,7 @@ namespace dotNet5781_03B_5173_9142
             else if (startTime != DateTime.MinValue && licenceNum != 0 && milage >= 0 && fuelTime >= 0)
                 createBus.Focus();
         }
+
     }
+
 }

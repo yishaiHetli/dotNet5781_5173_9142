@@ -27,7 +27,6 @@ namespace dotNet5781_03B_5173_9142
         public MainWindow()
         {
             InitializeComponent();
-            this.myGrid.Background = Brushes.Gray;
             company.Add(new Bus(60251537, new DateTime(2020, 6, 11), 0, 1200));
             company.Add(new Bus(31442230, new DateTime(2020, 3, 13), 100, 1100));
             company.Add(new Bus(5934862, new DateTime(2003, 11, 4), 310000, 250));
@@ -75,7 +74,7 @@ namespace dotNet5781_03B_5173_9142
                                 bus.countDown = string.Format(" ", time);//reset the clock
                                 bus.countDown = string.Format("{0:00}:{1:00}", time / 60, time % 60);//Displays the property 'time' in clock format
                                 bus.Helper = false; // halp the countdown to update 
-                                Thread.Sleep(1000);//sleep for onw seconde
+                                Thread.Sleep(1000);//sleep for one second
                                 bus.Helper = false;//notify if  ther was change in the property countDown
                                 time--;
                             }

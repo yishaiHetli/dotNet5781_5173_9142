@@ -17,6 +17,7 @@ namespace dotNet5781_03B_5173_9142
         {
             bus = _buss;
             InitializeComponent();
+            drive.Focus();
         }
 
         /// <summary>
@@ -50,6 +51,7 @@ namespace dotNet5781_03B_5173_9142
                         {
                             if (bus.BusStatus == Status.READY)//if the bus status is 'READY'
                             {
+                                ended.Focus();
                                 double drives = x;//double 'x' to be used for the input of kilometers of the travel
                                 bus.BusStatus = Status.TRAVELING;//changing the bus status to 'TRAVELING'
                                 Random r = new Random();//a random number to be used as the travel speed
