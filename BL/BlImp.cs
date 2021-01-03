@@ -19,12 +19,37 @@ namespace BL
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
+        BO.BusLine BusLineDoBoAdapter(DO.BusLine busDO)
+        {
+            BO.BusLine busBO = new BO.BusLine();
+            busDO.CopyPropertiesTo(busBO);
+            return busBO;
+        }
+        BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
+        {
+            BO.BusStation busBO = new BO.BusStation();
+            busDO.CopyPropertiesTo(busBO);
+            return busBO;
+        }
         DO.Bus BusBoDoAdapter(BO.Bus busBO)
         {
             DO.Bus busDO = new DO.Bus();
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
+        DO.BusLine BusLineBoDoAdapter(BO.BusLine busBO)
+        {
+            DO.BusLine busDO = new DO.BusLine();
+            busBO.CopyPropertiesTo(busDO);
+            return busDO;
+        }
+        DO.BusStation BusStationBoDoAdapter(BO.BusStation busBO)
+        {
+            DO.BusStation busDO = new DO.BusStation();
+            busBO.CopyPropertiesTo(busDO);
+            return busDO;
+        }
+
         public IEnumerable<BO.Bus> GetAllBuss()
         {
             return from item in dl.GetAllBuss()
@@ -81,6 +106,18 @@ namespace BL
             {
                 throw new BO.BadLisenceException($"{ex.Message}", ex);
             }
+        }
+
+        public IEnumerable<BO.BusLine> GetAllLines()
+        {
+            return from item in dl.GetAllLines()
+                   select BusLineDoBoAdapter(item);
+        }
+
+        public IEnumerable<BO.BusStation> GetAllStations()
+        {
+            return from item in dl.GetAllStation()
+                   select BusStationDoBoAdapter(item);
         }
     }
 }

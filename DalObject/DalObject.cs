@@ -21,13 +21,13 @@ namespace Dal
         #region bus 
         public void AddNewBus(Bus other)
         {
-           
+
             int longs = other.LicenseNum.ToString().Length;
             if (longs < 7 || longs > 8)
                 throw new DO.BadLisenceException(other.LicenseNum, "bus lisence nember is illegal");
             if ((longs == 8 && other.StartActivity.Year < 2018) ||
                 (longs == 7 && other.StartActivity.Year >= 2018))
-                throw new DO.BadLisenceException(other.LicenseNum, "bus lisence nember dont match the date of manfacture"); 
+                throw new DO.BadLisenceException(other.LicenseNum, "bus lisence nember dont match the date of manfacture");
             if (DataSource.buss.FirstOrDefault(p => p.LicenseNum == other.LicenseNum) != null)
                 throw new DO.BadLisenceException(other.LicenseNum, "Duplicate of lisence number");
             DataSource.buss.Add(other.Clone());
@@ -37,6 +37,7 @@ namespace Dal
             return from bus in DataSource.buss
                    select bus.Clone();
         }
+      
         public Bus GetBus(int licenseNum)
         {
             DO.Bus num = DataSource.buss.Find(p => p.LicenseNum == licenseNum);
@@ -87,10 +88,38 @@ namespace Dal
             else
                 throw new DO.BadLisenceException(bus.LicenseNum, $"bad lisence number: {bus.LicenseNum}");
         }
-        
+
         #endregion
+        #region BusLine
+        public IEnumerable<DO.BusLine> GetAllLines()
+        {
+            return from bus in DataSource.busLine
+                   select bus.Clone();
+        }
+        public BusLine GetBusLine(int id, BusStation first, BusStation last)
+        {
+            DO.BusLine num = DataSource.busLine.Find(p => p.LineID == id && p.FirstStation == first.BusStationKey
+            && p.LastStation == last.BusStationKey);
+            if (num != null)
+                return num.Clone();
+            else
+                throw new DO.BadLisenceException(id, $"bad lisence number: {id}");
+        }
 
+        public IEnumerable<BusStation> GetAllStation()
+        {
+            return from bus in DataSource.busSta
+                   select bus.Clone();
+        }
 
-
+        public BusStation GetBusStation(int busStationKey)
+        {
+            DO.BusStation num = DataSource.busSta.Find(p => p.BusStationKey == busStationKey);
+            if (num != null)
+                return num.Clone();
+            else
+                throw new DO.BadLisenceException(busStationKey, $"bad lisence number: {busStationKey}");
+        }
+        #endregion
     }
 }

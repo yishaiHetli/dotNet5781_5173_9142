@@ -24,7 +24,7 @@ namespace PL_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
+       
         IBL bl = BLFactory.GetBL("1");
         public MainWindow()
         {
@@ -48,10 +48,9 @@ namespace PL_WPF
             else if (rbManage.IsChecked == true)
             {
                 ManageWindow winM = new ManageWindow(bl);
-                //Main.Content = winM;
                 winM.Show();
             }
         }
     }
-
+   
 }

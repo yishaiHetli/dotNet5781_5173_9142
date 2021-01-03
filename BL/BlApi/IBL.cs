@@ -15,5 +15,8 @@ namespace BLApi
         void GetRepair(BO.Bus other);
         void RemoveBus(int lisence);
         void AddNewBus(BO.Bus addedBus);
+        IEnumerable<BO.BusLine> GetAllLines();
+        IEnumerable<BO.BusStation> GetAllStations();
+
     }
 }

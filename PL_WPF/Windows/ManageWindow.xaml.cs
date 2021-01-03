@@ -41,7 +41,8 @@ namespace PL_WPF
 
         private void Line_Click(object sender, RoutedEventArgs e)
         {
-
+            LineWindow win = new LineWindow(bl);
+            win.Show();
         }
 
         private void Station_Click(object sender, RoutedEventArgs e)
@@ -49,5 +50,4 @@ namespace PL_WPF
 
         }
     }
-
 }

@@ -26,7 +26,7 @@ namespace PL_WPF
         public Bus myBus { get; set; }
         ListBox list;
         List<Bus> listOfBuses;
-        public DatailsBus(IBL _bl, Bus bus , ListBox _list,List<Bus> _listOfBuses)
+        public DatailsBus(IBL _bl, Bus bus, ListBox _list, List<Bus> _listOfBuses)
         {
             bl = _bl;
             list = _list;

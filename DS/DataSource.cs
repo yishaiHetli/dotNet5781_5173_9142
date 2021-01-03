@@ -20,7 +20,7 @@ namespace DS
         {
             InitAllLists();
         }
-        
+
         static void InitAllLists()
         {
             #region Bus
@@ -277,7 +277,7 @@ namespace DS
                     Latitude = lat[i],
                     Longitude = lon[i],
                     Name = streets[i],
-                    
+
                 });
                 if (i > 0 && Math.Abs(busSta[i].BusStationKey - busSta[i - 1].BusStationKey) == 1)
                 {

@@ -15,6 +15,7 @@ namespace DO
             base(message) => Lisence = id;
         public BadLisenceException(int id, string message, Exception innerException) :
             base(message, innerException) => Lisence = id;
-        public override string ToString() => base.ToString() + $",bus lisence number: {Lisence}";
+
+        public override string ToString() => base.ToString() + $", bad lisence number: {Lisence}";
     }
 }

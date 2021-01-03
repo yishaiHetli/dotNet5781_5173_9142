@@ -23,7 +23,8 @@ namespace BO
                     LicenseNum) : String.Format("{0:###-##-###}", LicenseNum);
             }
         }
-        public override string ToString() {
+        public override string ToString()
+        {
 
             return String.Format($"Bus Number: {LicenceInString}\n" + $"fuel in km {FuelInKm}\n" +
                                        "Activity date:{0}", String.Format("{0:dd/MM/yyyy}\n", StartActivity)

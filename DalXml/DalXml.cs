@@ -14,7 +14,28 @@ namespace Dal
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<BusLine> GetAllLines()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<BusStation> GetAllStation()
+        {
+            throw new NotImplementedException();
+        }
+
         public Bus GetBus(int licenseNum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BusLine GetBusLine(int id, BusStation first, BusStation last)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BusStation GetBusStation(int busStationKey)
         {
             throw new NotImplementedException();
         }
