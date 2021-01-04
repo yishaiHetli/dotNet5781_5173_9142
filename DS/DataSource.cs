@@ -316,7 +316,7 @@ namespace DS
                     lineSta.Add(new LineStation
                     {
                         BusStationKey = busSta[g].BusStationKey,
-                        LineNum = busLine[i].LineNumber,
+                        LineID = busLine[i].LineID,
                         LIneStationIndex = n
                     });
                 }

@@ -9,7 +9,7 @@ namespace DO
    public class LineStation
     {
         public int BusStationKey { get; set; }
-        public int LineNum { get; set; }
+        public int LineID { get; set; }
         public int LIneStationIndex { get; set; }
         public override string ToString() => this.ToStringProperty();
     }

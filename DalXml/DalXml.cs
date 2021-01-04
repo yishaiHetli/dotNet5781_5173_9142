@@ -20,6 +20,11 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        public IEnumerable<LineStation> GetAllLineStations(int LineID)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<BusStation> GetAllStation()
         {
             throw new NotImplementedException();

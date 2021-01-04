@@ -35,7 +35,7 @@
         <ListBox x:Name="list" Height="500" Background="DarkGray"
                          Grid.ColumnSpan="3" Grid.RowSpan="3" Grid.Column="1" Grid.Row="2"
                          ItemsSource="{Binding lineSta, Mode=OneWayToSource, 
-                    UpdateSourceTrigger =PropertyChanged}">
+                    UpdateSourceTrigger =PropertyChanged}" MouseDoubleClick="list_MouseDoubleClick">
         </ListBox>
         <StackPanel Grid.Row="2" Grid.Column="4" Grid.RowSpan="4" Height="481" Margin="0,0,0.4,19.8" VerticalAlignment="Bottom">
             <Expander  HorizontalAlignment="Stretch" Header="Add Line" Grid.RowSpan="3">

@@ -13,21 +13,11 @@ namespace BL
     class BlImp : IBL
     {
         IDal dl = DLFactory.GetDL();
+
+        #region Buses CUR 
         BO.Bus BusDoBoAdapter(DO.Bus busDO)
         {
             BO.Bus busBO = new BO.Bus();
-            busDO.CopyPropertiesTo(busBO);
-            return busBO;
-        }
-        BO.BusLine BusLineDoBoAdapter(DO.BusLine busDO)
-        {
-            BO.BusLine busBO = new BO.BusLine();
-            busDO.CopyPropertiesTo(busBO);
-            return busBO;
-        }
-        BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
-        {
-            BO.BusStation busBO = new BO.BusStation();
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
@@ -37,25 +27,6 @@ namespace BL
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
-        DO.BusLine BusLineBoDoAdapter(BO.BusLine busBO)
-        {
-            DO.BusLine busDO = new DO.BusLine();
-            busBO.CopyPropertiesTo(busDO);
-            return busDO;
-        }
-        DO.BusStation BusStationBoDoAdapter(BO.BusStation busBO)
-        {
-            DO.BusStation busDO = new DO.BusStation();
-            busBO.CopyPropertiesTo(busDO);
-            return busDO;
-        }
-
-        public IEnumerable<BO.Bus> GetAllBuss()
-        {
-            return from item in dl.GetAllBuss()
-                   select BusDoBoAdapter(item);
-        }
-
         public void GetRefule(BO.Bus other)
         {
             try
@@ -78,6 +49,12 @@ namespace BL
             {
                 throw new BO.BadLisenceException($"bus number {other.LicenseNum} does not exist", ex);
             }
+        }
+
+        public IEnumerable<BO.Bus> GetAllBuss()
+        {
+            return from item in dl.GetAllBuss()
+                   select BusDoBoAdapter(item);
         }
 
         public BO.Bus GetBus(int lisence)
@@ -107,6 +84,41 @@ namespace BL
                 throw new BO.BadLisenceException($"{ex.Message}", ex);
             }
         }
+        #endregion
+        #region Lines CUR
+        BO.LineStation LineStaDoBoAdapter(DO.LineStation busDO)
+        {
+            BO.LineStation busBO = new BO.LineStation();
+            busDO.CopyPropertiesTo(busBO);
+            return busBO;
+        }
+        BO.BusLine BusLineDoBoAdapter(DO.BusLine busDO)
+        {
+            BO.BusLine busBO = new BO.BusLine();
+            busDO.CopyPropertiesTo(busBO);
+            busBO.LinesSta = from line in dl.GetAllLineStations(busBO.LineID)
+                             select LineStaDoBoAdapter(line);
+            return busBO;
+        }
+        BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
+        {
+            BO.BusStation busBO = new BO.BusStation();
+            busDO.CopyPropertiesTo(busBO);
+            return busBO;
+        }
+
+        DO.BusLine BusLineBoDoAdapter(BO.BusLine busBO)
+        {
+            DO.BusLine busDO = new DO.BusLine();
+            busBO.CopyPropertiesTo(busDO);
+            return busDO;
+        }
+        DO.BusStation BusStationBoDoAdapter(BO.BusStation busBO)
+        {
+            DO.BusStation busDO = new DO.BusStation();
+            busBO.CopyPropertiesTo(busDO);
+            return busDO;
+        }
 
         public IEnumerable<BO.BusLine> GetAllLines()
         {
@@ -119,5 +131,7 @@ namespace BL
             return from item in dl.GetAllStation()
                    select BusStationDoBoAdapter(item);
         }
+
+        #endregion
     }
 }

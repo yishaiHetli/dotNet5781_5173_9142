@@ -18,10 +18,14 @@ namespace DalApi
         void GetRefule(int lisence);
         void GetRepair(int lisence);
         #endregion
-        IEnumerable<BusLine> GetAllLines();
-        BusLine GetBusLine(int id, BusStation first, BusStation last);
+ 
         IEnumerable<BusStation> GetAllStation();
         BusStation GetBusStation(int busStationKey);
+        #region Lines
+        IEnumerable<BusLine> GetAllLines();
+        BusLine GetBusLine(int id, BusStation first, BusStation last);
+        IEnumerable<LineStation> GetAllLineStations(int LineID);
+        #endregion
 
     }
 }

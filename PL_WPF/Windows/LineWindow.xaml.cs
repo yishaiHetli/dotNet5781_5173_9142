@@ -25,21 +25,19 @@ namespace PL_WPF
     public partial class LineWindow : Window
     {
         IBL bl;
-        List<BusLine> listOfLines;
-        List<BusStation> listOfStation;
-
+        List<BusLine> listOfLines = new List<BusLine>();
+        List<BusStation> listOfStation = new List<BusStation>();
         public LineWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
-            listOfLines = new List<BusLine>();
             listOfLines = (from number in bl.GetAllLines()
                            orderby number.LineID
                            select number).ToList();
             list.ItemsSource = listOfLines;
             listOfStation = (from number in bl.GetAllStations()
-                           orderby number.BusStationKey
-                           select number).ToList();
+                             orderby number.BusStationKey
+                             select number).ToList();
             first.ItemsSource = listOfStation;
             last.ItemsSource = listOfStation;
         }
@@ -47,6 +45,16 @@ namespace PL_WPF
         private void Add_Click(object sender, RoutedEventArgs e)
         {
                    
+        }
+
+        private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BusLine bus = (BusLine)list.SelectedItem;
+            if (bus != null)
+            {
+                LineStationDatails winLSD = new LineStationDatails(bl, bus.LinesSta);
+                winLSD.Show();
+            }
         }
     }
 }

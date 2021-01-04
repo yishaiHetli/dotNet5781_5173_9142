@@ -112,6 +112,13 @@ namespace Dal
                    select bus.Clone();
         }
 
+        public IEnumerable<LineStation> GetAllLineStations(int LineID)
+        {
+            IEnumerable<LineStation> line = DataSource.lineSta.FindAll(p => p.LineID == LineID);
+            if (line == null)
+                throw new DO.BadLisenceException(LineID, $"Line ID {LineID} dont match");
+           return from l in line select l.Clone();
+        }
         public BusStation GetBusStation(int busStationKey)
         {
             DO.BusStation num = DataSource.busSta.Find(p => p.BusStationKey == busStationKey);
