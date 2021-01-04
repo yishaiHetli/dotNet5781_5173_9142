@@ -95,6 +95,7 @@ namespace Dal
         {
             return from bus in DataSource.busLine
                    select bus.Clone();
+
         }
         public BusLine GetBusLine(int id, BusStation first, BusStation last)
         {

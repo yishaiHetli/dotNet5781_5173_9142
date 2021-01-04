@@ -21,6 +21,7 @@ namespace BL
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
+
         DO.Bus BusBoDoAdapter(BO.Bus busBO)
         {
             DO.Bus busDO = new DO.Bus();

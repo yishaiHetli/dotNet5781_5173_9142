@@ -15,6 +15,7 @@ namespace Dal
                 propertyInfo.SetValue(copyToObject, propertyInfo.GetValue(original, null), null);
 
             return copyToObject;
+
         }
 
 
