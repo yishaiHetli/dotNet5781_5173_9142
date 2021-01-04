@@ -21,6 +21,7 @@ namespace DalApi
  
         IEnumerable<BusStation> GetAllStation();
         BusStation GetBusStation(int busStationKey);
+
         #region Lines
         IEnumerable<BusLine> GetAllLines();
         BusLine GetBusLine(int id, BusStation first, BusStation last);
