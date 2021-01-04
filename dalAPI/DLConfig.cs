@@ -41,7 +41,6 @@ namespace DalApi
                            .ToDictionary(p => "" + p.Name, p => p);
         }
     }
-
     /// <summary>
     /// Represents errors during DalApi initialization
     /// </summary>
