@@ -128,6 +128,32 @@ namespace Dal
             else
                 throw new DO.BadLisenceException(busStationKey, $"bad lisence number: {busStationKey}");
         }
+
+        public void AddNewBusLine(BusLine bus)
+        {
+            bus.LineID = BusLine.ID++;
+            DataSource.lineSta.Add(new LineStation
+            {
+                LineID =bus.LineID,
+                LIneStationIndex = 0,
+                BusStationKey = bus.FirstStation
+            });
+            DataSource.lineSta.Add(new LineStation
+            {
+                LineID = bus.LineID,
+                LIneStationIndex = 1,
+                BusStationKey = bus.LastStation
+            });
+            DataSource.busLine.Add(bus.Clone());
+        }
         #endregion
+
+        public bool CheckUser(string userName, string password, bool manage)
+        {
+            if (DataSource.userList.FirstOrDefault(u => u.UserName == userName
+          && u.Password == password && u.Management == manage) == null)
+                return false;
+            return true;
+        }
     }
 }

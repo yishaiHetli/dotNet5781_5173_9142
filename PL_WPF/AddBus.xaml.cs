@@ -16,12 +16,13 @@ using BO;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
+
 namespace PL_WPF
 {
     /// <summary>
-    /// Interaction logic for BusWindow.xaml
+    /// Interaction logic for AddBus.xaml
     /// </summary>
-    public partial class BusWindow : Window
+    public partial class AddBus : Window
     {
         private static readonly Regex _regex = new Regex("[^0-9.-]+");
         private DateTime startTime;
@@ -30,15 +31,13 @@ namespace PL_WPF
         private double milage = 0;
         IBL bl;
         List<Bus> listOfBus;
-        public BusWindow(IBL _bl)
+        ListBox list;
+        public AddBus(IBL _bl,ListBox _list)
         {
             InitializeComponent();
             bl = _bl;
-            listOfBus = new List<Bus>();
-            listOfBus = (from number in bl.GetAllBuss()
-                         orderby number.LicenseNum
-                         select number).ToList();
-            list.ItemsSource = listOfBus;
+          
+            list = _list;
 
         }
         private static bool IsTextAllowed(string text)
@@ -110,35 +109,8 @@ namespace PL_WPF
                 listOfBus = (from number in bl.GetAllBuss()
                              orderby number.LicenseNum
                              select number).ToList();
-                list.ItemsSource = null;
-                list.ItemsSource = listOfBus;
-            }
-        }
-        private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Bus bus = (Bus)list.SelectedItem;
-            if (bus != null)
-            {
-                DatailsBus winD = new DatailsBus(bl, bus, list, listOfBus);
-                winD.Show();
-            }
-        }
-
-
-        private void removeBus_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = (Button)sender;
-            if (btn.DataContext is Bus)
-            {
-                Bus bus = (Bus)btn.DataContext;
-                bl.RemoveBus(bus.LicenseNum);
-                listOfBus = (from number in bl.GetAllBuss()
-                             orderby number.LicenseNum
-                             select number).ToList();
-                list.ItemsSource = null;
                 list.ItemsSource = listOfBus;
             }
         }
     }
 }
-

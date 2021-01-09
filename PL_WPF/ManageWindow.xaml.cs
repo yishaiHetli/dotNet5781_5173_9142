@@ -21,33 +21,38 @@ namespace PL_WPF
     /// <summary>
     /// Interaction logic for ManageWindow.xaml
     /// </summary>
-    public partial class ManageWindow : Window
+    public partial class ManageWindow : Page
     {
-
-        
         IBL bl;
         public ManageWindow(IBL _bL)
         {
             InitializeComponent();
             bl = _bL;
-          
         }
-
         private void Bus_Click(object sender, RoutedEventArgs e)
         {
             BusWindow win = new BusWindow(bl);
-            win.Show();
+            frmMain.NavigationService.Navigate(win);
         }
-
         private void Line_Click(object sender, RoutedEventArgs e)
         {
             LineWindow win = new LineWindow(bl);
-            win.Show();
+            frmMain.NavigationService.Navigate(win);
         }
-
         private void Station_Click(object sender, RoutedEventArgs e)
         {
 
+      
         }
+      
+        private void LogOut_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddStation_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+      
     }
 }

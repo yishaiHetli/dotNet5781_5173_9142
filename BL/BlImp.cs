@@ -21,7 +21,6 @@ namespace BL
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
-
         DO.Bus BusBoDoAdapter(BO.Bus busBO)
         {
             DO.Bus busDO = new DO.Bus();
@@ -39,7 +38,6 @@ namespace BL
                 throw new BO.BadLisenceException($"bus number {other.LicenseNum} does not exist", ex);
             }
         }
-
         public void GetRepair(BO.Bus other)
         {
             try
@@ -133,6 +131,24 @@ namespace BL
                    select BusStationDoBoAdapter(item);
         }
 
+        public void AddNewBusLine(BO.BusLine bus)
+        {
+            try
+            {
+                dl.AddNewBusLine(BusLineBoDoAdapter(bus));
+            }
+            catch (DO.BadLisenceException ex)
+            {
+                throw new BO.BadLisenceException($"{ex.Message}", ex);
+            }
+
+        }
         #endregion
+        public bool userCheck(string name, string password, bool manage)
+        {
+            if (dl.CheckUser(name, password, manage))
+                return true;
+            return false;
+        }
     }
 }

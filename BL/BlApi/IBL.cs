@@ -17,6 +17,7 @@ namespace BLApi
         void AddNewBus(BO.Bus addedBus);
         IEnumerable<BO.BusLine> GetAllLines();
         IEnumerable<BO.BusStation> GetAllStations();
-
+        void AddNewBusLine(BO.BusLine bus);
+        bool userCheck(string name, string password, bool manage);
     }
 }

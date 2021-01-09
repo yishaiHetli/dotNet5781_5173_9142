@@ -17,6 +17,15 @@ using BL;
 using BO;
 using System.Collections.ObjectModel;
 
+//Main.Content = winM;
+//winM.Show();
+//this.Hide();
+//frmMain.AllowDrop = true;
+//this.NavigationService.Navigate(winM);
+//Main.Navigate(winM);
+//NavigationWindow window = new NavigationWindow();
+//window.Source = new Uri("ManageWindow.xaml", UriKind.Relative);
+//window.Show();
 namespace PL_WPF
 {
     /// <summary>
@@ -32,7 +41,7 @@ namespace PL_WPF
             //ObservableCollection<Bus> listOfBus;
             //listOfBus = new ObservableCollection<Bus>();
             //foreach (var item in bl.GetAllBuss())
-            //    listOfBus.Add(item);
+            //listOfBus.Add(item);
             //list.ItemsSource = listOfBus; 
         }
 
@@ -47,11 +56,28 @@ namespace PL_WPF
             }
             else if (rbManage.IsChecked == true)
             {
-                ManageWindow winM = new ManageWindow(bl);
-                //Main.Content = winM;
-                winM.Show();
+                if (userName.Text == string.Empty)
+                {
+                    userName.Focus();
+                }
+                else if (password.Password == string.Empty)
+                {
+                    password.Focus();
+                }
+                else
+                {
+                    if (bl.userCheck(userName.Text, password.Password, true))
+                    {
+                        ManageWindow winM = new ManageWindow(bl);
+                        this.Content = winM.Content;
+                    }
+                    else
+                    {
+                        MessageBox.Show("username or password incorrect", "error");
+                        userName.Focus();
+                    }
+                }
             }
         }
     }
-
 }

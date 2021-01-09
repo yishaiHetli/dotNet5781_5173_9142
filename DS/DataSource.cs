@@ -14,6 +14,7 @@ namespace DS
         public static List<BusLine> busLine; // 10
         public static List<LineStation> lineSta; // 10 for each busLine 
         public static List<PairStations> pairSta;
+        public static List<Users> userList;
         static Random rnd = new Random();
 
         static DataSource()
@@ -324,7 +325,19 @@ namespace DS
                 g -= 5;
             }
             #endregion
-
+            userList = new List<Users>();
+            userList.Add(new Users
+            {
+                UserName = "david",
+                Password = "cohen",
+                Management = true
+            });
+            userList.Add(new Users
+            {
+                UserName = "yshai",
+                Password = "hetli",
+                Management = true
+            });
         }
 
         static DateTime randomDate(DateTime start, DateTime end)

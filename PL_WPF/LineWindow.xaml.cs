@@ -22,15 +22,17 @@ namespace PL_WPF
     /// <summary>
     /// Interaction logic for LineWindow.xaml
     /// </summary>
-    public partial class LineWindow : Window
+    public partial class LineWindow : Page
     {
         IBL bl;
-        List<BusLine> listOfLines = new List<BusLine>();
-        List<BusStation> listOfStation = new List<BusStation>();
+        List<BusLine> listOfLines;
+        List<BusStation> listOfStation;
+
         public LineWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
+            listOfLines = new List<BusLine>();
             listOfLines = (from number in bl.GetAllLines()
                            orderby number.LineID
                            select number).ToList();
@@ -38,23 +40,28 @@ namespace PL_WPF
             listOfStation = (from number in bl.GetAllStations()
                              orderby number.BusStationKey
                              select number).ToList();
-            first.ItemsSource = listOfStation;
-            last.ItemsSource = listOfStation;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-                   
+
         }
 
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BusLine bus = (BusLine)list.SelectedItem;
-            if (bus != null)
+            BusLine lines = (BusLine)list.SelectedItem;
+            if (lines != null)
             {
-                LineStationDatails winLSD = new LineStationDatails(bl, bus.LinesSta);
-                winLSD.Show();
+
+                LineStationDatails win = new LineStationDatails(bl, lines.LinesSta);
+                win.Show();
             }
+        }
+
+        private void AddLine_click(object sender, RoutedEventArgs e)
+        {
+            AddLine win = new AddLine(bl,list);
+            win.Show();
         }
     }
 }

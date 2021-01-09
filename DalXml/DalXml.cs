@@ -15,6 +15,16 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        public void AddNewBusLine(BusLine bus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckUser(string username, string password, bool manage)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<BusLine> GetAllLines()
         {
             throw new NotImplementedException();

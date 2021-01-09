@@ -18,7 +18,7 @@ namespace DalApi
         void GetRefule(int lisence);
         void GetRepair(int lisence);
         #endregion
- 
+
         IEnumerable<BusStation> GetAllStation();
         BusStation GetBusStation(int busStationKey);
 
@@ -26,7 +26,9 @@ namespace DalApi
         IEnumerable<BusLine> GetAllLines();
         BusLine GetBusLine(int id, BusStation first, BusStation last);
         IEnumerable<LineStation> GetAllLineStations(int LineID);
+        void AddNewBusLine(BusLine bus);
         #endregion
 
+        bool CheckUser(string username, string password, bool manage);
     }
 }

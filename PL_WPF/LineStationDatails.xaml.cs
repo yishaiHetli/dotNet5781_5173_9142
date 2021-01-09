@@ -23,7 +23,7 @@ namespace PL_WPF
     {
         IBL bl;
         List<LineStation> lines = new List<LineStation>();
-        public LineStationDatails(IBL _bl,IEnumerable<LineStation> _lines)
+        public LineStationDatails(IBL _bl, IEnumerable<LineStation> _lines)
         {
             bl = _bl;
             lines = _lines.ToList();
