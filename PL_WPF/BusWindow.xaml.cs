@@ -32,7 +32,6 @@ namespace PL_WPF
             bl = _bl;
             listOfBus = new List<Bus>();
             listOfBus = (from number in bl.GetAllBuss()
-                         orderby number.LicenseNum
                          select number).ToList();
             list.ItemsSource = listOfBus;
         }
@@ -53,7 +52,6 @@ namespace PL_WPF
                 Bus bus = (Bus)btn.DataContext;
                 bl.RemoveBus(bus.LicenseNum);
                 listOfBus = (from number in bl.GetAllBuss()
-                             orderby number.LicenseNum
                              select number).ToList();
                 list.ItemsSource = null;
                 list.ItemsSource = listOfBus;

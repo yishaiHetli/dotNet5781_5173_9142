@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
 
+
 namespace PL_WPF
 {
     /// <summary>
@@ -32,36 +33,37 @@ namespace PL_WPF
         {
             InitializeComponent();
             bl = _bl;
-            listOfLines = new List<BusLine>();
             listOfLines = (from number in bl.GetAllLines()
-                           orderby number.LineID
                            select number).ToList();
             list.ItemsSource = listOfLines;
             listOfStation = (from number in bl.GetAllStations()
-                             orderby number.BusStationKey
                              select number).ToList();
         }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BusLine lines = (BusLine)list.SelectedItem;
             if (lines != null)
             {
-
                 LineStationDatails win = new LineStationDatails(bl, lines.LinesSta);
                 win.Show();
             }
         }
+        private void AddStop_click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.DataContext is BusLine)
+            {
+                BusLine bus = (BusLine)btn.DataContext;
+                AddStop win = new AddStop(bl, bus, list);
+                win.Show();
+            }
 
+        }
         private void AddLine_click(object sender, RoutedEventArgs e)
         {
-            AddLine win = new AddLine(bl,list);
+            AddLine win = new AddLine(bl, list);
             win.Show();
         }
+
     }
 }

@@ -9,8 +9,8 @@
     <Grid>
         <GroupBox Header="Choose Option:" Height="270" VerticalAlignment="Top" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
             <StackPanel >
-                <RadioButton x:Name ="rbDriver" Content="Driver" Height="24" IsChecked="True"/>
-                <RadioButton x:Name ="rbManage" Content="Management" Height="23" />
+                <RadioButton x:Name ="rbDriver" Content="Driver" Height="24" />
+                <RadioButton x:Name ="rbManage" Content="Management" Height="23" IsChecked="True"/>
             </StackPanel>
         </GroupBox>
         <Button x:Name="btnGO" Content="LOGE IN" HorizontalAlignment="Left" Height="35" 

@@ -96,6 +96,7 @@ namespace BL
             BO.BusLine busBO = new BO.BusLine();
             busDO.CopyPropertiesTo(busBO);
             busBO.LinesSta = from line in dl.GetAllLineStations(busBO.LineID)
+                             orderby line.LIneStationIndex
                              select LineStaDoBoAdapter(line);
             return busBO;
         }
@@ -103,6 +104,10 @@ namespace BL
         {
             BO.BusStation busBO = new BO.BusStation();
             busDO.CopyPropertiesTo(busBO);
+            busBO.LineInStation = from line in GetAllLines()
+                                  from lines in line.LinesSta
+                                  where lines.BusStationKey == busBO.BusStationKey
+                                  select line;              
             return busBO;
         }
 
@@ -143,12 +148,21 @@ namespace BL
             }
 
         }
+        public bool AddStop(int index, BO.BusLine bus, BO.BusStation station)
+        {
+            if (index > bus.LinesSta.ToList().Count())
+                return false;
+            dl.AddNewStop(index, BusLineBoDoAdapter(bus), BusStationBoDoAdapter(station));
+            return true;
+        }
         #endregion
+        #region user
         public bool userCheck(string name, string password, bool manage)
         {
             if (dl.CheckUser(name, password, manage))
                 return true;
             return false;
         }
+        #endregion
     }
 }

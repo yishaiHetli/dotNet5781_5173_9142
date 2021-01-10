@@ -30,12 +30,11 @@ namespace PL_WPF
         List<BusLine> listOfLines;
         List<BusStation> listOfStation;
         ListBox boxList;
-        public AddLine(IBL _bl,ListBox _boxList)
+        public AddLine(IBL _bl, ListBox _boxList)
         {
             InitializeComponent();
-            bl = _bl; 
+            bl = _bl;
             listOfStation = (from number in bl.GetAllStations()
-                             orderby number.BusStationKey
                              select number).ToList();
             first.ItemsSource = listOfStation;
             last.ItemsSource = listOfStation;
@@ -50,19 +49,27 @@ namespace PL_WPF
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (lineNum.Text != null && IsTextAllowed(lineNum.Text))
+            if (lineNum.Text != "" && IsTextAllowed(lineNum.Text))
             {
                 if (one && two && three)
                 {
                     bus.LineNumber = Convert.ToInt32(lineNum.Text);
                     bl.AddNewBusLine(bus);
                 }
+                if (!one)
+                    MessageBox.Show("first station is not valid");
+                if (!two)
+                    MessageBox.Show("lasr station is not valid");
+                if (!three)
+                    MessageBox.Show("area station is not valid");
+
                 listOfLines = (from number in bl.GetAllLines()
-                               orderby number.LineID
                                select number).ToList();
                 boxList.ItemsSource = listOfLines;
                 this.Close();
             }
+            else
+                MessageBox.Show("line number not valid");
         }
 
         private void first_SelectionChanged(object sender, SelectionChangedEventArgs e)

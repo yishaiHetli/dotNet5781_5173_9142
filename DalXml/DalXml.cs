@@ -20,6 +20,11 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        public void AddNewStop(int index, BusLine bus, BusStation station)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool CheckUser(string username, string password, bool manage)
         {
             throw new NotImplementedException();

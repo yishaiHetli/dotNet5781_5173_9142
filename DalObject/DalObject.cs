@@ -35,6 +35,7 @@ namespace Dal
         public IEnumerable<DO.Bus> GetAllBuss()
         {
             return from bus in DataSource.buss
+                   orderby bus.LicenseNum
                    select bus.Clone();
         }
       
@@ -94,6 +95,7 @@ namespace Dal
         public IEnumerable<DO.BusLine> GetAllLines()
         {
             return from bus in DataSource.busLine
+                   orderby bus.LineID
                    select bus.Clone();
 
         }
@@ -104,12 +106,13 @@ namespace Dal
             if (num != null)
                 return num.Clone();
             else
-                throw new DO.BadLisenceException(id, $"bad lisence number: {id}");
+                throw new DO.BadLisenceException(id, $"bad ID number: {id}");
         }
 
         public IEnumerable<BusStation> GetAllStation()
         {
             return from bus in DataSource.busSta
+                   orderby bus.BusStationKey
                    select bus.Clone();
         }
 
@@ -118,7 +121,9 @@ namespace Dal
             IEnumerable<LineStation> line = DataSource.lineSta.FindAll(p => p.LineID == LineID);
             if (line == null)
                 throw new DO.BadLisenceException(LineID, $"Line ID {LineID} dont match");
-           return from l in line select l.Clone();
+           return from l in line 
+                  orderby l.LIneStationIndex
+                  select l.Clone();
         }
         public BusStation GetBusStation(int busStationKey)
         {
@@ -154,6 +159,21 @@ namespace Dal
           && u.Password == password && u.Management == manage) == null)
                 return false;
             return true;
+        }
+        public void AddNewStop(int index, BusLine bus, BusStation station)
+        {
+            foreach (var x in DataSource.lineSta)
+            {
+                if (x.LineID != bus.LineID) continue;
+                if (x.LIneStationIndex < index) continue;
+                ++x.LIneStationIndex;
+            }
+            DataSource.lineSta.Add(new LineStation
+            {
+                LineID = bus.LineID,
+                LIneStationIndex = index,
+                BusStationKey = station.BusStationKey
+            });
         }
     }
 }

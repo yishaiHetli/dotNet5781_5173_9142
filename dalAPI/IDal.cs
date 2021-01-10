@@ -28,7 +28,7 @@ namespace DalApi
         IEnumerable<LineStation> GetAllLineStations(int LineID);
         void AddNewBusLine(BusLine bus);
         #endregion
-
+        void AddNewStop(int index, BusLine bus, BusStation station);
         bool CheckUser(string username, string password, bool manage);
     }
 }

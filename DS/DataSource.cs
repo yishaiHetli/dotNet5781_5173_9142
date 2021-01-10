@@ -269,7 +269,6 @@ namespace DS
 ,85678
         };
             busSta = new List<BusStation>();
-            pairSta = new List<PairStations>();
             for (int i = 0; i < 60; ++i)
             {
                 busSta.Add(new BusStation
@@ -280,19 +279,7 @@ namespace DS
                     Name = streets[i],
 
                 });
-                if (i > 0 && Math.Abs(busSta[i].BusStationKey - busSta[i - 1].BusStationKey) == 1)
-                {
-                    var sCoord = new GeoCoordinate(busSta[i].Latitude, busSta[i].Longitude);
-                    var eCoord = new GeoCoordinate(busSta[i - 1].Latitude, busSta[i - 1].Longitude);
-                    double cord = sCoord.GetDistanceTo(eCoord) / 1000;
-                    pairSta.Add(new PairStations
-                    {
-                        FirstKey = busSta[i - 1].BusStationKey,
-                        SecondKey = busSta[i].BusStationKey,
-                        Distance = cord,
-                        AverageTime = TimeSpan.FromMinutes(cord)
-                    });
-                }
+               
             }
             lon.Clear();
             lat.Clear();
@@ -302,6 +289,7 @@ namespace DS
             #region Lines
             busLine = new List<BusLine>();
             lineSta = new List<LineStation>();
+            pairSta = new List<PairStations>();
             for (int i = 0, g = 0; i < 10; ++i)
             {
                 busLine.Add(new BusLine
@@ -312,7 +300,7 @@ namespace DS
                     FirstStation = busSta[g].BusStationKey,
                     LastStation = 0
                 });
-                for (int n = 0; n < 10; ++n, ++g)
+                for (int n = 0; n <= 10; ++n, ++g)
                 {
                     lineSta.Add(new LineStation
                     {
@@ -320,22 +308,35 @@ namespace DS
                         LineID = busLine[i].LineID,
                         LIneStationIndex = n
                     });
+                    if (n > 0)
+                    {
+                        var sCoord = new GeoCoordinate(busSta[g].Latitude, busSta[g].Longitude);
+                        var eCoord = new GeoCoordinate(busSta[g - 1].Latitude, busSta[g - 1].Longitude);
+                        double cord = sCoord.GetDistanceTo(eCoord) / 1000;
+                        pairSta.Add(new PairStations
+                        {
+                            FirstKey = busSta[g - 1].BusStationKey,
+                            SecondKey = busSta[g].BusStationKey,
+                            Distance = cord,
+                            AverageTime = TimeSpan.FromMinutes(cord)
+                        });
+                    }
                 }
                 busLine[i].LastStation = busSta[g - 1].BusStationKey;
-                g -= 5;
+                g -= 6;
             }
             #endregion
             userList = new List<Users>();
             userList.Add(new Users
             {
-                UserName = "david",
-                Password = "cohen",
+                UserName = "d",
+                Password = "c",
                 Management = true
             });
             userList.Add(new Users
             {
-                UserName = "yshai",
-                Password = "hetli",
+                UserName = "y",
+                Password = "h",
                 Management = true
             });
         }

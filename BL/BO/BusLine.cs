@@ -18,7 +18,7 @@ namespace BO
         {
             return String.Format($"Line ID: {LineID}\n" + $"Place: {Place}\n" +
               $"Line Number: {LineNumber}\n" + $"First Station: {FirstStation}\n"
-              + $"Last Station: {LastStation}\n");
+              + $"Last Station: {LastStation}");
         }
     }
 }

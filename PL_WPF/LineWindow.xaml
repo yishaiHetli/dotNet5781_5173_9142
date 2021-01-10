@@ -22,12 +22,25 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130"/>
             <ColumnDefinition Width="*"/>
-
         </Grid.ColumnDefinitions>
-        
+
         <Button Grid.Row="0" Grid.Column="0" Click="AddLine_click" Content="Add Line" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
                        Margin="1,1,0,0" Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"  />
         <ListBox x:Name="list"  MouseDoubleClick="list_MouseDoubleClick"  Background="DarkGray" 
-                 Height="400" Grid.ColumnSpan="3" Margin="0,0,10,20" Grid.RowSpan="3" Grid.Column="0" Grid.Row="2"/>
+                 Height="440" Grid.ColumnSpan="3" Margin="0,0,10,20" Grid.RowSpan="3" Grid.Column="0" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding}"/>
+                        <StackPanel Orientation="Vertical">
+                            <Button Click="AddStop_click" Content="Add A new Stop" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                  Margin="300,20,0,0" Width="140"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
     </Grid>
 </Page>

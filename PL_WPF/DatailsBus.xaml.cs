@@ -43,7 +43,6 @@ namespace PL_WPF
                 myBus = bl.GetBus(myBus.LicenseNum);
                 listText.Text = myBus.ToString();
                 listOfBuses = (from number in bl.GetAllBuss()
-                               orderby number.LicenseNum
                                select number).ToList();
                 list.ItemsSource = null;
                 list.ItemsSource = listOfBuses;
@@ -59,7 +58,6 @@ namespace PL_WPF
                 myBus = bl.GetBus(myBus.LicenseNum);
                 listText.Text = myBus.ToString();
                 listOfBuses = (from number in bl.GetAllBuss()
-                               orderby number.LicenseNum
                                select number).ToList();
                 list.ItemsSource = null;
                 list.ItemsSource = listOfBuses;

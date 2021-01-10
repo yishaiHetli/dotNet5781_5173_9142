@@ -41,8 +41,8 @@ namespace PL_WPF
         }
         private void Station_Click(object sender, RoutedEventArgs e)
         {
-
-      
+            StationsWindow win = new StationsWindow(bl);
+            frmMain.NavigationService.Navigate(win);
         }
       
         private void LogOut_click(object sender, RoutedEventArgs e)
