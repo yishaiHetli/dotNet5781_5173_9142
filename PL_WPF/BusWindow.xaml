@@ -57,7 +57,7 @@
                         <TextBlock Text="Bus Number: " FontSize="18"/>
                         <TextBlock Text="{Binding LicenceInString}" FontSize="18"/>
                         <StackPanel Orientation="Vertical">
-                            <Button x:Name="removeBus" Content="remove" 
+                            <Button x:Name="removeBus" Content="remove" Style="{StaticResource MaterialDesignRaisedLightButton}"
                                   Click ="removeBus_Click" Width="90" Height="25" FontSize="12" Margin="300,1,1,1" />
                         </StackPanel>
                     </StackPanel>

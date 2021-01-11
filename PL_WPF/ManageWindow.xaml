@@ -41,14 +41,14 @@
   Grid.Row="1" Grid.Column="3" Content="Stations" FontSize="20"   
                  FontStyle="Oblique" VerticalAlignment="Top" Height="60" Width="130" Click="Station_Click"/>
         <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="0,5,5,0">
-            <Button  Click="AddStation_click" Content="Add Station" Margin="0,0,0,5" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"  />
-
             <Button  Click="LogOut_click" Content="Log Out" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
                         Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"  />
         </StackPanel>
         <DockPanel Width="660" Height="480" Grid.Row="2" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="4">
             <Frame x:Name="frmMain" NavigationUIVisibility="Hidden"/>
+        </DockPanel>
+        <DockPanel Height="550" Width="800" Grid.RowSpan="6" Grid.ColumnSpan="4">
+            <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
         </DockPanel>
     </Grid>
 </Page>

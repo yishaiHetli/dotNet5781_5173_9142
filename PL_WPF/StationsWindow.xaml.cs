@@ -43,5 +43,23 @@ namespace PL_WPF
                 win.Show();
             }
         }
+        private void AddStation_click(object sender, RoutedEventArgs e)
+        {
+            AddStation win = new AddStation(bl, list);
+            win.Show();
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.DataContext is BusStation)
+            {
+                BusStation sta = (BusStation)btn.DataContext;
+                bl.RemoveSta(sta);
+                staList = (from number in bl.GetAllStations()
+                           select number).ToList();
+                list.ItemsSource = staList;
+            }
+        }
     }
 }

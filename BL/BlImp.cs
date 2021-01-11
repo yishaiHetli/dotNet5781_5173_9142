@@ -98,6 +98,25 @@ namespace BL
             busBO.LinesSta = from line in dl.GetAllLineStations(busBO.LineID)
                              orderby line.LIneStationIndex
                              select LineStaDoBoAdapter(line);
+            bool notFirstSta = false;
+            int first = 0;
+            List<BO.LineStation> linesSta = busBO.LinesSta.ToList();
+            foreach (var item in linesSta)
+            {
+                if (notFirstSta)
+                {
+                    DO.PairStations pair = dl.GetPair(first, item.BusStationKey);
+                    if (pair != null)
+                    {
+                        item.Distance = pair.Distance;
+                        item.AverageTime = pair.AverageTime;
+                    }
+                }
+
+                first = item.BusStationKey;
+                notFirstSta = true;
+            }
+            busBO.LinesSta = linesSta;
             return busBO;
         }
         BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
@@ -107,6 +126,7 @@ namespace BL
             busBO.LineInStation = from line in GetAllLines()
                                   from lines in line.LinesSta
                                   where lines.BusStationKey == busBO.BusStationKey
+                                  orderby line.LineID
                                   select line;              
             return busBO;
         }
@@ -148,12 +168,16 @@ namespace BL
             }
 
         }
-        public bool AddStop(int index, BO.BusLine bus, BO.BusStation station)
+        public void AddStop(int index, BO.BusLine bus, BO.BusStation station)
         {
             if (index > bus.LinesSta.ToList().Count())
-                return false;
+                throw new ArgumentException("index too big");
+            var linesta = bus.LinesSta.FirstOrDefault(P => P.BusStationKey == station.BusStationKey);
+            if (linesta != null)
+            {
+                throw new ArgumentException("this station already exist in this bus route");
+            }
             dl.AddNewStop(index, BusLineBoDoAdapter(bus), BusStationBoDoAdapter(station));
-            return true;
         }
         #endregion
         #region user
@@ -164,5 +188,36 @@ namespace BL
             return false;
         }
         #endregion
+        public void AddBusStation(BO.BusStation station)
+        {
+            List<BO.BusStation> busStations = GetAllStations().ToList();
+            foreach (var item in busStations)
+            {
+                if (item.Latitude == station.Latitude && item.Longitude == station.Longitude)
+                {
+                    throw new ArgumentException("there is another station at this location");
+                }
+                if (item.BusStationKey == station.BusStationKey)
+                {
+                    throw new ArgumentException("this code already exist");
+                }
+                if (item.Name == station.Name)
+                {
+                    throw new ArgumentException("this name already exist");
+                }
+            }
+            dl.AddBusStation(BusStationBoDoAdapter(station));
+
+        }
+
+
+        public void RemoveLine(BO.BusLine line)
+        {
+            dl.RemoveBusLine(line.LineID);
+        }
+        public void RemoveSta(BO.BusStation sta)
+        {
+            dl.RemoveSta(sta.BusStationKey);
+        }
     }
 }

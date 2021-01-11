@@ -36,7 +36,6 @@ namespace PL_WPF
             InitializeComponent();
             bl = _bl;
             listOfStation = (from number in bl.GetAllStations()
-                             orderby number.BusStationKey
                              select number).ToList();
             station.ItemsSource = listOfStation;
             bus1 = bus;
@@ -46,7 +45,6 @@ namespace PL_WPF
         {
             return !_regex.IsMatch(text);
         }
-        //LinesSta
 
         private void station_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -55,17 +53,18 @@ namespace PL_WPF
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
-            if (lineNum.Text != "" && IsTextAllowed(lineNum.Text))
+            if (lineNum.Text == string.Empty && IsTextAllowed(lineNum.Text))
             {
-                if (!(bl.AddStop(Convert.ToInt32(lineNum.Text), bus1, sta)))
-                    MessageBox.Show("the index is too big");
-                else
+                try
                 {
+                    bl.AddStop(Convert.ToInt32(lineNum.Text), bus1, sta);
                     list.ItemsSource = (from number in bl.GetAllLines()
-                                        orderby number.LineID
                                         select number).ToList();
                     this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             else

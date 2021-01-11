@@ -65,5 +65,17 @@ namespace PL_WPF
             win.Show();
         }
 
+        private void Remove_click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.DataContext is BusLine)
+            {
+                BusLine bus = (BusLine)btn.DataContext;
+                bl.RemoveLine(bus);
+                listOfLines = (from number in bl.GetAllLines()
+                               select number).ToList();
+                list.ItemsSource = listOfLines;
+            }
+        }
     }
 }

@@ -318,7 +318,7 @@ namespace DS
                             FirstKey = busSta[g - 1].BusStationKey,
                             SecondKey = busSta[g].BusStationKey,
                             Distance = cord,
-                            AverageTime = TimeSpan.FromMinutes(cord)
+                            AverageTime = TimeSpan.FromMinutes(cord *2)
                         });
                     }
                 }

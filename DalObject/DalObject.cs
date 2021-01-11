@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,10 @@ namespace Dal
                 throw new DO.BadLisenceException(other.LicenseNum, "bus lisence nember dont match the date of manfacture");
             if (DataSource.buss.FirstOrDefault(p => p.LicenseNum == other.LicenseNum) != null)
                 throw new DO.BadLisenceException(other.LicenseNum, "Duplicate of lisence number");
+            if (other.FuelInKm > 1200)
+                other.FuelInKm = 1200;
+            if (other.FuelInKm < 0)
+                other.FuelInKm = 0;
             DataSource.buss.Add(other.Clone());
         }
         public IEnumerable<DO.Bus> GetAllBuss()
@@ -38,7 +43,7 @@ namespace Dal
                    orderby bus.LicenseNum
                    select bus.Clone();
         }
-      
+
         public Bus GetBus(int licenseNum)
         {
             DO.Bus num = DataSource.buss.Find(p => p.LicenseNum == licenseNum);
@@ -121,9 +126,9 @@ namespace Dal
             IEnumerable<LineStation> line = DataSource.lineSta.FindAll(p => p.LineID == LineID);
             if (line == null)
                 throw new DO.BadLisenceException(LineID, $"Line ID {LineID} dont match");
-           return from l in line 
-                  orderby l.LIneStationIndex
-                  select l.Clone();
+            return from l in line
+                   orderby l.LIneStationIndex
+                   select l.Clone();
         }
         public BusStation GetBusStation(int busStationKey)
         {
@@ -139,7 +144,7 @@ namespace Dal
             bus.LineID = BusLine.ID++;
             DataSource.lineSta.Add(new LineStation
             {
-                LineID =bus.LineID,
+                LineID = bus.LineID,
                 LIneStationIndex = 0,
                 BusStationKey = bus.FirstStation
             });
@@ -150,6 +155,9 @@ namespace Dal
                 BusStationKey = bus.LastStation
             });
             DataSource.busLine.Add(bus.Clone());
+            BusStation sta1 = DataSource.busSta.Find(s => s.BusStationKey == bus.FirstStation);
+            BusStation sta2 = DataSource.busSta.Find(s => s.BusStationKey == bus.LastStation);
+            updatePair(sta1, sta2);
         }
         #endregion
 
@@ -162,6 +170,7 @@ namespace Dal
         }
         public void AddNewStop(int index, BusLine bus, BusStation station)
         {
+
             foreach (var x in DataSource.lineSta)
             {
                 if (x.LineID != bus.LineID) continue;
@@ -174,6 +183,63 @@ namespace Dal
                 LIneStationIndex = index,
                 BusStationKey = station.BusStationKey
             });
+
+            if (index == 0)
+            {
+                LineStation nextLine = DataSource.lineSta.Find(l => l.LineID == bus.LineID && l.LIneStationIndex == index + 1);
+                BusStation nextSta = DataSource.busSta.Find(s => s.BusStationKey == nextLine.BusStationKey);
+                updatePair(station, nextSta);
+                return;
+            }
+            LineStation line1 = DataSource.lineSta.Find(l => l.LineID == bus.LineID && l.LIneStationIndex == index - 1);
+            LineStation line2 = DataSource.lineSta.Find(l => l.LineID == bus.LineID && l.LIneStationIndex == index);
+            LineStation line3 = DataSource.lineSta.Find(l => l.LineID == bus.LineID && l.LIneStationIndex == index + 1);
+            BusStation sta1 = DataSource.busSta.Find(s => s.BusStationKey == line1.BusStationKey);
+            BusStation sta2 = DataSource.busSta.Find(s => s.BusStationKey == line2.BusStationKey);
+            updatePair(sta1, sta2);
+            if (line3 != null)
+            {
+                BusStation sta3 = DataSource.busSta.Find(s => s.BusStationKey == line3.BusStationKey);
+                updatePair(sta2, sta3);
+            }
+        }
+        public PairStations GetPair(int sta1, int sta2)
+        {
+            DO.PairStations pair = DataSource.pairSta.Find(p => p.FirstKey == sta1
+            && p.SecondKey == sta2);
+            return pair;
+        }
+        void updatePair(BusStation sta1, BusStation sta2)
+        {
+            if (GetPair(sta1.BusStationKey, sta2.BusStationKey) == null)
+            {
+                var sCoord = new GeoCoordinate(sta1.Latitude, sta1.Longitude);
+                var eCoord = new GeoCoordinate(sta2.Latitude, sta2.Longitude);
+                double cord = sCoord.GetDistanceTo(eCoord) / 1000;
+                DataSource.pairSta.Add(new PairStations
+                {
+                    FirstKey = sta1.BusStationKey,
+                    SecondKey = sta2.BusStationKey,
+                    Distance = cord,
+                    AverageTime = TimeSpan.FromMinutes(cord * 2)
+                });
+            }
+        }
+        public void AddBusStation(BusStation station)
+        {
+            DataSource.busSta.Add(station);
+        }
+        public void RemoveBusLine(int ID)
+        {
+            BusLine line = DataSource.busLine.Find(p => p.LineID == ID);
+            if (line != null)
+                DataSource.busLine.Remove(line);
+        }
+        public void RemoveSta(int ID)
+        {
+            DO.BusStation sta = DataSource.busSta.Find(p => p.BusStationKey == ID);
+            if (sta != null)
+                DataSource.busSta.Remove(sta);
         }
     }
 }

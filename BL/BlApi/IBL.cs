@@ -18,7 +18,10 @@ namespace BLApi
         IEnumerable<BO.BusLine> GetAllLines();
         IEnumerable<BO.BusStation> GetAllStations();
         void AddNewBusLine(BO.BusLine bus);
-        bool AddStop(int index, BO.BusLine bus, BO.BusStation station);
+        void AddStop(int index, BO.BusLine bus, BO.BusStation station);
         bool userCheck(string name, string password, bool manage);
+        void AddBusStation(BO.BusStation station);
+        void RemoveLine(BO.BusLine line);
+        void RemoveSta(BO.BusStation sta);
     }
 }

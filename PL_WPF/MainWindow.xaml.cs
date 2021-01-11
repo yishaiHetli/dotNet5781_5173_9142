@@ -17,15 +17,7 @@ using BL;
 using BO;
 using System.Collections.ObjectModel;
 
-//Main.Content = winM;
-//winM.Show();
-//this.Hide();
-//frmMain.AllowDrop = true;
-//this.NavigationService.Navigate(winM);
-//Main.Navigate(winM);
-//NavigationWindow window = new NavigationWindow();
-//window.Source = new Uri("ManageWindow.xaml", UriKind.Relative);
-//window.Show();
+
 namespace PL_WPF
 {
     /// <summary>
@@ -35,14 +27,11 @@ namespace PL_WPF
     {
 
         IBL bl = BLFactory.GetBL("1");
+        private object content;
         public MainWindow()
         {
             InitializeComponent();
-            //ObservableCollection<Bus> listOfBus;
-            //listOfBus = new ObservableCollection<Bus>();
-            //foreach (var item in bl.GetAllBuss())
-            //listOfBus.Add(item);
-            //list.ItemsSource = listOfBus; 
+            content = Content;
         }
 
         private void btnGO_Click(object sender, RoutedEventArgs e)
@@ -68,8 +57,11 @@ namespace PL_WPF
                 {
                     if (bl.userCheck(userName.Text, password.Password, true))
                     {
-                        ManageWindow winM = new ManageWindow(bl);
+                        userName.Text = "";
+                        password.Password = "";
+                        ManageWindow winM = new ManageWindow(bl,this);
                         this.Content = winM.Content;
+
                     }
                     else
                     {
@@ -78,6 +70,11 @@ namespace PL_WPF
                     }
                 }
             }
+
+        }
+        public void GoBackToStartPage()
+        {
+            Content = content;
         }
     }
 }

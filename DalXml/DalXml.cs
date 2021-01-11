@@ -10,6 +10,11 @@ namespace Dal
 {
     class DalXml : IDal
     {
+        public void AddBusStation(BusStation station)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddNewBus(Bus other)
         {
             throw new NotImplementedException();
@@ -60,6 +65,11 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        public PairStations GetPair(int sta1, int sta2)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetRefule(int lisence)
         {
             throw new NotImplementedException();
@@ -76,6 +86,16 @@ namespace Dal
         }
 
         public void RemoveBus(int license)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveBusLine(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveSta(int ID)
         {
             throw new NotImplementedException();
         }

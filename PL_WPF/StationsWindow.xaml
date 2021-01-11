@@ -23,7 +23,22 @@
             <ColumnDefinition Width="130"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="list"  Background="LightSlateGray" MouseDoubleClick="list_MouseDoubleClick"
-                 Height="400" Grid.ColumnSpan="3" Margin="0,0,10,20" Grid.RowSpan="3" Grid.Column="0" Grid.Row="2"/>
+        <Button Grid.Row="0" Grid.Column="0" Click="AddStation_click" Content="Add Station" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                       Margin="1,1,0,0" Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"/>
+        
+        <ListBox x:Name="list"  Background="DarkGray" MouseDoubleClick="list_MouseDoubleClick"
+                 Height="440" Grid.ColumnSpan="3" Margin="0,0,10,20" Grid.RowSpan="3" Grid.Column="0" Grid.Row="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" Width="450"/>
+                        <StackPanel >
+                            <Button Click="Remove_Click"  Content="Remove" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                             Width="90"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

@@ -24,10 +24,12 @@ namespace PL_WPF
     public partial class ManageWindow : Page
     {
         IBL bl;
-        public ManageWindow(IBL _bL)
+        private MainWindow mainWindow;
+        public ManageWindow(IBL _bL, MainWindow _mainWindow)
         {
             InitializeComponent();
             bl = _bL;
+            mainWindow = _mainWindow;
         }
         private void Bus_Click(object sender, RoutedEventArgs e)
         {
@@ -47,12 +49,7 @@ namespace PL_WPF
       
         private void LogOut_click(object sender, RoutedEventArgs e)
         {
-
+            mainWindow.GoBackToStartPage();
         }
-        private void AddStation_click(object sender, RoutedEventArgs e)
-        {
-
-        }
-      
     }
 }
