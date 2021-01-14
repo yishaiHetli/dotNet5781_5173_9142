@@ -1,0 +1,55 @@
+﻿<Window x:Class="PL_WPF.UpdatePairWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL_WPF"
+       mc:Ignorable="d" FontSize="18" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Add new bus" Height="300" Width="280">
+    <Grid x:Name="myGrid" Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- station 1 text and  button -->
+        <TextBox x:Name="staBox1" Grid.Row="0"  
+         materialDesign:HintAssist.Hint=" enter the first station:"  FontSize="20"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                 PreviewKeyDown ="staBox1_PreviewKeyDown"  Focusable="True"/>
+
+        <!-- station 2 text and  button -->
+        <TextBox x:Name="staBox2" Grid.Row="1"
+         materialDesign:HintAssist.Hint=" enter the seacond station:" FontSize="20"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                 PreviewKeyDown ="staBox2_PreviewKeyDown" Focusable="True"/>
+        
+        <!-- distance text and  button -->
+        <TextBox x:Name="distanceBox" Grid.Row="2" 
+         materialDesign:HintAssist.Hint="enter the distance between:"  FontSize="20"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                 PreviewKeyDown ="distanceBox_PreviewKeyDown"  Focusable="True"/>
+
+        <!-- average Time text and  button -->
+        <TextBox x:Name="avergeBox" Grid.Row="3"
+         materialDesign:HintAssist.Hint=" enter the time in minutes:" FontSize="20"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                 PreviewKeyDown ="avergeBox_PreviewKeyDown" Focusable="True"/>
+        
+        <!--update click-->
+        <Button x:Name="updateMe" Content=" Update " FontSize="18"
+          Grid.Row="4"  Focusable="True"  Margin="2,2,2,2"
+         VerticalAlignment="Stretch"  Height="Auto" Click="UpdateClick" Background="LightGreen" />
+    </Grid>
+</Window>

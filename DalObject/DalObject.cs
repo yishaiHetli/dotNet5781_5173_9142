@@ -13,10 +13,10 @@ namespace Dal
     sealed class DalObject : IDal
     {
         #region singelton
-        static readonly DalObject instance = new DalObject();
+        static readonly IDal instance = new DalObject();
         static DalObject() { }// static ctor to ensure instance init is done just before first usage
         DalObject() { } // default => private
-        public static DalObject Instance { get => instance; }// The public Instance property to use
+        public static IDal Instance { get => instance; }// The public Instance property to use
         #endregion
 
         #region bus 
@@ -111,7 +111,7 @@ namespace Dal
             if (num != null)
                 return num.Clone();
             else
-                throw new DO.BadLisenceException(id, $"bad ID number: {id}");
+                throw new DO.BadLineException(id, $"bad ID number: {id}");
         }
 
         public IEnumerable<BusStation> GetAllStation()
@@ -125,7 +125,7 @@ namespace Dal
         {
             IEnumerable<LineStation> line = DataSource.lineSta.FindAll(p => p.LineID == LineID);
             if (line == null)
-                throw new DO.BadLisenceException(LineID, $"Line ID {LineID} dont match");
+                throw new DO.BadStationException(LineID, $"Line ID {LineID} dont match");
             return from l in line
                    orderby l.LIneStationIndex
                    select l.Clone();
@@ -136,7 +136,7 @@ namespace Dal
             if (num != null)
                 return num.Clone();
             else
-                throw new DO.BadLisenceException(busStationKey, $"bad lisence number: {busStationKey}");
+                throw new DO.BadStationException(busStationKey, $"bad station key number: {busStationKey}");
         }
 
         public void AddNewBusLine(BusLine bus)
@@ -207,7 +207,9 @@ namespace Dal
         {
             DO.PairStations pair = DataSource.pairSta.Find(p => p.FirstKey == sta1
             && p.SecondKey == sta2);
-            return pair;
+            if (pair != null)
+                return pair.Clone();
+            return null;
         }
         void updatePair(BusStation sta1, BusStation sta2)
         {
@@ -225,6 +227,34 @@ namespace Dal
                 });
             }
         }
+        public void UpdatePairByUser(int sta1, int sta2, double distance , TimeSpan averge)
+        {
+            if (DataSource.busSta.Find(x => x.BusStationKey == sta1) == null)
+            {
+                throw new DO.BadStationException(sta1, "there is no such station");
+            }
+            if (DataSource.busSta.Find(x => x.BusStationKey == sta2) == null)
+            {
+                throw new DO.BadStationException(sta2, "there is no such station");
+            }
+            DO.PairStations pair = DataSource.pairSta.Find(p => p.FirstKey == sta1
+              && p.SecondKey == sta2);
+            if (pair != null)
+            {
+                pair.AverageTime = averge;
+                pair.Distance = distance;
+            }
+            else 
+            {
+                DataSource.pairSta.Add(new PairStations
+                {
+                    FirstKey = sta1,
+                    SecondKey = sta2,
+                    AverageTime = averge,
+                    Distance = distance
+                });
+            }
+        }
         public void AddBusStation(BusStation station)
         {
             DataSource.busSta.Add(station);
@@ -233,13 +263,32 @@ namespace Dal
         {
             BusLine line = DataSource.busLine.Find(p => p.LineID == ID);
             if (line != null)
-                DataSource.busLine.Remove(line);
+            {
+                DataSource.lineSta.RemoveAll(P => P.LineID == line.LineID);
+                DataSource.busLine.Remove(line);  
+            }
         }
         public void RemoveSta(int ID)
         {
             DO.BusStation sta = DataSource.busSta.Find(p => p.BusStationKey == ID);
             if (sta != null)
+            {
+                foreach (var lines in DataSource.lineSta) // update lines index
+                {
+                    if (lines.BusStationKey == sta.BusStationKey)
+                    {
+                        foreach (var line in DataSource.lineSta)
+                        {
+                            if (line.LineID == lines.LineID && line.LIneStationIndex > lines.LIneStationIndex)
+                            {
+                                --line.LIneStationIndex;
+                            }
+                        }
+                    }
+                }
+                DataSource.lineSta.RemoveAll(P => P.BusStationKey == sta.BusStationKey);
                 DataSource.busSta.Remove(sta);
+            }
         }
     }
 }

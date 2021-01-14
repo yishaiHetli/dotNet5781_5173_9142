@@ -19,9 +19,6 @@ namespace DalApi
         void GetRepair(int lisence);
         #endregion
 
-        IEnumerable<BusStation> GetAllStation();
-        BusStation GetBusStation(int busStationKey);
-
         #region Lines
         IEnumerable<BusLine> GetAllLines();
         void RemoveBusLine(int ID);
@@ -29,11 +26,13 @@ namespace DalApi
         IEnumerable<LineStation> GetAllLineStations(int LineID);
         void AddNewBusLine(BusLine bus);
         #endregion
+        IEnumerable<BusStation> GetAllStation();
+        BusStation GetBusStation(int busStationKey);
         void AddNewStop(int index, BusLine bus, BusStation station);
-        bool CheckUser(string username, string password, bool manage);
-        PairStations GetPair(int sta1, int sta2);
         void AddBusStation(BusStation station);
         void RemoveSta(int ID);
-
+        PairStations GetPair(int sta1, int sta2);
+        void UpdatePairByUser(int sta1, int sta2, double distance, TimeSpan averge);
+        bool CheckUser(string username, string password, bool manage);
     }
 }

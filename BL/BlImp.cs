@@ -13,7 +13,12 @@ namespace BL
     class BlImp : IBL
     {
         IDal dl = DLFactory.GetDL();
-
+        #region singelton
+        static readonly IBL instance = new BlImp();
+        static BlImp() { }// static ctor to ensure instance init is done just before first usage
+        BlImp() { } // default => private
+        public static IBL Instance { get => instance; }// The public Instance property to use
+        #endregion
         #region Buses CUR 
         BO.Bus BusDoBoAdapter(DO.Bus busDO)
         {
@@ -119,17 +124,7 @@ namespace BL
             busBO.LinesSta = linesSta;
             return busBO;
         }
-        BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
-        {
-            BO.BusStation busBO = new BO.BusStation();
-            busDO.CopyPropertiesTo(busBO);
-            busBO.LineInStation = from line in GetAllLines()
-                                  from lines in line.LinesSta
-                                  where lines.BusStationKey == busBO.BusStationKey
-                                  orderby line.LineID
-                                  select line;              
-            return busBO;
-        }
+        
 
         DO.BusLine BusLineBoDoAdapter(BO.BusLine busBO)
         {
@@ -137,25 +132,12 @@ namespace BL
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
-        DO.BusStation BusStationBoDoAdapter(BO.BusStation busBO)
-        {
-            DO.BusStation busDO = new DO.BusStation();
-            busBO.CopyPropertiesTo(busDO);
-            return busDO;
-        }
-
+     
         public IEnumerable<BO.BusLine> GetAllLines()
         {
             return from item in dl.GetAllLines()
                    select BusLineDoBoAdapter(item);
         }
-
-        public IEnumerable<BO.BusStation> GetAllStations()
-        {
-            return from item in dl.GetAllStation()
-                   select BusStationDoBoAdapter(item);
-        }
-
         public void AddNewBusLine(BO.BusLine bus)
         {
             try
@@ -168,17 +150,11 @@ namespace BL
             }
 
         }
-        public void AddStop(int index, BO.BusLine bus, BO.BusStation station)
+        public void RemoveLine(BO.BusLine line)
         {
-            if (index > bus.LinesSta.ToList().Count())
-                throw new ArgumentException("index too big");
-            var linesta = bus.LinesSta.FirstOrDefault(P => P.BusStationKey == station.BusStationKey);
-            if (linesta != null)
-            {
-                throw new ArgumentException("this station already exist in this bus route");
-            }
-            dl.AddNewStop(index, BusLineBoDoAdapter(bus), BusStationBoDoAdapter(station));
+            dl.RemoveBusLine(line.LineID);
         }
+       
         #endregion
         #region user
         public bool userCheck(string name, string password, bool manage)
@@ -188,6 +164,25 @@ namespace BL
             return false;
         }
         #endregion
+        #region Stations
+        DO.BusStation BusStationBoDoAdapter(BO.BusStation busBO)
+        {
+            DO.BusStation busDO = new DO.BusStation();
+            busBO.CopyPropertiesTo(busDO);
+            return busDO;
+        }
+
+        public void AddStop(int index, BO.BusLine bus, BO.BusStation station)
+        {
+            if (index > bus.LinesSta.ToList().Count())
+                throw new IndexOutOfRangeException("index too big");
+            var linesta = bus.LinesSta.FirstOrDefault(P => P.BusStationKey == station.BusStationKey);
+            if (linesta != null)
+            {
+                throw new DuplicateWaitObjectException("this station already exist in this bus route");
+            }
+            dl.AddNewStop(index, BusLineBoDoAdapter(bus), BusStationBoDoAdapter(station));
+        }
         public void AddBusStation(BO.BusStation station)
         {
             List<BO.BusStation> busStations = GetAllStations().ToList();
@@ -195,29 +190,53 @@ namespace BL
             {
                 if (item.Latitude == station.Latitude && item.Longitude == station.Longitude)
                 {
-                    throw new ArgumentException("there is another station at this location");
+                    throw new DuplicateWaitObjectException("there is another station at this location");
                 }
                 if (item.BusStationKey == station.BusStationKey)
                 {
-                    throw new ArgumentException("this code already exist");
+                    throw new DuplicateWaitObjectException("this code already exist");
                 }
                 if (item.Name == station.Name)
                 {
-                    throw new ArgumentException("this name already exist");
+                    throw new DuplicateWaitObjectException("this name already exist");
                 }
             }
             dl.AddBusStation(BusStationBoDoAdapter(station));
 
         }
-
-
-        public void RemoveLine(BO.BusLine line)
+        BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
         {
-            dl.RemoveBusLine(line.LineID);
+            BO.BusStation busBO = new BO.BusStation();
+            busDO.CopyPropertiesTo(busBO);
+            busBO.LineInStation = from line in GetAllLines()
+                                  from lines in line.LinesSta
+                                  where lines.BusStationKey == busBO.BusStationKey
+                                  orderby line.LineID
+                                  select line;
+            return busBO;
         }
+        public IEnumerable<BO.BusStation> GetAllStations()
+        {
+            return from item in dl.GetAllStation()
+                   select BusStationDoBoAdapter(item);
+        }
+
         public void RemoveSta(BO.BusStation sta)
         {
             dl.RemoveSta(sta.BusStationKey);
         }
+
+        public void PairUpdate(int sta1,int sta2 , double distance, TimeSpan average)
+        {
+            try
+            {
+                dl.UpdatePairByUser(sta1, sta2, distance, average);
+            }
+            catch (DO.BadStationException ex)
+            {
+                throw new BO.BadStationException(ex.Message,ex);
+            }
+        }
+        #endregion
     }
 }

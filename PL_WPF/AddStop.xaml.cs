@@ -48,12 +48,13 @@ namespace PL_WPF
 
         private void station_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            sta = station.SelectedItem as BusStation;
+            if (station.SelectedItem != null)
+                sta = station.SelectedItem as BusStation;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (lineNum.Text == string.Empty && IsTextAllowed(lineNum.Text))
+            if (lineNum.Text != string.Empty && IsTextAllowed(lineNum.Text) && sta != null)
             {
                 try
                 {

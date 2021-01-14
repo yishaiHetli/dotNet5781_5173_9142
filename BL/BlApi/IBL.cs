@@ -23,5 +23,6 @@ namespace BLApi
         void AddBusStation(BO.BusStation station);
         void RemoveLine(BO.BusLine line);
         void RemoveSta(BO.BusStation sta);
+        void PairUpdate(int sta1, int sta2, double distance, TimeSpan average);
     }
 }

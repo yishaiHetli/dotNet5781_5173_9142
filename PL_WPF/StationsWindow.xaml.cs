@@ -61,5 +61,11 @@ namespace PL_WPF
                 list.ItemsSource = staList;
             }
         }
+
+        private void UpdateTwoStations(object sender, RoutedEventArgs e)
+        {
+            UpdatePairWin win = new UpdatePairWin(bl);
+            win.Show();
+        }
     }
 }

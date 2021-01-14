@@ -105,6 +105,11 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        public void UpdatePairByUser(int sta1, int sta2, double distance, TimeSpan averge)
+        {
+            throw new NotImplementedException();
+        }
+
         IEnumerable<Bus> IDal.GetAllBuss()
         {
             throw new NotImplementedException();

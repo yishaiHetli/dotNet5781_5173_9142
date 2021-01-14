@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Window1" Height="400" Width="320">
+        Title="Add new bus" Height="400" Width="320">
     <Grid x:Name="myGrid" Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height ="*"/>
@@ -40,12 +40,11 @@
         Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                  PreviewKeyDown ="fuels_PreviewKeyDown"  Focusable="True"/>
 
-        <!-- Fuel text and  button -->
+        <!-- Milage text and  button -->
         <TextBox x:Name="milages" Grid.Row="3"
          materialDesign:HintAssist.Hint=" enter milages of the bus:" FontSize="20"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                  PreviewKeyDown ="milages_PreviewKeyDown" Focusable="True"/>
-
         <!--Create a Bus click-->
         <Button x:Name="createBus" Content=" Create a bus "
           Grid.Row="4"  Margin="20,10,20,10"  Focusable="True"
