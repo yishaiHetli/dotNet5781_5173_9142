@@ -222,6 +222,10 @@ namespace BL
 
         public void PairUpdate(int sta1,int sta2 , double distance, TimeSpan average)
         {
+            if (sta1 == sta2)
+            {
+                throw new DuplicateWaitObjectException("you cannot select the same station twice");
+            }    
             try
             {
                 dl.UpdatePairByUser(sta1, sta2, distance, average);

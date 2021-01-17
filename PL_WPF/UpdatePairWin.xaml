@@ -23,18 +23,13 @@
             <RowDefinition Height ="*"/>
         </Grid.RowDefinitions>
 
-        <!-- station 1 text and  button -->
-        <TextBox x:Name="staBox1" Grid.Row="0"  
-         materialDesign:HintAssist.Hint=" enter the first station:"  FontSize="20"
-        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                 PreviewKeyDown ="staBox1_PreviewKeyDown"  Focusable="True"/>
+        <!-- station 1 comboBox -->
+        <ComboBox Name="first" Grid.Row="0" VerticalAlignment="Stretch" Focusable="True"
+                      materialDesign:HintAssist.Hint="First station" SelectionChanged="first_SelectionChanged"/>
+        <!-- station 2 comboBox -->
+        <ComboBox Name="last" Grid.Row="1" VerticalAlignment="Stretch" Focusable="True"
+                      materialDesign:HintAssist.Hint="Last station" SelectionChanged="last_SelectionChanged"/>
 
-        <!-- station 2 text and  button -->
-        <TextBox x:Name="staBox2" Grid.Row="1"
-         materialDesign:HintAssist.Hint=" enter the seacond station:" FontSize="20"
-        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                 PreviewKeyDown ="staBox2_PreviewKeyDown" Focusable="True"/>
-        
         <!-- distance text and  button -->
         <TextBox x:Name="distanceBox" Grid.Row="2" 
          materialDesign:HintAssist.Hint="enter the distance between:"  FontSize="20"

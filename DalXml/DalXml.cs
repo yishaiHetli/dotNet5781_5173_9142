@@ -206,13 +206,14 @@ namespace Dal
         {
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\LineStation.xml");
             IEnumerable<DO.LineStation> line = from bus in xmlDocumentLineSta.Descendants("LineStation")
-                                                where (int)bus.Element("LineID") == LineID
-                                                select new DO.LineStation
-                                                {
-                                                    LineID = (int)bus.Element("LineID"),
-                                                    BusStationKey = (int)bus.Element("BusStationKey"),
-                                                    LIneStationIndex = (int)bus.Element("LIneStationIndex")
-                                                };
+                                               where (int)bus.Element("LineID") == LineID
+                                               let l = new DO.LineStation
+                                               {
+                                                   LineID = (int)bus.Element("LineID"),
+                                                   BusStationKey = (int)bus.Element("BusStationKey"),
+                                                   LIneStationIndex = (int)bus.Element("LIneStationIndex")
+                                               }
+                                               select l;
             return from l in line
                    orderby l.LIneStationIndex
                    select l;
@@ -242,23 +243,8 @@ namespace Dal
                new XElement("BusStationKey", bus.LastStation),
                new XElement("LIneStationIndex", 1)));
             xmlDocumentLineSta.Save(@"..\bin\LineStation.xml");
-            XDocument xmlDocumentBus = XDocument.Load(@"..\bin\BusStation.xml");
-            BusStation sta1 = xmlDocumentBus.Descendants("BusStation").Where(x => (int)x.Element("BusStationKey") == bus.FirstStation).Select(x =>
-                 new DO.BusStation
-                 {
-                     BusStationKey = (int)x.Element("BusStationKey"),
-                     Latitude = (double)x.Element("Latitude"),
-                     Longitude = (double)x.Element("Longitude"),
-                     Name = (string)x.Element("Name")
-                 }).FirstOrDefault();
-            BusStation sta2 = xmlDocumentBus.Descendants("BusStation").Where(x => (int)x.Element("BusStationKey") == bus.LastStation).Select(x =>
-               new DO.BusStation
-               {
-                   BusStationKey = (int)x.Element("BusStationKey"),
-                   Latitude = (double)x.Element("Latitude"),
-                   Longitude = (double)x.Element("Longitude"),
-                   Name = (string)x.Element("Name")
-               }).FirstOrDefault();
+            BusStation sta1 = GetBusStation(bus.FirstStation);
+            BusStation sta2 = GetBusStation(bus.LastStation);
             updatePair(sta1, sta2);
         }
 

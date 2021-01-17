@@ -29,10 +29,13 @@ namespace PL_WPF
         int station2 = -1;
         double distance = 0;
         TimeSpan averageTime = TimeSpan.Zero;
+        List<BusStation> listSta; 
         public UpdatePairWin(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
+            listSta = bl.GetAllStations().ToList();
+            first.ItemsSource = last.ItemsSource = listSta;
         }
 
         private static bool IsTextAllowed(string text)
@@ -55,33 +58,14 @@ namespace PL_WPF
             else { MessageBox.Show("some value was missing"); next(); }
         }
 
-        private void staBox1_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void first_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.Key == Key.Enter)//if the user press on enter
-            {
-                if (staBox1 != null && IsTextAllowed(staBox1.Text)) //if there is a text
-                {
-                    int x;
-                    x = int.Parse(staBox1.Text); // convert to a date
-                    station1 = x;
-                    next(); // set the focus by some order
-                }
-                else { MessageBox.Show("the value is not courect"); }
-            }
+            station1 = ((BusStation)first.SelectedItem).BusStationKey;
         }
-        private void staBox2_PreviewKeyDown(object sender, KeyEventArgs e)
+
+        private void last_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.Key == Key.Enter)//if the user press on enter
-            {
-                if (staBox2 != null && IsTextAllowed(staBox2.Text)) //if there is a text
-                {
-                    int x;
-                    x = int.Parse(staBox2.Text); // convert to a date
-                    station2 = x;
-                    next(); // set the focus by some order
-                }
-                else { MessageBox.Show("the value is not courect"); }
-            }
+            station2 = ((BusStation)last.SelectedItem).BusStationKey;
         }
 
         private void distanceBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -118,11 +102,11 @@ namespace PL_WPF
         {
             if (station1 == -1)
             {
-                staBox1.Focus();
+                first.Focus();
             }
             else if (station2 == -1)
             {
-                staBox2.Focus();
+                last.Focus();
             }
             else if (distance == 0)
             {
