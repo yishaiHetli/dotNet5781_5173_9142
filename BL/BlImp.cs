@@ -34,30 +34,22 @@ namespace BL
         }
         public void GetRefule(BO.Bus other)
         {
-            try
-            {
-                dl.GetRefule(other.LicenseNum);
-            }
-            catch (DO.BadLisenceException ex)
-            {
-                throw new BO.BadLisenceException($"bus number {other.LicenseNum} does not exist", ex);
-            }
+            other.FuelInKm = 1200;
+            DO.Bus bus = BusBoDoAdapter(other);
+            dl.UpdateBus(bus);
         }
         public void GetRepair(BO.Bus other)
         {
-            try
-            {
-                dl.GetRepair(other.LicenseNum);
-            }
-            catch (DO.BadLisenceException ex)
-            {
-                throw new BO.BadLisenceException($"bus number {other.LicenseNum} does not exist", ex);
-            }
+            other.FuelInKm = 1200;
+            other.TotalKm = 0;
+            DO.Bus bus = BusBoDoAdapter(other);
+            dl.UpdateBus(bus);
         }
 
         public IEnumerable<BO.Bus> GetAllBuss()
         {
             return from item in dl.GetAllBuss()
+                   orderby item.LicenseNum
                    select BusDoBoAdapter(item);
         }
 
@@ -136,6 +128,7 @@ namespace BL
         public IEnumerable<BO.BusLine> GetAllLines()
         {
             return from item in dl.GetAllLines()
+                   orderby item.LineID
                    select BusLineDoBoAdapter(item);
         }
         public void AddNewBusLine(BO.BusLine bus)
@@ -218,6 +211,7 @@ namespace BL
         public IEnumerable<BO.BusStation> GetAllStations()
         {
             return from item in dl.GetAllStation()
+                   orderby item.BusStationKey
                    select BusStationDoBoAdapter(item);
         }
 

@@ -22,12 +22,10 @@ namespace DalApi
         #region Lines
         IEnumerable<BusLine> GetAllLines();
         void RemoveBusLine(int ID);
-        BusLine GetBusLine(int id, BusStation first, BusStation last);
         IEnumerable<LineStation> GetAllLineStations(int LineID);
         void AddNewBusLine(BusLine bus);
         #endregion
         IEnumerable<BusStation> GetAllStation();
-        BusStation GetBusStation(int busStationKey);
         void AddNewStop(int index, BusLine bus, BusStation station);
         void AddBusStation(BusStation station);
         void RemoveSta(int ID);

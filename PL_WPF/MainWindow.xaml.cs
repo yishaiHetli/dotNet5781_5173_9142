@@ -59,7 +59,7 @@ namespace PL_WPF
                     {
                         userName.Text = "";
                         password.Password = "";
-                        ManageWindow winM = new ManageWindow(bl,this);
+                        ManageWindow winM = new ManageWindow(bl, this);
                         this.Content = winM.Content;
 
                     }

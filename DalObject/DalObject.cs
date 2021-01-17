@@ -22,7 +22,6 @@ namespace Dal
         #region bus 
         public void AddNewBus(Bus other)
         {
-
             int longs = other.LicenseNum.ToString().Length;
             if (longs < 7 || longs > 8)
                 throw new DO.BadLisenceException(other.LicenseNum, "bus lisence nember is illegal");
@@ -100,18 +99,8 @@ namespace Dal
         public IEnumerable<DO.BusLine> GetAllLines()
         {
             return from bus in DataSource.busLine
-                   orderby bus.LineID
                    select bus.Clone();
 
-        }
-        public BusLine GetBusLine(int id, BusStation first, BusStation last)
-        {
-            DO.BusLine num = DataSource.busLine.Find(p => p.LineID == id && p.FirstStation == first.BusStationKey
-            && p.LastStation == last.BusStationKey);
-            if (num != null)
-                return num.Clone();
-            else
-                throw new DO.BadLineException(id, $"bad ID number: {id}");
         }
 
         public IEnumerable<BusStation> GetAllStation()
@@ -130,14 +119,7 @@ namespace Dal
                    orderby l.LIneStationIndex
                    select l.Clone();
         }
-        public BusStation GetBusStation(int busStationKey)
-        {
-            DO.BusStation num = DataSource.busSta.Find(p => p.BusStationKey == busStationKey);
-            if (num != null)
-                return num.Clone();
-            else
-                throw new DO.BadStationException(busStationKey, $"bad station key number: {busStationKey}");
-        }
+
 
         public void AddNewBusLine(BusLine bus)
         {
