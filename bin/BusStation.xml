@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<BusStations>
+  <BusStation>
+    <BusStationKey>38831</BusStationKey>
+    <Latitude>32.183921</Latitude>
+    <Longitude>34.917806</Longitude>
+    <Name>Bar Lev / Ben Yehuda School</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38832</BusStationKey>
+    <Latitude>31.870034</Latitude>
+    <Longitude>34.819541</Longitude>
+    <Name>Herzl / Bilu Junction</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38833</BusStationKey>
+    <Latitude>31.984553</Latitude>
+    <Longitude>34.790904</Longitude>
+    <Name>The surge / fishermen</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38834</BusStationKey>
+    <Latitude>31.88855</Latitude>
+    <Longitude>34.782828</Longitude>
+    <Name>Fried / The Six Days</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38836</BusStationKey>
+    <Latitude>31.956392</Latitude>
+    <Longitude>34.898098</Longitude>
+    <Name>A. Lod Central / Download</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38837</BusStationKey>
+    <Latitude>31.892166</Latitude>
+    <Longitude>34.796071</Longitude>
+    <Name>Hannah Avrech / Vulcani</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38838</BusStationKey>
+    <Latitude>31.857565</Latitude>
+    <Longitude>34.824106</Longitude>
+    <Name>Herzl / Moshe Sharet</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38839</BusStationKey>
+    <Latitude>31.862305</Latitude>
+    <Longitude>34.821857</Longitude>
+    <Name>The boys / Eli Cohen</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38840</BusStationKey>
+    <Latitude>31.865085</Latitude>
+    <Longitude>34.822237</Longitude>
+    <Name>Weizmann / The Boys</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38841</BusStationKey>
+    <Latitude>31.865222</Latitude>
+    <Longitude>34.818957</Longitude>
+    <Name>The iris / anemone</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38842</BusStationKey>
+    <Latitude>31.867597</Latitude>
+    <Longitude>34.818392</Longitude>
+    <Name>The anemone / daffodil</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38844</BusStationKey>
+    <Latitude>31.86244</Latitude>
+    <Longitude>34.827023</Longitude>
+    <Name>Eli Cohen / Ghetto Fighters</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38845</BusStationKey>
+    <Latitude>31.863501</Latitude>
+    <Longitude>34.828702</Longitude>
+    <Name>Shabazi / Shabbat brothers</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38846</BusStationKey>
+    <Latitude>31.865348</Latitude>
+    <Longitude>34.827102</Longitude>
+    <Name>Shabazi / Weizmann</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38847</BusStationKey>
+    <Latitude>31.977409</Latitude>
+    <Longitude>34.763896</Longitude>
+    <Name>Haim Bar Lev / Yitzhak Rabin Boulevard</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38848</BusStationKey>
+    <Latitude>32.300345</Latitude>
+    <Longitude>34.912708</Longitude>
+    <Name>Lev Hasharon Mental Health Center</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38849</BusStationKey>
+    <Latitude>32.301347</Latitude>
+    <Longitude>34.912602</Longitude>
+    <Name>Lev Hasharon Mental Health Center</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38852</BusStationKey>
+    <Latitude>31.914255</Latitude>
+    <Longitude>34.807944</Longitude>
+    <Name>Holtzman / Science</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38854</BusStationKey>
+    <Latitude>31.963668</Latitude>
+    <Longitude>34.836363</Longitude>
+    <Name>Zrifin Camp / Club</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38855</BusStationKey>
+    <Latitude>31.856115</Latitude>
+    <Longitude>34.825249</Longitude>
+    <Name>Herzl / Golani</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38856</BusStationKey>
+    <Latitude>31.874963</Latitude>
+    <Longitude>34.81249</Longitude>
+    <Name>Rotem / Deganiot</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38859</BusStationKey>
+    <Latitude>32.300035</Latitude>
+    <Longitude>34.910842</Longitude>
+    <Name>The prairie</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38860</BusStationKey>
+    <Latitude>32.305234</Latitude>
+    <Longitude>34.948647</Longitude>
+    <Name>Introduction to the vine / Slope of the fig</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38861</BusStationKey>
+    <Latitude>32.304022</Latitude>
+    <Longitude>34.943393</Longitude>
+    <Name>Introduction to the vine / extension</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38862</BusStationKey>
+    <Latitude>32.302957</Latitude>
+    <Longitude>34.940529</Longitude>
+    <Name>The extension a</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38863</BusStationKey>
+    <Latitude>32.300264</Latitude>
+    <Longitude>34.939512</Longitude>
+    <Name>The extension b</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38864</BusStationKey>
+    <Latitude>32.298171</Latitude>
+    <Longitude>34.938705</Longitude>
+    <Name>The extension / veterans</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38865</BusStationKey>
+    <Latitude>31.990876</Latitude>
+    <Longitude>34.8976</Longitude>
+    <Name>Airports / Aliyah Authority</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38866</BusStationKey>
+    <Latitude>31.998767</Latitude>
+    <Longitude>34.879725</Longitude>
+    <Name>Wing / Cypress</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38867</BusStationKey>
+    <Latitude>31.883019</Latitude>
+    <Longitude>34.818708</Longitude>
+    <Name>The gang / Dov Hoz</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38869</BusStationKey>
+    <Latitude>32.349776</Latitude>
+    <Longitude>34.926837</Longitude>
+    <Name>Beit Halevie</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38870</BusStationKey>
+    <Latitude>32.352953</Latitude>
+    <Longitude>34.899465</Longitude>
+    <Name>First / Route 5700</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38872</BusStationKey>
+    <Latitude>31.897286</Latitude>
+    <Longitude>34.775083</Longitude>
+    <Name>The genius Ben Ish Chai / Ceylon</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38873</BusStationKey>
+    <Latitude>31.883941</Latitude>
+    <Longitude>34.807039</Longitude>
+    <Name>Okashi / Levi Eshkol</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38875</BusStationKey>
+    <Latitude>31.896762</Latitude>
+    <Longitude>34.816752</Longitude>
+    <Name>Rest and estate / Yehuda Gorodisky</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38876</BusStationKey>
+    <Latitude>31.898463</Latitude>
+    <Longitude>34.823461</Longitude>
+    <Name>Gorodsky / Yechiel Paldi</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38877</BusStationKey>
+    <Latitude>32.076535</Latitude>
+    <Longitude>34.904907</Longitude>
+    <Name>Derech Menachem Begin / Yaakov Hazan</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38878</BusStationKey>
+    <Latitude>32.299994</Latitude>
+    <Longitude>34.878765</Longitude>
+    <Name>Through the Park / Rabbi Neria</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38879</BusStationKey>
+    <Latitude>31.865457</Latitude>
+    <Longitude>34.859437</Longitude>
+    <Name>The fig / vine</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38880</BusStationKey>
+    <Latitude>31.866772</Latitude>
+    <Longitude>34.864555</Longitude>
+    <Name>The fig / oak</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38881</BusStationKey>
+    <Latitude>31.809325</Latitude>
+    <Longitude>34.784347</Longitude>
+    <Name>Through the Flowers / Jasmine</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38883</BusStationKey>
+    <Latitude>31.80037</Latitude>
+    <Longitude>34.778239</Longitude>
+    <Name>Yitzhak Rabin / Pinchas Sapir</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38884</BusStationKey>
+    <Latitude>31.799224</Latitude>
+    <Longitude>34.782985</Longitude>
+    <Name>Menachem Begin / Yitzhak Rabin</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38885</BusStationKey>
+    <Latitude>31.800334</Latitude>
+    <Longitude>34.785069</Longitude>
+    <Name>Haim Herzog / Dolev</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38886</BusStationKey>
+    <Latitude>31.802319</Latitude>
+    <Longitude>34.786735</Longitude>
+    <Name>Shades / Cedar School</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38887</BusStationKey>
+    <Latitude>31.804595</Latitude>
+    <Longitude>34.786623</Longitude>
+    <Name>Through the trees / oak</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38888</BusStationKey>
+    <Latitude>31.805041</Latitude>
+    <Longitude>34.785098</Longitude>
+    <Name>Through the Trees / Menachem Begin</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38889</BusStationKey>
+    <Latitude>31.816751</Latitude>
+    <Longitude>34.782252</Longitude>
+    <Name>Independence / Weizmann</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38890</BusStationKey>
+    <Latitude>31.816579</Latitude>
+    <Longitude>34.779753</Longitude>
+    <Name>Weizmann / The Magic Rug</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38891</BusStationKey>
+    <Latitude>31.801182</Latitude>
+    <Longitude>34.787199</Longitude>
+    <Name>Tzala / Coral</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38892</BusStationKey>
+    <Latitude>31.802279</Latitude>
+    <Longitude>34.786055</Longitude>
+    <Name>Hatzav / Tzala Garden</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38893</BusStationKey>
+    <Latitude>31.814676</Latitude>
+    <Longitude>34.777574</Longitude>
+    <Name>Pines / Levinson</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38894</BusStationKey>
+    <Latitude>31.813285</Latitude>
+    <Longitude>34.775928</Longitude>
+    <Name>Feinberg / Schachwitz</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38895</BusStationKey>
+    <Latitude>31.806959</Latitude>
+    <Longitude>34.773504</Longitude>
+    <Name>Ben Gurion / Fox</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38898</BusStationKey>
+    <Latitude>31.884187</Latitude>
+    <Longitude>34.805494</Longitude>
+    <Name>Levi Eshkol / Rabbi David Israel</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38899</BusStationKey>
+    <Latitude>31.910118</Latitude>
+    <Longitude>34.805809</Longitude>
+    <Name>Lily / Oppenheimer</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38901</BusStationKey>
+    <Latitude>31.882474</Latitude>
+    <Longitude>34.80506</Longitude>
+    <Name>Rabbi David Israel / Arie Dolcin</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38903</BusStationKey>
+    <Latitude>31.878667</Latitude>
+    <Longitude>34.81138</Longitude>
+    <Name>Kronenberg / Crimson</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>38904</BusStationKey>
+    <Latitude>31.975479</Latitude>
+    <Longitude>34.813355</Longitude>
+    <Name>Jacob Freiman / Benjamin Shmotkin</Name>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>66787</BusStationKey>
+    <Latitude>31.982177</Latitude>
+    <Longitude>34.789445</Longitude>
+    <Name>Rabbi David Israel / Arie Dolcin</Name>
+  </BusStation>
+</BusStations>
