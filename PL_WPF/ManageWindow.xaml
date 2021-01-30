@@ -40,9 +40,17 @@
         <Button Margin="0,5,5,5"  Style="{StaticResource MaterialDesignRaisedDarkButton}"
   Grid.Row="1" Grid.Column="3" Content="Stations" FontSize="20"   
                  FontStyle="Oblique" VerticalAlignment="Top" Height="60" Width="130" Click="Station_Click"/>
-        <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="0,5,5,0">
-            <Button  Click="LogOut_click" Content="Log Out" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
+        <StackPanel Grid.Column="0" Grid.Row="1"  Margin="1,5,5,1">
+            <Button  Click="LogOut_click" Content="Log Out" Height="28" Style="{StaticResource MaterialDesignRaisedLightButton}"
                         Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"  />
+            <Button  Click="CloseAllWindows" Margin="1,5,1,1" Content="Close winows" Height="28" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"  />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <materialDesign:TimePicker x:Name="pickerTime"  Height="30" Margin="0,30,0,0" SelectedTime="10AM" SelectedTimeChanged="TimePicker_SelectedTimeChanged"/>
+            <TextBox Margin="0,9,0,0" x:Name="speedVal" materialDesign:HintAssist.Hint="Speed in millisecodns" Height="30"/>
+            <Button x:Name="Simulator" Margin="1,6,1,1" Content="Start simulation" Height="28" Style="{StaticResource MaterialDesignRaisedLightButton}"
+               Width="138" Click="Simulator_Click"/>
         </StackPanel>
         <DockPanel Width="660" Height="480" Grid.Row="2" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="4">
             <Frame x:Name="frmMain" NavigationUIVisibility="Hidden"/>

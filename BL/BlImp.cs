@@ -88,12 +88,19 @@ namespace BL
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
+        BO.LineTrip LineTripDOBOAdapter(DO.LineTrip busDO)
+        {
+            BO.LineTrip busBO = new BO.LineTrip();
+            busDO.CopyPropertiesTo(busBO);
+            return busBO;
+        }
         BO.BusLine BusLineDoBoAdapter(DO.BusLine busDO)
         {
             BO.BusLine busBO = new BO.BusLine();
             busDO.CopyPropertiesTo(busBO);
+
             busBO.LinesSta = from line in dl.GetAllLineStations(busBO.LineID)
-                             orderby line.LIneStationIndex
+                             orderby line.LineStationIndex
                              select LineStaDoBoAdapter(line);
             bool notFirstSta = false;
             int first = 0;
@@ -113,7 +120,23 @@ namespace BL
                 first = item.BusStationKey;
                 notFirstSta = true;
             }
+
             busBO.LinesSta = linesSta;
+            busBO.LinesExit = from line in dl.GetAllLineTrip(busBO.LineID)
+                              orderby line.StartAt
+                              select LineTripDOBOAdapter(line);
+
+            TimeSpan time = TimeSpan.Zero;
+            foreach (var line in busBO.LinesSta)
+            {
+                time += line.AverageTime;
+            }
+            List<BO.LineTrip> lines = busBO.LinesExit.ToList();
+            foreach (var line in lines)
+            {
+                line.FinishAt = line.StartAt + time;
+            }
+            busBO.LinesExit = lines;
             return busBO;
         }
         
@@ -149,12 +172,23 @@ namespace BL
         }
        
         #endregion
-        #region user
+        #region User
         public bool userCheck(string name, string password, bool manage)
         {
             if (dl.CheckUser(name, password, manage))
                 return true;
             return false;
+        }
+        public void AddUser(string name, string password, bool manage)
+        {
+            try
+            {
+                dl.AddUser(name, password, manage);
+            }
+            catch (Exception ex)
+            {
+                throw new DuplicateWaitObjectException($"{ex.Message}");
+            }
         }
         #endregion
         #region Stations
@@ -195,7 +229,6 @@ namespace BL
                 }
             }
             dl.AddBusStation(BusStationBoDoAdapter(station));
-
         }
         BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
         {
@@ -234,6 +267,62 @@ namespace BL
             {
                 throw new BO.BadStationException(ex.Message,ex);
             }
+        }
+        public List<StationDistance> Avarge(BO.BusStation station, TimeSpan time)
+        {
+            List<StationDistance> list = new List<StationDistance>();
+            foreach (var x in station.LineInStation)
+            {
+                TimeSpan average = TimeSpan.Zero;
+                foreach (var y in x.LinesSta)
+                {
+                    average += y.AverageTime;
+                    if (station.BusStationKey == y.BusStationKey)
+                    {
+                        foreach (var item in x.LinesExit)
+                        {
+                            TimeSpan _average = average;
+                            _average += item.StartAt;
+                            list.Add(new StationDistance
+                            {
+                                Average = _average,
+                                LineID = x.LineID,
+                                StartTime = item.StartAt,
+                                FirstStation = x.FirstStation,
+                                LineNumber = x.LineNumber,
+                                LastStation = x.LastStation
+                            });
+                        }
+                        break;
+                    }
+                }
+            }
+            list = list.OrderBy(x => x.Average).ToList();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                if (list[i].Average > time) 
+                {
+                    List<StationDistance> list2 = new List<StationDistance>();
+                    if (i != 0)
+                        list2.Add(list[i-1]);
+                    for (int j = 0; i < list.Count() && j < 5; j++)
+                    {
+                        list2.Add(new StationDistance
+                        {
+                            Average = list[i].Average - time,
+                            LineID = list[i].LineID,
+                            StartTime = list[i].StartTime,
+                            FirstStation = list[i].FirstStation,
+                            LineNumber = list[i].LineNumber,
+                            LastStation = list[i].LastStation
+
+                        });
+                        i++;
+                    }
+                    return list2;
+                }
+            }
+            return null;
         }
         #endregion
     }

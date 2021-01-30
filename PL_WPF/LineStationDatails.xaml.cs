@@ -23,12 +23,15 @@ namespace PL_WPF
     {
         IBL bl;
         List<LineStation> lines = new List<LineStation>();
-        public LineStationDatails(IBL _bl, IEnumerable<LineStation> _lines)
+        List<LineTrip> lineTrip = new List<LineTrip>();
+        public LineStationDatails(IBL _bl, IEnumerable<LineStation> _lines, IEnumerable<LineTrip> _lineTrip)
         {
             bl = _bl;
             lines = _lines.ToList();
+            lineTrip = _lineTrip.ToList();
             InitializeComponent();
             list.ItemsSource = lines;
+            listTrip.ItemsSource = lineTrip;
         }
     }
 }

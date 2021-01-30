@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DO;
+
 namespace DS
 {
+    /// <summary>
+    /// This class create all the data source for 'DalObject' 
+    /// </summary>
     public static class DataSource
     {
         public static List<Bus> buss;  // 20
@@ -15,15 +17,19 @@ namespace DS
         public static List<LineStation> lineSta; // 10 for each busLine 
         public static List<PairStations> pairSta;
         public static List<Users> userList;
+        public static List<LineTrip> lineTrips;
         static Random rnd = new Random();
 
         static DataSource()
         {
-            InitAllLists();
+            InitAllLists();  //Calls to initialize data
         }
-
+        /// <summary>
+        /// initialize all list that use by the 'DalObject'
+        /// </summary>
         static void InitAllLists()
         {
+            // create 20 buses
             #region Bus
             buss = new List<Bus>();
             bool exsit;
@@ -32,7 +38,7 @@ namespace DS
             {
                 exsit = false;
                 licenseNum = rnd.Next(1000000, 100000000);
-                for (int j = 0; j < i; ++j)
+                for (int j = 0; j < i; ++j) //check if this bus license number alredy exsit
                     if (buss[j].LicenseNum == licenseNum)
                     {
                         --i;
@@ -41,15 +47,15 @@ namespace DS
                     }
                 if (exsit)
                     continue;
-                DateTime start = new DateTime(1985, 1, 1);
+                DateTime start = new DateTime(1995, 1, 1);   
                 DateTime end = new DateTime(2018, 1, 1);
-                if (licenseNum.ToString().Length > 7)
+                if (licenseNum.ToString().Length > 7) //if the license have more than 7 digits
                 {
                     start = end;
                     end = DateTime.Today;
                 }
-                end = randomDate(start, end);
-                buss.Add(new Bus
+                end = randomDate(start, end); // gets random date
+                buss.Add(new Bus      
                 {
                     LicenseNum = licenseNum,
                     StartActivity = end,
@@ -59,7 +65,9 @@ namespace DS
                 });
             }
             #endregion
+            // create 60 stations  
             #region Bus stations
+            //Manual list of streets, landmarks, station numbers
             List<string> streets = new List<string> {
 "Bar Lev / Ben Yehuda School"
 ,"Herzl / Bilu Junction"
@@ -269,7 +277,7 @@ namespace DS
 ,85678
         };
             busSta = new List<BusStation>();
-            for (int i = 0; i < 60; ++i)
+            for (int i = 0; i < 60; ++i) //create 60 BusStations arguments
             {
                 busSta.Add(new BusStation
                 {
@@ -286,46 +294,76 @@ namespace DS
             streets.Clear();
             staKey.Clear();
             #endregion
+            // create 10 bus lines and for each line creates station , line trip , pair station
             #region Lines
             busLine = new List<BusLine>();
             lineSta = new List<LineStation>();
             pairSta = new List<PairStations>();
-            for (int i = 0, g = 0; i < 10; ++i)
+            lineTrips = new List<LineTrip>();
+            for (int i = 0; i < 10; ++i) // create 10 bus lines
             {
                 busLine.Add(new BusLine
                 {
                     LineID = BusLine.ID++,
                     LineNumber = rnd.Next(1, 1000),
                     Place = (Area)rnd.Next(0, 5),
-                    FirstStation = busSta[g].BusStationKey,
+                    FirstStation = 0,
                     LastStation = 0
                 });
-                for (int n = 0; n <= 10; ++n, ++g)
+                TimeSpan start = randomTime(TimeSpan.FromHours(7), TimeSpan.FromHours(9));//gets random time between 7 to 9 
+                for (int a = 0; a < 50; ++a) // create lines trip
                 {
+                    if (start > TimeSpan.FromHours(23))// if the time small than 11PM
+                    {
+                        break;
+                    }
+                    start += TimeSpan.FromMinutes(rnd.Next(10, 50));
+                    lineTrips.Add(new LineTrip
+                    {
+                        LineID = busLine[i].LineID,
+                        StartAt = start
+                    });
+                }
+                int index1 = 0;
+                int index2 = 0;
+                for (int n = 0; n <= 10; ++n) // create line stations
+                {
+                    index1 = rnd.Next(0, busSta.Count); // gets random index for bus station list
+                    if (lineSta.FirstOrDefault(x => x.LineID == busLine[i].LineID && x.BusStationKey == busSta[index1].BusStationKey) != null)
+                    {
+                        --n;
+                        continue; // if this busStation alredy exist in this line
+                    }
+                    if (n == 0) // updata busline first station to this station
+                    {
+                        busLine[i].FirstStation = busSta[index1].BusStationKey;
+                    }
                     lineSta.Add(new LineStation
                     {
-                        BusStationKey = busSta[g].BusStationKey,
+                        BusStationKey = busSta[index1].BusStationKey,
                         LineID = busLine[i].LineID,
-                        LIneStationIndex = n
+                        LineStationIndex = n
                     });
                     if (n > 0)
                     {
-                        var sCoord = new GeoCoordinate(busSta[g].Latitude, busSta[g].Longitude);
-                        var eCoord = new GeoCoordinate(busSta[g - 1].Latitude, busSta[g - 1].Longitude);
-                        double cord = sCoord.GetDistanceTo(eCoord) / 1000;
+                        var sCoord = new GeoCoordinate(busSta[index1].Latitude, busSta[index1].Longitude); 
+                        var eCoord = new GeoCoordinate(busSta[index2].Latitude, busSta[index2].Longitude);
+                        double cord = sCoord.GetDistanceTo(eCoord) / 1000; //gets the distance between two station by coordinates in km
                         pairSta.Add(new PairStations
                         {
-                            FirstKey = busSta[g - 1].BusStationKey,
-                            SecondKey = busSta[g].BusStationKey,
+                            FirstKey = busSta[index2].BusStationKey,
+                            SecondKey = busSta[index1].BusStationKey,
                             Distance = cord,
-                            AverageTime = TimeSpan.FromMinutes(cord *2)
+                            AverageTime = randomTime(TimeSpan.FromMinutes(cord), TimeSpan.FromMinutes(cord * 2)) // random time between 60kmh to 30kmh  
                         });
                     }
+                    index2 = index1; // keep the previous index
                 }
-                busLine[i].LastStation = busSta[g - 1].BusStationKey;
-                g -= 6;
+                busLine[i].LastStation = busSta[index1].BusStationKey; // update busLine last station
             }
             #endregion
+            // cteate two users
+            #region User 
             userList = new List<Users>();
             userList.Add(new Users
             {
@@ -339,8 +377,26 @@ namespace DS
                 Password = "h",
                 Management = true
             });
+            #endregion
         }
 
+        /// <summary>
+        /// gets the start and end time and returns some random value between them
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns>random TimeSpan between start and end</returns>
+        static TimeSpan randomTime(TimeSpan start, TimeSpan end)
+        {
+            int range = (int)(end - start).TotalMinutes;
+            return start + TimeSpan.FromMinutes(rnd.Next(range));
+        }
+        /// <summary>
+        /// gets the start and end date and returns some random value between them
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns>random DateTime between start and end</returns>
         static DateTime randomDate(DateTime start, DateTime end)
         {
             int range = (end - start).Days;

@@ -44,7 +44,7 @@ namespace PL_WPF
             BusLine lines = (BusLine)list.SelectedItem;
             if (lines != null)
             {
-                LineStationDatails win = new LineStationDatails(bl, lines.LinesSta);
+                LineStationDatails win = new LineStationDatails(bl, lines.LinesSta, lines.LinesExit);
                 win.Show();
             }
         }

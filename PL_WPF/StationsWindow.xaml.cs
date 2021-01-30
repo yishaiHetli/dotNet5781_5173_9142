@@ -23,24 +23,36 @@ namespace PL_WPF
     {
         IBL bl;
         List<BusStation> staList;
-        public StationsWindow(IBL _bl)
+        ManageWindow manageWindow;
+        public StationsWindow(IBL _bl,ManageWindow _win)
         {
             InitializeComponent();
             bl = _bl;
+            manageWindow = _win;
             staList = (from number in bl.GetAllStations()
                        select number).ToList();
             list.ItemsSource = staList;
-
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.BusStation lsta = (BO.BusStation)list.SelectedItem;
+            BusStation lsta = (BusStation)list.SelectedItem;
             if (lsta != null)
             {
-
-                StationDetails win = new StationDetails(bl, lsta.LineInStation);
-                win.Show();
+                if (manageWindow.worker.IsBusy == true)
+                {
+                    SimulationWin win = new SimulationWin(bl, lsta, manageWindow, lsta.LineInStation);
+                    win.Show();
+                }
+                else
+                {
+                    StationDetails win = new StationDetails(bl, lsta.LineInStation);
+                    win.Show();
+                }
             }
         }
         private void AddStation_click(object sender, RoutedEventArgs e)

@@ -8,7 +8,6 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using DalApi;
 using DO;
-using DS;
 
 namespace Dal
 {
@@ -19,76 +18,95 @@ namespace Dal
         DalXml() { } // default => private 
         static DalXml()
         {
-               // XDocument xmlDocumentBus = new XDocument(
-               //     new XDeclaration("1.0", "utf-8", "yes"),
-               //     new XElement("Buses",
-               //         from bus in DataSource.buss
-               //         select new XElement("Bus",
-               //                new XElement("LicenseNum", bus.LicenseNum),
-               //                new XElement("TotalKm", bus.TotalKm),
-               //                new XElement("FuelInKm", bus.FuelInKm),
-               //                new XElement("BusStatus", bus.BusStatus),
-               //                new XElement("StartActivity", bus.StartActivity))));
-               // xmlDocumentBus.Save(@"C:\Users\User\source\repos\yishaiHetli\dotNet5781_5173_9142\bin\Bus.xml");
+            // XDocument xmlDocumentBus = new XDocument(
+            //     new XDeclaration("1.0", "utf-8", "yes"),
+            //     new XElement("Buses",
+            //         from bus in DataSource.buss
+            //         select new XElement("Bus",
+            //                new XElement("LicenseNum", bus.LicenseNum),
+            //                new XElement("TotalKm", bus.TotalKm),
+            //                new XElement("FuelInKm", bus.FuelInKm),
+            //                new XElement("BusStatus", bus.BusStatus),
+            //                new XElement("StartActivity", bus.StartActivity))));
+            // xmlDocumentBus.Save(@"..\bin\Bus.xml");
 
-               // XDocument xmlDocumentBusLine = new XDocument(
-               //     new XDeclaration("1.0", "utf-8", "yes"),
-               // new XElement("BusLines",
-               //         from bus in DataSource.busLine
-               //         select new XElement("BusLine",
-               //                 new XElement("LineID", bus.LineID),
-               //                new XElement("Place", bus.Place),
-               //                new XElement("LineNumber", bus.LineNumber),
-               //                new XElement("FirstStation", bus.FirstStation),
-               //                new XElement("LastStation", bus.LastStation))));
-               // xmlDocumentBusLine.Save(@"C:\Users\User\source\repos\yishaiHetli\dotNet5781_5173_9142\bin\BusLine.xml");
+            // XDocument xmlDocumentBusLine = new XDocument(
+            //     new XDeclaration("1.0", "utf-8", "yes"),
+            // new XElement("BusLines",
+            //         from bus in DataSource.busLine
+            //         select new XElement("BusLine",
+            //                 new XElement("LineID", bus.LineID),
+            //                new XElement("Place", bus.Place),
+            //                new XElement("LineNumber", bus.LineNumber),
+            //                new XElement("FirstStation", bus.FirstStation),
+            //                new XElement("LastStation", bus.LastStation))));
+            // xmlDocumentBusLine.Save(@"..\bin\BusLine.xml");
 
-               // XDocument xmlDocumentBusStation = new XDocument(
-               //     new XDeclaration("1.0", "utf-8", "yes"),
-               // new XElement("BusStations",
-               //         from bus in DataSource.busSta
-               //         select new XElement("BusStation",
-               //                new XElement("BusStationKey", bus.BusStationKey),
-               //                new XElement("Latitude", bus.Latitude),
-               //                new XElement("Longitude", bus.Longitude),
-               //                new XElement("Name", bus.Name))));
-               // xmlDocumentBusStation.Save(@"C:\Users\User\source\repos\yishaiHetli\dotNet5781_5173_9142\bin\BusStation.xml");
+            // XDocument xmlDocumentBusStation = new XDocument(
+            //     new XDeclaration("1.0", "utf-8", "yes"),
+            // new XElement("BusStations",
+            //         from bus in DataSource.busSta
+            //         select new XElement("BusStation",
+            //                new XElement("BusStationKey", bus.BusStationKey),
+            //                new XElement("Latitude", bus.Latitude),
+            //                new XElement("Longitude", bus.Longitude),
+            //                new XElement("Name", bus.Name))));
+            // xmlDocumentBusStation.Save(@"..\bin\BusStation.xml");
 
-               // XDocument xmlDocumentLineStation = new XDocument(
-               //    new XDeclaration("1.0", "utf-8", "yes"),
-               //new XElement("LineStations",
-               //         from bus in DataSource.lineSta
-               //         select new XElement("LineStation",
-               //                new XElement("LineID", bus.LineID),
-               //               new XElement("BusStationKey", bus.BusStationKey),
-               //               new XElement("LIneStationIndex", bus.LIneStationIndex))));
-               // xmlDocumentLineStation.Save(@"C:\Users\User\source\repos\yishaiHetli\dotNet5781_5173_9142\bin\LineStation.xml");
+            // XDocument xmlDocumentLineStation = new XDocument(
+            //    new XDeclaration("1.0", "utf-8", "yes"),
+            //new XElement("LineStations",
+            //         from bus in DataSource.lineSta
+            //         select new XElement("LineStation",
+            //                new XElement("LineID", bus.LineID),
+            //               new XElement("BusStationKey", bus.BusStationKey),
+            //               new XElement("LineStationIndex", bus.LineStationIndex))));
+            // xmlDocumentLineStation.Save(@"..\bin\LineStation.xml");
 
-               // XDocument xmlDocumentPairStation = new XDocument(
-               //   new XDeclaration("1.0", "utf-8", "yes"),
-               //new XElement("PairStations",
-               //         from bus in DataSource.pairSta
-               //         select new XElement("PairStation",
-               //                new XElement("FirstKey", bus.FirstKey),
-               //                new XElement("SecondKey", bus.SecondKey),
-               //                new XElement("Distance", bus.Distance),
-               //                new XElement("AverageTime", bus.AverageTime))));
-               // xmlDocumentPairStation.Save(@"C:\Users\User\source\repos\yishaiHetli\dotNet5781_5173_9142\bin\PairStation.xml");
+            // XDocument xmlDocumentPairStation = new XDocument(
+            //   new XDeclaration("1.0", "utf-8", "yes"),
+            //new XElement("PairStations",
+            //         from bus in DataSource.pairSta
+            //         select new XElement("PairStation",
+            //                new XElement("FirstKey", bus.FirstKey),
+            //                new XElement("SecondKey", bus.SecondKey),
+            //                new XElement("Distance", bus.Distance),
+            //                new XElement("AverageTime", bus.AverageTime))));
+            // xmlDocumentPairStation.Save(@"..\bin\PairStation.xml");
 
-               // XDocument xmlDocumentUsers = new XDocument(
-               //  new XDeclaration("1.0", "utf-8", "yes"),
-               //new XElement("Users",
-               //         from bus in DataSource.userList
-               //         select new XElement("User",
-               //                new XElement("UserName", bus.UserName),
-               //                new XElement("Password", bus.Password),
-               //                new XElement("Management", bus.Management))));
-               // xmlDocumentUsers.Save(@"C:\Users\User\source\repos\yishaiHetli\dotNet5781_5173_9142\bin\Users.xml");
-                XDocument xmlDocumentBusLines = XDocument.Load(@"..\bin\BusLine.xml");
-            BusLine.ID = xmlDocumentBusLines.Descendants("BusLine").Count();
+            // XDocument xmlDocumentUsers = new XDocument(
+            //  new XDeclaration("1.0", "utf-8", "yes"),
+            //new XElement("Users",
+            //         from bus in DataSource.userList
+            //         select new XElement("User",
+            //                new XElement("UserName", bus.UserName),
+            //                new XElement("Password", bus.Password),
+            //                new XElement("Management", bus.Management))));
+            // xmlDocumentUsers.Save(@"..\bin\Users.xml");
+            // XDocument xmlDocumentLineTrip = new XDocument(
+            //  new XDeclaration("1.0", "utf-8", "yes"),
+            //new XElement("LineTrips",
+            //         from line in DataSource.lineTrips
+            //         select new XElement("LineTrip",
+            //                new XElement("LineID", line.LineID),
+            //                new XElement("StartAt", line.StartAt))));
+            // xmlDocumentLineTrip.Save(@"..\bin\LineTrip.xml");
+            XDocument xmlDocumentBusLines = XDocument.Load(@"..\bin\BusLine.xml");
+            int id = 0;
+            foreach (var bus in xmlDocumentBusLines.Descendants("BusLine"))
+            {
+                if ((int)bus.Element("LineID") > id)
+                    id = (int)bus.Element("LineID");
+            }
+            BusLine.ID = ++id;
         }
         public static IDal Instance { get => instance; }// The public Instance property to use
         #endregion
+        /// <summary>
+        /// the function gets a bus and if the parameters are correct 
+        /// adding it to the list of buses
+        /// </summary>
+        /// <param name="other">the bus we want to add</param>
         public void AddNewBus(Bus other)
         {
             int longs = other.LicenseNum.ToString().Length;
@@ -114,7 +132,11 @@ namespace Dal
                 new XElement("TotalKm", other.TotalKm)));
             xmlDocumentBus.Save(@"..\bin\Bus.xml");
         }
-
+        /// <summary>
+        /// the function gets a license plate and 
+        /// removes the bus to which it belongs
+        /// </summary>
+        /// <param name="license">the license of the bus we want to remove</param>
         public void RemoveBus(int license)
         {
             XDocument xmlDocumentBus = XDocument.Load(@"..\bin\Bus.xml");
@@ -122,7 +144,12 @@ namespace Dal
                 .FirstOrDefault().Remove();
             xmlDocumentBus.Save(@"..\bin\Bus.xml");
         }
-
+        /// <summary>
+        /// the function gets a license plate and take
+        /// the bus to which it belongs and copy the data to a DO.Bus
+        /// </summary>
+        /// <param name="licenseNum">the licenseNum of the bus ew want</param>
+        /// <returns></returns>
         public Bus GetBus(int licenseNum)
         {
             XDocument xmlDocumentBus = XDocument.Load(@"..\bin\Bus.xml");
@@ -136,13 +163,19 @@ namespace Dal
                       TotalKm = (double)bus.Element("TotalKm")
                   }).FirstOrDefault();
         }
-
+        /// <summary>
+        /// the function updating the bus the bus by remoning it and recrating it
+        /// </summary>
+        /// <param name="bus">the bus we want to update</param>
         public void UpdateBus(Bus bus)
         {
             RemoveBus(bus.LicenseNum);
             AddNewBus(bus);
         }
-
+        /// <summary>
+        /// the function copy all of the buses the to IEnumerable
+        /// </summary>
+        /// <returns> IEnumerable<DO.Bus></returns>
         public IEnumerable<Bus> GetAllBuss()
         {
             XDocument xmlDocumentBus = XDocument.Load(@"..\bin\Bus.xml");
@@ -158,28 +191,14 @@ namespace Dal
             return buses;
         }
 
-        public void GetRefule(int lisence)
-        {
-            XDocument xmlDocumentBus = XDocument.Load(@"..\bin\Bus.xml");
-            xmlDocumentBus.Descendants("Bus").Where(x => (int)x.Element("LicenseNum") == lisence)
-                .FirstOrDefault().SetElementValue("FuelInKm", 1200);
-            xmlDocumentBus.Save(@"..\bin\Bus.xml");
-        }
-
-        public void GetRepair(int lisence)
-        {
-            XDocument xmlDocumentBus = XDocument.Load(@"..\bin\Bus.xml");
-            xmlDocumentBus.Descendants("Bus").Where(x => (int)x.Element("LicenseNum") == lisence)
-                .FirstOrDefault().SetElementValue("FuelInKm", 1200);
-            xmlDocumentBus.Descendants("Bus").Where(x => (int)x.Element("LicenseNum") == lisence)
-               .Select(x => x.Element("TotalKm")).FirstOrDefault().SetValue(0);
-            xmlDocumentBus.Save(@"..\bin\Bus.xml");
-        }
-
+        /// <summary>
+        /// the function copy all of the lines to IEnumerable
+        /// </summary>
+        /// <returns>IEnumerable<DO.BusLine></returns>
         public IEnumerable<BusLine> GetAllLines()
         {
             XDocument xmlDocumentBus = XDocument.Load(@"..\bin\BusLine.xml");
-            IEnumerable<DO.BusLine> buses = from bus in xmlDocumentBus.Descendants("BusLine")
+            IEnumerable<DO.BusLine> lines = from bus in xmlDocumentBus.Descendants("BusLine")
                                             select new DO.BusLine
                                             {
                                                 LineID = (int)bus.Element("LineID"),
@@ -188,37 +207,65 @@ namespace Dal
                                                 LastStation = (int)bus.Element("LastStation"),
                                                 Place = (Area)Enum.Parse(typeof(Area), (string)bus.Element("Place"), true)
                                             };
-            return buses;
+            return lines;
         }
-
+        /// <summary>
+        /// the function gets an id and remove the line to which it belongs
+        /// </summary>
+        /// <param name="ID">th id of the line we want to remove</param>
         public void RemoveBusLine(int ID)
         {
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\LineStation.xml");
             XDocument xmlDocumentBus = XDocument.Load(@"..\bin\BusLine.xml");
+            XDocument xmlDocumentLineTrip = XDocument.Load(@"..\bin\LineTrip.xml");
             xmlDocumentBus.Root.Elements().Where(x => (int)x.Element("LineID") == ID)
                 .FirstOrDefault().Remove();
             xmlDocumentLineSta.Root.Elements().Where(x => (int)x.Element("LineID") == ID).Remove();
+            xmlDocumentLineTrip.Root.Elements().Where(x => (int)x.Element("LineID") == ID).Remove();
+            foreach (var x in xmlDocumentBus.Descendants("BusLine"))
+            {
+                if ((int)x.Element("LineID") < ID) continue;
+                x.Element("LineID").SetValue((int)x.Element("LineID") - 1);
+            }
+            foreach (var x in xmlDocumentLineSta.Descendants("LineStation"))
+            {
+                if ((int)x.Element("LineID") < ID) continue;
+                x.Element("LineID").SetValue((int)x.Element("LineID") - 1);
+            }
+            foreach (var x in xmlDocumentLineTrip.Descendants("LineTrip"))
+            {
+                if ((int)x.Element("LineID") < ID) continue;
+                x.Element("LineID").SetValue((int)x.Element("LineID") - 1);
+            }
+            --BusLine.ID;
             xmlDocumentBus.Save(@"..\bin\BusLine.xml");
             xmlDocumentLineSta.Save(@"..\bin\LineStation.xml");
+            xmlDocumentLineTrip.Save(@"..\bin\LineTrip.xml");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="LineID"></param>
+        /// <returns></returns>
         public IEnumerable<LineStation> GetAllLineStations(int LineID)
         {
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\LineStation.xml");
-            IEnumerable<DO.LineStation> line = from bus in xmlDocumentLineSta.Descendants("LineStation")
-                                               where (int)bus.Element("LineID") == LineID
-                                               let l = new DO.LineStation
-                                               {
-                                                   LineID = (int)bus.Element("LineID"),
-                                                   BusStationKey = (int)bus.Element("BusStationKey"),
-                                                   LIneStationIndex = (int)bus.Element("LIneStationIndex")
-                                               }
-                                               select l;
-            return from l in line
-                   orderby l.LIneStationIndex
+            return from bus in xmlDocumentLineSta.Descendants("LineStation")
+                   where (int)bus.Element("LineID") == LineID
+                   let l = new DO.LineStation
+                   {
+                       LineID = (int)bus.Element("LineID"),
+                       BusStationKey = (int)bus.Element("BusStationKey"),
+                       LineStationIndex = (int)bus.Element("LineStationIndex")
+                   }
+                   orderby l.LineStationIndex
                    select l;
         }
-
+        /// <summary>
+        /// the function gets a line and if the parameters are correct 
+        /// adding it to the list of lines
+        /// </summary>
+        /// <param name="other">the line we want to add</param>
         public void AddNewBusLine(BusLine bus)
         {
             bus.LineID = BusLine.ID++;
@@ -236,18 +283,21 @@ namespace Dal
                 new XElement("LineStation",
                 new XElement("LineID", bus.LineID),
                 new XElement("BusStationKey", bus.FirstStation),
-                new XElement("LIneStationIndex", 0)));
+                new XElement("LineStationIndex", 0)));
             xmlDocumentLineSta.Element("LineStations").Add(
                new XElement("LineStation",
                new XElement("LineID", bus.LineID),
                new XElement("BusStationKey", bus.LastStation),
-               new XElement("LIneStationIndex", 1)));
+               new XElement("LineStationIndex", 1)));
             xmlDocumentLineSta.Save(@"..\bin\LineStation.xml");
             BusStation sta1 = GetBusStation(bus.FirstStation);
             BusStation sta2 = GetBusStation(bus.LastStation);
             updatePair(sta1, sta2);
         }
-
+        /// <summary>
+        /// the function copy all of the bus stations to IEnumerable
+        /// </summary>
+        /// <returns> IEnumerable<DO.BusStation></returns>
         public IEnumerable<BusStation> GetAllStation()
         {
             XDocument xmlDocumentBus = XDocument.Load(@"..\bin\BusStation.xml");
@@ -261,24 +311,46 @@ namespace Dal
                                                };
             return buses;
         }
-
+        /// <summary>
+        /// the function gets bus station data and line data
+        /// and if the parameters of the bus station are correct 
+        /// adding it to the route of the line
+        /// </summary>
+        /// <param name="index">the place we want to add the bus station 
+        /// in the route of the line </param>
+        /// <param name="bus">the line of which we want to add the bus station</param>
+        /// <param name="station">the station we want to add</param>
         public void AddNewStop(int index, BusLine bus, BusStation station)
         {
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\LineStation.xml");
+            XDocument xmlDocumentBusLine = XDocument.Load(@"..\bin\BusLine.xml");
+
             foreach (var x in xmlDocumentLineSta.Descendants("LineStation"))
             {
                 if ((int)x.Element("LineID") != bus.LineID) continue;
-                if ((int)x.Element("LIneStationIndex") < index) continue;
-                x.Element("LIneStationIndex").SetValue((int)x.Element("LIneStationIndex") + 1);
+                if ((int)x.Element("LineStationIndex") < index) continue;
+                x.Element("LineStationIndex").SetValue((int)x.Element("LineStationIndex") + 1);
             }
             xmlDocumentLineSta.Element("LineStations").Add(
                 new XElement("LineStation",
                 new XElement("LineID", bus.LineID),
                 new XElement("BusStationKey", station.BusStationKey),
-                new XElement("LIneStationIndex", index)));
+                new XElement("LineStationIndex", index)));
             xmlDocumentLineSta.Save(@"..\bin\LineStation.xml");
+
+            if (xmlDocumentLineSta.Descendants("LineStation").FirstOrDefault(x =>
+             (int)x.Element("LineID") == bus.LineID && (int)x.Element("LineStationIndex") > index) == null)
+            {
+                xmlDocumentBusLine.Descendants("BusLine").FirstOrDefault(x => (int)x.Element("LineID") == bus.LineID)
+                    .Element("LastStation").SetValue(station.BusStationKey);
+                xmlDocumentBusLine.Save(@"..\bin\BusLine.xml");
+            }
+
             if (index == 0)
             {
+                xmlDocumentBusLine.Descendants("BusLine").FirstOrDefault(x => (int)x.Element("LineID") == bus.LineID)
+                    .Element("FirstStation").SetValue(station.BusStationKey);
+                xmlDocumentBusLine.Save(@"..\bin\BusLine.xml");
                 LineStation nextLine = getLineSta(bus.LineID, index + 1);
                 BusStation nextSta = GetBusStation(nextLine.BusStationKey);
                 updatePair(station, nextSta);
@@ -296,6 +368,12 @@ namespace Dal
                 updatePair(sta2, sta3);
             }
         }
+        /// <summary>
+        /// the function gets a bus station key plate and take
+        /// the bus to which it belongs and copy the data to a  DO.BusStation
+        /// </summary>
+        /// <param name="BusStationKey">the bus station key of the station we want</param>
+        /// <returns>DO.BusStation</returns>
         BusStation GetBusStation(int BusStationKey)
         {
             XDocument xmlDocumentBusStation = XDocument.Load(@"..\bin\BusStation.xml");
@@ -308,19 +386,30 @@ namespace Dal
                              Name = (string)x.Element("Name")
                          }).FirstOrDefault();
         }
-        LineStation getLineSta(int lineID,int index)
+        /// <summary>
+        /// the function get a line id and  an index
+        /// and looking for the bus station in the index in the line route
+        /// </summary>
+        /// <param name="lineID"></param>
+        /// <param name="index"></param>
+        /// <returns>the station in the wanted index in the line route</returns>
+        LineStation getLineSta(int lineID, int index)
         {
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\LineStation.xml");
             return xmlDocumentLineSta.Descendants("LineStation").Where
-                    (l => (int)l.Element("LineID") == lineID && (int)l.Element("LIneStationIndex") == index).Select(x =>
+                    (l => (int)l.Element("LineID") == lineID && (int)l.Element("LineStationIndex") == index).Select(x =>
                      new LineStation
                      {
                          LineID = lineID,
                          BusStationKey = (int)x.Element("BusStationKey"),
-                         LIneStationIndex = index
+                         LineStationIndex = index
                      }).FirstOrDefault();
         }
-
+        /// <summary>
+        /// the function gets a bus station and if the parameters are correct 
+        /// adding it to the list of bus stations
+        /// </summary>
+        /// <param name="station">the bus station we want to add</param>
         public void AddBusStation(BusStation station)
         {
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\BusStation.xml");
@@ -332,29 +421,62 @@ namespace Dal
                new XElement("Name", station.Name)));
             xmlDocumentLineSta.Save(@"..\bin\BusStation.xml");
         }
-
-        public void RemoveSta(int ID)
+        /// <summary>
+        /// the function gets a key and 
+        /// removes the station to which it belongs
+        /// </summary>
+        /// <param name="key">the key of the station we want to remove</param>
+        public void RemoveSta(int key)
         {
-            BusStation sta = GetBusStation(ID);
+            BusStation sta = GetBusStation(key);
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\LineStation.xml");
             XDocument xmlDocumentBusSta = XDocument.Load(@"..\bin\BusStation.xml");
+            XDocument xmlDocumentBusLine = XDocument.Load(@"..\bin\BusLine.xml");
+            foreach (var lines in xmlDocumentBusLine.Descendants("BusLine"))// update first and last station for each line
+            {
+                if ((int)lines.Element("FirstStation") == key) // update first station
+                {
+                    var val = xmlDocumentLineSta.Descendants("LineStation").
+                         FirstOrDefault(x => (int)x.Element("LineID") == (int)lines.Element("LineID") && (int)x.Element("LineStationIndex") == 1);
+                    if (val == null) //if there are no other line station to this line
+                        lines.Element("FirstStation").SetValue(0);
+                    else
+                        lines.Element("FirstStation").SetValue((int)val.Element("BusStationKey"));
+                }
+                if ((int)lines.Element("LastStation") == key) //update last station
+                {
+                    var val = xmlDocumentLineSta.Descendants("LineStation").FirstOrDefault(x => (int)x.Element("LineID") == (int)lines.Element("LineID") &&
+                                         (int)x.Element("BusStationKey") == key);
+                    if (val == null) //if there are no other line station to this line
+                        lines.Element("LastStation").SetValue(0);
+                    else
+                    {
+                        int index = (int)val.Element("LineStationIndex") - 1;
+                        var val2 = xmlDocumentLineSta.Descendants("LineStation").FirstOrDefault(x =>
+                               (int)x.Element("LineID") == (int)lines.Element("LineID") && (int)x.Element("LineStationIndex") == index);
+                        if (val2 != null)
+                            lines.Element("LastStation").SetValue((int)val2.Element("BusStationKey"));
+                    }
+                }
+            }
             foreach (var lines in xmlDocumentLineSta.Descendants("LineStation")) // update lines index
             {
                 if ((int)lines.Element("BusStationKey") == sta.BusStationKey)
                 {
                     foreach (var line in xmlDocumentLineSta.Descendants("LineStation"))
                     {
-                        if (line.Element("LineID") == lines.Element("LineID") && (int)line.Element("LIneStationIndex") > (int)lines.Element("LIneStationIndex"))
+                        if ((int)line.Element("LineID") == (int)lines.Element("LineID") && (int)line.Element("LineStationIndex") > (int)lines.Element("LineStationIndex"))
                         {
-                            line.Element("LIneStationIndex").SetValue((int)line.Element("LIneStationIndex") - 1);
+                            line.Element("LineStationIndex").SetValue((int)line.Element("LineStationIndex") - 1);
                         }
                     }
                 }
             }
-            xmlDocumentLineSta.Root.Elements().Where(x => (int)x.Element("BusStationKey") == ID).Remove();
-            xmlDocumentBusSta.Root.Elements().Where(x => (int)x.Element("BusStationKey") == ID).FirstOrDefault().Remove();
+            xmlDocumentLineSta.Root.Elements().Where(x => (int)x.Element("BusStationKey") == key).Remove(); // remove all line station with this station
+            xmlDocumentBusSta.Root.Elements().Where(x => (int)x.Element("BusStationKey") == key).FirstOrDefault().Remove();// remove this bus station
             xmlDocumentLineSta.Save(@"..\bin\LineStation.xml");
             xmlDocumentBusSta.Save(@"..\bin\BusStation.xml");
+            xmlDocumentBusLine.Save(@"..\bin\BusLine.xml");
         }
 
         public PairStations GetPair(int sta1, int sta2)
@@ -416,6 +538,33 @@ namespace Dal
                 xmlDocumentPair.Save(@"..\bin\PairStation.xml");
             }
         }
+        /// <summary>
+        /// the function get a line id
+        /// and copy all of his trips to a IEnumerable
+        /// </summary>
+        /// <param name="lineID">the line id of which we want his trips</param>
+        /// <returns>IEnumerable of all the trips of the wanted line</returns>
+        public IEnumerable<LineTrip> GetAllLineTrip(int lineID)
+        {
+            XDocument xmlDocumentLine = XDocument.Load(@"..\bin\LineTrip.xml");
+            return from line in xmlDocumentLine.Descendants("LineTrip")
+                   where (int)line.Element("LineID") == lineID
+                   select new DO.LineTrip
+                   {
+                       LineID = lineID,
+                       StartAt = (TimeSpan)line.Element("StartAt")
+                   };
+        }
+
+        #region User
+        /// <summary>
+        /// the function get a username and password 
+        /// and check if thay are matching a manager
+        /// </summary>
+        /// <param name="username">The username who used to log to the program</param>
+        /// <param name="password">The password who used to log to the program</param>
+        /// <param name="manage"></param>
+        /// <returns>true: if there a match. false:if there is'nt a match</returns>
         public bool CheckUser(string username, string password, bool manage)
         {
             XDocument xmlDocumentUser = XDocument.Load(@"..\bin\Users.xml");
@@ -425,5 +574,24 @@ namespace Dal
                 return false;
             return true;
         }
+        /// <summary>
+        /// Add a new user 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="manage">if he have access</param>
+        public void AddUser(string username, string password, bool manage)
+        {
+            XDocument xmlDocumentUser = XDocument.Load(@"..\bin\Users.xml");
+            if (xmlDocumentUser.Descendants("User").Where(x => (string)x.Element("UserName") == username) != null)
+                throw new DuplicateWaitObjectException("this username alredy exsit");
+            xmlDocumentUser.Element("Users").Add
+                (new XElement("User",
+                new XElement("UserName", username),
+                new XElement("Password", password),
+                new XElement("Management", manage)));
+            xmlDocumentUser.Save(@"..\bin\Users.xml");
+        }
+        #endregion
     }
 }

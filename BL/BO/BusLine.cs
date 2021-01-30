@@ -14,6 +14,7 @@ namespace BO
         public int FirstStation { get; set; }
         public int LastStation { get; set; }
         public IEnumerable<LineStation> LinesSta { get; set; }
+        public IEnumerable<LineTrip> LinesExit { get; set; }
         public override string ToString()
         {
             return String.Format($"Line ID: {LineID}\n" + $"Place: {Place}\n" +

@@ -38,7 +38,6 @@ namespace PL_WPF
                              select number).ToList();
             first.ItemsSource = listOfStation;
             last.ItemsSource = listOfStation;
-
             boxList = _boxList;
         }
         private BusLine bus = new BusLine();

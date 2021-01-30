@@ -7,10 +7,16 @@
         mc:Ignorable="d"
         Title="LineStationDatails" Height="350" Width="600">
     <Grid>
-
-        <ListBox x:Name="list" Background="DarkGray"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="list" Background="DarkGray" Grid.Column="0"
                          ItemsSource="{Binding lines, Mode=OneWayToSource, 
-                    UpdateSourceTrigger =PropertyChanged}" Margin="0,0,-0.4,0" />
+                    UpdateSourceTrigger =PropertyChanged}"  />
         
+        <ListBox x:Name="listTrip" Background="DarkGray" Grid.Column="1"
+                         ItemsSource="{Binding lines, Mode=OneWayToSource, 
+                    UpdateSourceTrigger =PropertyChanged}"  />
     </Grid>
 </Window>
