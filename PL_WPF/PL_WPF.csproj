@@ -122,10 +122,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DriverWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="AddBus.xaml.cs">
       <DependentUpon>AddBus.xaml</DependentUpon>
     </Compile>
@@ -150,9 +146,6 @@
     </Compile>
     <Compile Include="BusWindow.xaml.cs">
       <DependentUpon>BusWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DriverWindow.xaml.cs">
-      <DependentUpon>DriverWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="ManageWindow.xaml">
       <SubType>Designer</SubType>

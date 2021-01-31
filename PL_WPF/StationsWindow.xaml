@@ -24,7 +24,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Click="AddStation_click" Content="Add Station" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
-                       Margin="1,1,0,0" Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"/>
+                       Margin="1,1,0,0" Width="130"/>
 
         <ListBox x:Name="list"  Background="DarkGray" MouseDoubleClick="list_MouseDoubleClick"
                  Height="440" Grid.ColumnSpan="3" Margin="0,0,10,20" Grid.RowSpan="3" Grid.Column="0" Grid.Row="2">

@@ -42,7 +42,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Click="AddBus_click" Grid.Row="0" Grid.Column="0" Content="Add Bus" Margin="1,1,0,0" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
-                      Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"  />
+                      Width="130" />
         <ListBox x:Name="list" Background="DarkGray" MouseDoubleClick ="list_MouseDoubleClick" ItemContainerStyle="{StaticResource TBStyle}"
                             Height="400" Grid.ColumnSpan="3" Margin="0,0,10,20"  Grid.Column="0" Grid.Row="1" 
                                           ItemsSource="{Binding listOfBus, Mode=OneWayToSource,  UpdateSourceTrigger =PropertyChanged}">
