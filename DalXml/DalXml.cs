@@ -91,6 +91,13 @@ namespace Dal
             //                new XElement("LineID", line.LineID),
             //                new XElement("StartAt", line.StartAt))));
             // xmlDocumentLineTrip.Save(@"..\bin\LineTrip.xml");
+            //x.Element("LineID").SetValue((int)x.Element("LineID") - 1);
+            XDocument xmlDocumentBuses = XDocument.Load(@"..\bin\Bus.xml");
+            foreach (var x in xmlDocumentBuses.Descendants("Bus"))
+            {
+                x.Element("BusStatus").SetValue(Status.READY);
+            }
+            xmlDocumentBuses.Save(@"..\bin\Bus.xml");
             XDocument xmlDocumentBusLines = XDocument.Load(@"..\bin\BusLine.xml");
             int id = 0;
             foreach (var bus in xmlDocumentBusLines.Descendants("BusLine"))
@@ -292,7 +299,7 @@ namespace Dal
             xmlDocumentLineSta.Save(@"..\bin\LineStation.xml");
             BusStation sta1 = GetBusStation(bus.FirstStation);
             BusStation sta2 = GetBusStation(bus.LastStation);
-            updatePair(sta1, sta2);
+            updatePair(sta1, sta2); // update time between first and last stations
         }
         /// <summary>
         /// the function copy all of the bus stations to IEnumerable
@@ -325,13 +332,13 @@ namespace Dal
             XDocument xmlDocumentLineSta = XDocument.Load(@"..\bin\LineStation.xml");
             XDocument xmlDocumentBusLine = XDocument.Load(@"..\bin\BusLine.xml");
 
-            foreach (var x in xmlDocumentLineSta.Descendants("LineStation"))
+            foreach (var x in xmlDocumentLineSta.Descendants("LineStation")) // update line station index
             {
                 if ((int)x.Element("LineID") != bus.LineID) continue;
                 if ((int)x.Element("LineStationIndex") < index) continue;
                 x.Element("LineStationIndex").SetValue((int)x.Element("LineStationIndex") + 1);
             }
-            xmlDocumentLineSta.Element("LineStations").Add(
+            xmlDocumentLineSta.Element("LineStations").Add( // add this stop 
                 new XElement("LineStation",
                 new XElement("LineID", bus.LineID),
                 new XElement("BusStationKey", station.BusStationKey),
@@ -339,21 +346,22 @@ namespace Dal
             xmlDocumentLineSta.Save(@"..\bin\LineStation.xml");
 
             if (xmlDocumentLineSta.Descendants("LineStation").FirstOrDefault(x =>
-             (int)x.Element("LineID") == bus.LineID && (int)x.Element("LineStationIndex") > index) == null)
+             (int)x.Element("LineID") == bus.LineID && (int)x.Element("LineStationIndex") > index) == null) // if it's the last station
             {
-                xmlDocumentBusLine.Descendants("BusLine").FirstOrDefault(x => (int)x.Element("LineID") == bus.LineID)
+                // update bus line last station
+                xmlDocumentBusLine.Descendants("BusLine").FirstOrDefault(x => (int)x.Element("LineID") == bus.LineID) 
                     .Element("LastStation").SetValue(station.BusStationKey);
                 xmlDocumentBusLine.Save(@"..\bin\BusLine.xml");
             }
 
-            if (index == 0)
+            if (index == 0)// if it's the first station
             {
                 xmlDocumentBusLine.Descendants("BusLine").FirstOrDefault(x => (int)x.Element("LineID") == bus.LineID)
-                    .Element("FirstStation").SetValue(station.BusStationKey);
+                    .Element("FirstStation").SetValue(station.BusStationKey); // update bus line first station
                 xmlDocumentBusLine.Save(@"..\bin\BusLine.xml");
-                LineStation nextLine = getLineSta(bus.LineID, index + 1);
-                BusStation nextSta = GetBusStation(nextLine.BusStationKey);
-                updatePair(station, nextSta);
+                LineStation nextLine = getLineSta(bus.LineID, index + 1);//get the second line station 
+                BusStation nextSta = GetBusStation(nextLine.BusStationKey);  //get the second station
+                updatePair(station, nextSta); // update their time and distance between
                 return;
             }
             LineStation line1 = getLineSta(bus.LineID, index - 1);
@@ -361,11 +369,11 @@ namespace Dal
             LineStation line3 = getLineSta(bus.LineID, index + 1);
             BusStation sta1 = GetBusStation(line1.BusStationKey);
             BusStation sta2 = GetBusStation(line2.BusStationKey);
-            updatePair(sta1, sta2);
+            updatePair(sta1, sta2); // update the station before the index and the index station time and distance
             if (line3 != null)
             {
-                BusStation sta3 = GetBusStation(line3.BusStationKey);
-                updatePair(sta2, sta3);
+                BusStation sta3 = GetBusStation(line3.BusStationKey); 
+                updatePair(sta2, sta3); // update the index station and station after the index time and distance
             }
         }
         /// <summary>
@@ -479,6 +487,12 @@ namespace Dal
             xmlDocumentBusLine.Save(@"..\bin\BusLine.xml");
         }
 
+        /// <summary>
+        /// gets two stations and if they exist returns their pair station
+        /// </summary>
+        /// <param name="sta1">first station</param>
+        /// <param name="sta2">second station</param>
+        /// <returns></returns>
         public PairStations GetPair(int sta1, int sta2)
         {
             XDocument xmlDocumentPair = XDocument.Load(@"..\bin\PairStation.xml");
@@ -493,6 +507,13 @@ namespace Dal
             }).FirstOrDefault();
         }
 
+        /// <summary>
+        /// gets two station from the user and update their time and distance 
+        /// </summary>
+        /// <param name="sta1">first station</param>
+        /// <param name="sta2">second station</param>
+        /// <param name="distance">distance between</param>
+        /// <param name="averge">average time between</param>
         public void UpdatePairByUser(int sta1, int sta2, double distance, TimeSpan averge)
         {
             if (GetBusStation(sta1) == null)
@@ -511,8 +532,9 @@ namespace Dal
                 Distance = distance
             };
             XDocument xmlDocumentPair = XDocument.Load(@"..\bin\PairStation.xml");
+            //remove if the pair of station alredy exist
             xmlDocumentPair.Root.Elements().Where(x => (int)x.Element("FirstKey") == sta1 && (int)x.Element("SecondKey") == sta2).Remove();
-            xmlDocumentPair.Element("PairStations").Add(
+            xmlDocumentPair.Element("PairStations").Add( // add the new update pair by the user 
                   new XElement("PairStation",
                   new XElement("FirstKey", sta1),
                   new XElement("SecondKey", sta2),
@@ -520,7 +542,11 @@ namespace Dal
                   new XElement("AverageTime", averge)));
             xmlDocumentPair.Save(@"..\bin\PairStation.xml");
         }
-
+        /// <summary>
+        /// gets two stations and calculate their time and distance by coordinates and update the xml file
+        /// </summary>
+        /// <param name="sta1">first station</param>
+        /// <param name="sta2">second station</param>
         void updatePair(BusStation sta1, BusStation sta2)
         {
             if (GetPair(sta1.BusStationKey, sta2.BusStationKey) == null)

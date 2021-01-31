@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Add new bus" Height="300" Width="280">
+        Title="Add new bus" Height="350" Width="300">
     <Grid x:Name="myGrid" Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height ="*"/>
@@ -37,7 +37,7 @@
                  PreviewKeyDown ="distanceBox_PreviewKeyDown"  Focusable="True"/>
 
         <!-- average Time text and  button -->
-        <TextBox x:Name="avergeBox" Grid.Row="3"
+        <TextBox x:Name="averageBox" Grid.Row="3"
          materialDesign:HintAssist.Hint=" enter the time in minutes:" FontSize="20"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                  PreviewKeyDown ="avergeBox_PreviewKeyDown" Focusable="True"/>

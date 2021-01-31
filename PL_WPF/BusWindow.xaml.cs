@@ -1,19 +1,10 @@
 ﻿using BLApi;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BO;
-using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
 namespace PL_WPF
@@ -38,7 +29,9 @@ namespace PL_WPF
             listOfBus = (from number in bl.GetAllBuss()
                          select number).ToList();
             list.ItemsSource = listOfBus;
+          
         }
+   
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Bus bus = (Bus)list.SelectedItem;
@@ -54,11 +47,18 @@ namespace PL_WPF
             if (btn.DataContext is Bus)
             {
                 Bus bus = (Bus)btn.DataContext;
-                bl.RemoveBus(bus.LicenseNum);
-                listOfBus = (from number in bl.GetAllBuss()
-                             select number).ToList();
-                list.ItemsSource = null;
-                list.ItemsSource = listOfBus;
+                if (bus.BusStatus == Status.READY)
+                {
+                    bl.RemoveBus(bus.LicenseNum);
+                    listOfBus = (from number in bl.GetAllBuss()
+                                 select number).ToList();
+                    list.ItemsSource = null;
+                    list.ItemsSource = listOfBus;
+                }
+                else 
+                {
+                    MessageBox.Show($"this bus is {bus.BusStatus}");
+                }
             }
         }
         private void AddBus_click(object sender, RoutedEventArgs e)
@@ -66,10 +66,7 @@ namespace PL_WPF
             AddBus win = new AddBus(bl,list);
             win.Show();
         }
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }
 

@@ -43,6 +43,16 @@ namespace BL
             return busDO;
         }
         /// <summary>
+        /// Update bus status whan is refuling or repairing
+        /// </summary>
+        /// <param name="other">bus to update</param>
+        public void UpdateStatus(BO.Bus other)
+        {
+            DO.Bus bus = BusBoDoAdapter(other); // convert the type to DO
+            dl.UpdateBus(bus);
+        }
+
+        /// <summary>
         /// refule the sended bus
         /// </summary>
         /// <param name="other">bus that send to refule</param>

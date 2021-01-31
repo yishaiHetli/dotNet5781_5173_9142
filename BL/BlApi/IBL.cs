@@ -11,6 +11,7 @@ namespace BLApi
         BO.Bus GetBus(int l);
         void GetRefule(BO.Bus other);
         void GetRepair(BO.Bus other);
+        void UpdateStatus(BO.Bus other);
         void RemoveBus(int lisence);
         void AddNewBus(BO.Bus addedBus);
         #endregion

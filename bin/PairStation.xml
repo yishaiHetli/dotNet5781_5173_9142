@@ -618,4 +618,28 @@
     <Distance>24.353816042190964</Distance>
     <AverageTime>PT48M42.458S</AverageTime>
   </PairStation>
+  <PairStation>
+    <FirstKey>38831</FirstKey>
+    <SecondKey>38837</SecondKey>
+    <Distance>11</Distance>
+    <AverageTime>PT15M</AverageTime>
+  </PairStation>
+  <PairStation>
+    <FirstKey>38832</FirstKey>
+    <SecondKey>38839</SecondKey>
+    <Distance>10</Distance>
+    <AverageTime>PT11M</AverageTime>
+  </PairStation>
+  <PairStation>
+    <FirstKey>38831</FirstKey>
+    <SecondKey>38844</SecondKey>
+    <Distance>10</Distance>
+    <AverageTime>PT11M</AverageTime>
+  </PairStation>
+  <PairStation>
+    <FirstKey>38832</FirstKey>
+    <SecondKey>38838</SecondKey>
+    <Distance>11</Distance>
+    <AverageTime>PT12M</AverageTime>
+  </PairStation>
 </PairStations>

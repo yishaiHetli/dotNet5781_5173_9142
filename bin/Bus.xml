@@ -15,25 +15,11 @@
     <StartActivity>2020-11-07T00:00:00</StartActivity>
   </Bus>
   <Bus>
-    <LicenseNum>4603598</LicenseNum>
-    <TotalKm>17018</TotalKm>
-    <FuelInKm>648</FuelInKm>
-    <BusStatus>READY</BusStatus>
-    <StartActivity>2011-07-11T00:00:00</StartActivity>
-  </Bus>
-  <Bus>
     <LicenseNum>9984363</LicenseNum>
     <TotalKm>716679</TotalKm>
     <FuelInKm>114</FuelInKm>
     <BusStatus>READY</BusStatus>
     <StartActivity>2000-08-19T00:00:00</StartActivity>
-  </Bus>
-  <Bus>
-    <LicenseNum>4367663</LicenseNum>
-    <TotalKm>8482</TotalKm>
-    <FuelInKm>678</FuelInKm>
-    <BusStatus>READY</BusStatus>
-    <StartActivity>2017-06-21T00:00:00</StartActivity>
   </Bus>
   <Bus>
     <LicenseNum>84993066</LicenseNum>
@@ -78,13 +64,6 @@
     <StartActivity>2019-11-18T00:00:00</StartActivity>
   </Bus>
   <Bus>
-    <LicenseNum>44409521</LicenseNum>
-    <TotalKm>681022</TotalKm>
-    <FuelInKm>586</FuelInKm>
-    <BusStatus>READY</BusStatus>
-    <StartActivity>2018-06-26T00:00:00</StartActivity>
-  </Bus>
-  <Bus>
     <LicenseNum>73757417</LicenseNum>
     <TotalKm>643367</TotalKm>
     <FuelInKm>969</FuelInKm>
@@ -104,13 +83,6 @@
     <FuelInKm>388</FuelInKm>
     <BusStatus>READY</BusStatus>
     <StartActivity>2020-05-26T00:00:00</StartActivity>
-  </Bus>
-  <Bus>
-    <LicenseNum>7919329</LicenseNum>
-    <TotalKm>108944</TotalKm>
-    <FuelInKm>832</FuelInKm>
-    <BusStatus>READY</BusStatus>
-    <StartActivity>1994-08-28T00:00:00</StartActivity>
   </Bus>
   <Bus>
     <LicenseNum>87723481</LicenseNum>
@@ -134,24 +106,52 @@
     <StartActivity>2019-03-31T00:00:00</StartActivity>
   </Bus>
   <Bus>
-    <LicenseNum>3151873</LicenseNum>
-    <TotalKm>381417</TotalKm>
-    <FuelInKm>806</FuelInKm>
-    <BusStatus>READY</BusStatus>
-    <StartActivity>1988-06-26T00:00:00</StartActivity>
-  </Bus>
-  <Bus>
-    <LicenseNum>5404222</LicenseNum>
-    <TotalKm>494495</TotalKm>
-    <FuelInKm>1196</FuelInKm>
-    <BusStatus>READY</BusStatus>
-    <StartActivity>1990-10-18T00:00:00</StartActivity>
-  </Bus>
-  <Bus>
     <LicenseNum>12822727</LicenseNum>
     <TotalKm>533673</TotalKm>
     <FuelInKm>71</FuelInKm>
     <BusStatus>READY</BusStatus>
     <StartActivity>2018-11-16T00:00:00</StartActivity>
+  </Bus>
+  <Bus>
+    <LicenseNum>7919329</LicenseNum>
+    <FuelInKm>1200</FuelInKm>
+    <BusStatus>READY</BusStatus>
+    <StartActivity>1994-08-28T00:00:00</StartActivity>
+    <TotalKm>0</TotalKm>
+  </Bus>
+  <Bus>
+    <LicenseNum>3151873</LicenseNum>
+    <FuelInKm>1200</FuelInKm>
+    <BusStatus>READY</BusStatus>
+    <StartActivity>1988-06-26T00:00:00</StartActivity>
+    <TotalKm>0</TotalKm>
+  </Bus>
+  <Bus>
+    <LicenseNum>4367663</LicenseNum>
+    <FuelInKm>1200</FuelInKm>
+    <BusStatus>READY</BusStatus>
+    <StartActivity>2017-06-21T00:00:00</StartActivity>
+    <TotalKm>0</TotalKm>
+  </Bus>
+  <Bus>
+    <LicenseNum>5404222</LicenseNum>
+    <FuelInKm>1200</FuelInKm>
+    <BusStatus>READY</BusStatus>
+    <StartActivity>1990-10-18T00:00:00</StartActivity>
+    <TotalKm>0</TotalKm>
+  </Bus>
+  <Bus>
+    <LicenseNum>44409521</LicenseNum>
+    <FuelInKm>1200</FuelInKm>
+    <BusStatus>READY</BusStatus>
+    <StartActivity>2018-06-26T00:00:00</StartActivity>
+    <TotalKm>681022</TotalKm>
+  </Bus>
+  <Bus>
+    <LicenseNum>4603598</LicenseNum>
+    <FuelInKm>1200</FuelInKm>
+    <BusStatus>READY</BusStatus>
+    <StartActivity>2011-07-11T00:00:00</StartActivity>
+    <TotalKm>0</TotalKm>
   </Bus>
 </Buses>

@@ -99,6 +99,11 @@ namespace PL_WPF
                 try
                 {
                     rate = int.Parse(speedVal.Text.ToString());
+                    if (rate <= 0)
+                    {
+                        MessageBox.Show("the value is not correct");
+                        return;
+                    }
                     speedVal.Text = "";
                     speedVal.IsEnabled = false;
                     pickerTime.IsEnabled = false;

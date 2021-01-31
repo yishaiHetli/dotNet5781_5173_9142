@@ -35,7 +35,7 @@ namespace PL_WPF
             lsta = _lsta;
             manageWindow = _manageWindow;
             lines = _lines.ToList();
-            if (lines.Count() == 0)
+            if (lines.Count() == 0) // if there are no lines that stops in this station
             {
                 expected.Text = "There is no buses stoping in this station";
                 stopingIn.Text = "";
@@ -58,13 +58,13 @@ namespace PL_WPF
             stationLines = bl.Avarge(lsta, UpdateTime.StartTime);
             list.ItemsSource = null;
             list.ItemsSource = stationLines;
-            if (manageWindow.worker.IsBusy == false)
+            if (manageWindow.worker.IsBusy == false) // if we shot down manage worker
                 this.Close();
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
+            while (true) // loop until it's cancel
             {
                 if (worker.CancellationPending == true || manageWindow.worker.IsBusy == false)
                 {
@@ -81,7 +81,7 @@ namespace PL_WPF
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            if (lines.Count() != 0 && worker.IsBusy == true)
+            if (lines.Count() != 0 && worker.IsBusy == true) // cancel worker when the window is closing
                 worker.CancelAsync();
         }
     }

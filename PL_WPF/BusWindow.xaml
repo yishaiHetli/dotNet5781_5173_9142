@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL_WPF"
         mc:Ignorable="d"
-        Title="BusWindow"  Width="660" Height="480"  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="BusWindow"  Width="660" Height="480"  
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
@@ -14,27 +14,22 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
     <Page.Resources>
-        <Style TargetType="{x:Type TextBlock}" x:Key="HorizontalExpanderContentTextBlock">
-            <Setter Property="Opacity" Value=".68"/>
-            <Setter Property="Text" Value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
-
-        <Style TargetType="{x:Type TextBlock}" x:Key="VerticalExpanderContentTextBlock" BasedOn="{StaticResource HorizontalExpanderContentTextBlock}">
-            <Setter Property="MaxWidth" Value="180"/>
-        </Style>
-
-        <Style TargetType="{x:Type Border}" x:Key="HorizontalDividerBorder">
-            <Setter Property="Background" Value="{DynamicResource MaterialDesignDivider}"/>
-            <Setter Property="UseLayoutRounding" Value="True"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Height" Value="1"/>
-        </Style>
-
-        <Style TargetType="{x:Type Border}" x:Key="VerticalDividerBorder" BasedOn="{StaticResource HorizontalDividerBorder}">
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Width" Value="1"/>
+        <Style TargetType="{x:Type ListBoxItem}" x:Key="TBStyle" >
+            <!--  READY, REPAIRING, REFUELING, TRAVELING-->
+            <Style.Triggers>
+                <!--<DataTrigger Binding="{Binding BusStatus}" Value="READY">
+                    <Setter Property="ListBoxItem.Background" Value="Gray"/>
+                </DataTrigger>-->
+                <DataTrigger Binding="{Binding BusStatus}" Value="REPAIRING">
+                    <Setter Property="ListBoxItem.Background" Value="Gold"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding BusStatus}" Value="REFUELING">
+                    <Setter Property="ListBoxItem.Background" Value="DeepPink" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding BusStatus}" Value="TRAVELING">
+                    <Setter Property="ListBoxItem.Background" Value="DarkGreen" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
     <Grid x:Name="myGrid" Background="#737373">
@@ -48,7 +43,7 @@
         </Grid.RowDefinitions>
         <Button Click="AddBus_click" Grid.Row="0" Grid.Column="0" Content="Add Bus" Margin="1,1,0,0" Height="30" Style="{StaticResource MaterialDesignRaisedLightButton}"
                       Width="130" ToolTip="Resource name: MaterialDesignRaisedLightButton"  />
-        <ListBox x:Name="list" Background="DarkGray" MouseDoubleClick ="list_MouseDoubleClick"
+        <ListBox x:Name="list" Background="DarkGray" MouseDoubleClick ="list_MouseDoubleClick" ItemContainerStyle="{StaticResource TBStyle}"
                             Height="400" Grid.ColumnSpan="3" Margin="0,0,10,20"  Grid.Column="0" Grid.Row="1" 
                                           ItemsSource="{Binding listOfBus, Mode=OneWayToSource,  UpdateSourceTrigger =PropertyChanged}">
             <ListBox.ItemTemplate>

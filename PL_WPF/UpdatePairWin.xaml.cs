@@ -31,7 +31,9 @@ namespace PL_WPF
         TimeSpan averageTime = TimeSpan.Zero;
         List<BusStation> listSta;
         /// <summary>
-        /// the program 
+        /// the program gives the user to choose two station 
+        /// from all the existing stations and allowing
+        /// him update their distance and time between
         /// </summary>
         /// <param name="_bl">the performance of the BL</param>
         public UpdatePairWin(IBL _bl)
@@ -48,6 +50,27 @@ namespace PL_WPF
         }
         private void UpdateClick(object sender, RoutedEventArgs e)
         {
+            if (distanceBox.Text != "")
+            {
+                if (IsTextAllowed(distanceBox.Text)) //if there is a text
+                {
+                    double x;
+                    x = double.Parse(distanceBox.Text); // convert to a date
+                    distance = x;
+                }
+                else { MessageBox.Show("the distance value is not courect"); distanceBox.Focus();  return; }
+            }
+            if (averageBox.Text != "")
+            {
+                if (IsTextAllowed(averageBox.Text)) //if there is a text
+                {
+                    double x;
+                    x = double.Parse(averageBox.Text); // convert to a date
+                    averageTime = TimeSpan.FromMinutes(x);
+                    next(); // set the focus by some order
+                }
+                else { MessageBox.Show("the average time value is not courect"); averageBox.Focus(); return; }
+            }
             if (station1 > 0 && station2 > 0 && averageTime > TimeSpan.Zero && distance > 0)
             {
                 try { bl.PairUpdate(station1, station2, distance, averageTime); }
@@ -91,10 +114,10 @@ namespace PL_WPF
         {
             if (e.Key == Key.Enter)//if the user press on enter
             {
-                if (avergeBox != null && IsTextAllowed(avergeBox.Text)) //if there is a text
+                if (averageBox != null && IsTextAllowed(averageBox.Text)) //if there is a text
                 {
                     double x;
-                    x = double.Parse(avergeBox.Text); // convert to a date
+                    x = double.Parse(averageBox.Text); // convert to a date
                     averageTime = TimeSpan.FromMinutes(x);
                     next(); // set the focus by some order
                 }
@@ -118,7 +141,7 @@ namespace PL_WPF
             }
             else if (averageTime == TimeSpan.Zero)
             {
-                avergeBox.Focus();
+                averageBox.Focus();
             }
             else if (station1 != -1 && station2 != -1 && distance >= 0 && averageTime > TimeSpan.Zero)
                 updateMe.Focus();
