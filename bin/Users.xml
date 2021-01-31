@@ -10,4 +10,14 @@
     <Password>h</Password>
     <Management>true</Management>
   </User>
+  <User>
+    <UserName>david</UserName>
+    <Password>cohen</Password>
+    <Management>true</Management>
+  </User>
+  <User>
+    <UserName>davidcoh</UserName>
+    <Password>cohen</Password>
+    <Management>true</Management>
+  </User>
 </Users>

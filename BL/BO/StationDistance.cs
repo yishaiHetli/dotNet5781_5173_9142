@@ -19,7 +19,8 @@ namespace BO
         public override string ToString()
         {
             return String.Format($"Line ID: {LineID}\t" + $"Arriving at: { String.Format("{0:hh\\:mm\\:ss}", Average)}\n"
-                + $"LineNumber: {LineNumber}\t" + $"FirstStation: {FirstStation}\n" + $"LastStation: {LastStation}\n");
+                + $"LineNumber: {LineNumber}\t" + $"FirstStation: {FirstStation}\n" + $"LastStation: {LastStation} "
+                + $"Start time: {StartTime}\n");
         }
     }
 }

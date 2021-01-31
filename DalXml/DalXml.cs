@@ -583,7 +583,7 @@ namespace Dal
         public void AddUser(string username, string password, bool manage)
         {
             XDocument xmlDocumentUser = XDocument.Load(@"..\bin\Users.xml");
-            if (xmlDocumentUser.Descendants("User").Where(x => (string)x.Element("UserName") == username) != null)
+            if (xmlDocumentUser.Descendants("User").FirstOrDefault(x => (string)x.Element("UserName") == username) != null)
                 throw new DuplicateWaitObjectException("this username alredy exsit");
             xmlDocumentUser.Element("Users").Add
                 (new XElement("User",

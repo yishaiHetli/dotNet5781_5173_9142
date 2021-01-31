@@ -4,21 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL_WPF"
-        mc:Ignorable="d"
+        mc:Ignorable="d" FontSize="18" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="user" Height="550" Width="800" >
     <Grid>
-        <GroupBox Header="Choose Option:" Height="270" VerticalAlignment="Top" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
-            <StackPanel >
-                <RadioButton x:Name ="rbDriver" Content="Driver" Height="24" />
-                <RadioButton x:Name ="rbManage" Content="Management" Height="23" IsChecked="True"/>
-            </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Choose Option:" Grid.ColumnSpan="2" Height="270" VerticalAlignment="Top" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
         </GroupBox>
-        <Button x:Name="btnGO" Content="LOGE IN" HorizontalAlignment="Left" Height="35" 
-             Margin="100,216,0,19" Width="144" Background="#FF4496CF" 
+        <Button x:Name="btnGO" Content="LOGE IN" HorizontalAlignment="Left" Height="Auto" 
+             Margin="110,184,0,296" Width="144" Background="#FF4496CF" 
                         FontSize="16" FontFamily="Kristen ITC" FontWeight="Bold" Click="btnGO_Click"/>
-        <PasswordBox x:Name="password"   FontSize="16" HorizontalAlignment="Left" Margin="182,163,0,0" VerticalAlignment="Top" Width="147" Height="35"/>
-        <TextBox FontSize="16" IsReadOnly="True" FontWeight="SemiBold" HorizontalAlignment="Left" Height="35" Margin="12,163,0,0" TextWrapping="Wrap" Text="enter your password:" VerticalAlignment="Top" Width="162"/>
-        <TextBox FontSize="16" IsReadOnly="True" Width="160" HorizontalAlignment="Left" Height="35" Margin="12,115,0,0"  FontWeight="Medium" TextWrapping="Wrap" Text="enter your username:" VerticalAlignment="Top"/>
-        <TextBox x:Name="userName" FontSize="15" Width="153" HorizontalAlignment="Left" Height="35" Margin="184,115,0,0" FontWeight="Medium"  TextWrapping="Wrap"  VerticalAlignment="Top"/>
+        <PasswordBox x:Name="password"   FontSize="16" HorizontalAlignment="Left" Margin="182,100,0,0" VerticalAlignment="Top" Width="147" Height="35"/>
+        <TextBox FontSize="16" IsReadOnly="True" FontWeight="SemiBold" HorizontalAlignment="Left" Height="35" Margin="12,100,0,0" TextWrapping="Wrap" Text="enter your password:" VerticalAlignment="Top" Width="162"/>
+        <TextBox FontSize="16" IsReadOnly="True" Width="160" HorizontalAlignment="Left" Height="35" Margin="12,50,0,0"  FontWeight="Medium" TextWrapping="Wrap" Text="enter your username:" VerticalAlignment="Top"/>
+        <TextBox x:Name="userName" FontSize="15" Width="153" HorizontalAlignment="Left" Height="35" Margin="184,50,0,0" FontWeight="Medium"  TextWrapping="Wrap"  VerticalAlignment="Top"/>
+        <Expander x:Name="expander" Grid.Column="1" Header="Sign up" IsExpanded="False" Margin="0.2,39,-0.4,221.8" Grid.RowSpan="2">
+            <StackPanel>
+                <TextBox x:Name="newUserName" materialDesign:HintAssist.Hint="User Name" FontSize="15"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="newPassword" materialDesign:HintAssist.Hint="Password" FontSize="15"
+        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="confirmPassword" materialDesign:HintAssist.Hint="Confirm Password" FontSize="15"
+        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center"/>
+                <Button x:Name="singUp" Content="Sing Up" Click="singUp_Click"/>
+            </StackPanel>
+        </Expander>
+
     </Grid>
 </Window>

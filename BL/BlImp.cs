@@ -20,46 +20,74 @@ namespace BL
         public static IBL Instance { get => instance; }// The public Instance property to use
         #endregion
         #region Buses CUR 
+        /// <summary>
+        /// convert bus in type of DO to BO
+        /// </summary>
+        /// <param name="busDO">bus to convert</param>
+        /// <returns>bus in typ of BO</returns>
         BO.Bus BusDoBoAdapter(DO.Bus busDO)
         {
             BO.Bus busBO = new BO.Bus();
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
+        /// <summary>
+        ///  convert bus in type of BO to DO
+        /// </summary>
+        /// <param name="busBO">bus to convert</param>
+        /// <returns>bus in typ of DO</returns>
         DO.Bus BusBoDoAdapter(BO.Bus busBO)
         {
             DO.Bus busDO = new DO.Bus();
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
+        /// <summary>
+        /// refule the sended bus
+        /// </summary>
+        /// <param name="other">bus that send to refule</param>
         public void GetRefule(BO.Bus other)
         {
             other.FuelInKm = 1200;
-            DO.Bus bus = BusBoDoAdapter(other);
+            DO.Bus bus = BusBoDoAdapter(other); // convert the type to DO
             dl.UpdateBus(bus);
         }
+        /// <summary>
+        /// repair the sended bus
+        /// </summary>
+        /// <param name="other">bus that send to repair</param>
         public void GetRepair(BO.Bus other)
         {
             other.FuelInKm = 1200;
             other.TotalKm = 0;
-            DO.Bus bus = BusBoDoAdapter(other);
+            DO.Bus bus = BusBoDoAdapter(other); // convert the type to DO
             dl.UpdateBus(bus);
         }
-
+        /// <summary>
+        /// get all the buses from dl and return it
+        /// </summary>
+        /// <returns>IEnumerable that contain all the buses in the system</returns>
         public IEnumerable<BO.Bus> GetAllBuss()
         {
             return from item in dl.GetAllBuss()
                    orderby item.LicenseNum
                    select BusDoBoAdapter(item);
         }
-
+        /// <summary>
+        /// return BO bus by the lisence number
+        /// </summary>
+        /// <param name="lisence">bus id</param>
+        /// <returns>BO bus by the lisence number</returns>
         public BO.Bus GetBus(int lisence)
         {
             try { return BusDoBoAdapter(dl.GetBus(lisence)); }
             catch (DO.BadLisenceException ex)
             { throw new BO.BadLisenceException($"bus number {lisence} does not exist", ex); }
         }
-
+        /// <summary>
+        /// remove bus with this license number
+        /// </summary>
+        /// <param name="lisence">bus id</param>
         public void RemoveBus(int lisence)
         {
             try
@@ -69,6 +97,10 @@ namespace BL
             catch (DO.BadLisenceException ex)
             { throw new BO.BadLisenceException($"bus number {lisence} does not exist", ex); }
         }
+        /// <summary>
+        /// add a new bus that sended 
+        /// </summary>
+        /// <param name="addedBus">new bus to add</param>
         public void AddNewBus(BO.Bus addedBus)
         {
             try
@@ -82,30 +114,45 @@ namespace BL
         }
         #endregion
         #region Lines CUR
+        /// <summary>
+        /// convert DO line station to BO
+        /// </summary>
+        /// <param name="busDO">line station DO to convert</param> 
+        /// <returns>line station in type of BO</returns>
         BO.LineStation LineStaDoBoAdapter(DO.LineStation busDO)
         {
             BO.LineStation busBO = new BO.LineStation();
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
+        /// <summary>
+        /// convert DO line trip to BO
+        /// </summary>
+        /// <param name="busDO">line trip DO to convert</param>
+        /// <returns>line trip in type of BO</returns>
         BO.LineTrip LineTripDOBOAdapter(DO.LineTrip busDO)
         {
             BO.LineTrip busBO = new BO.LineTrip();
             busDO.CopyPropertiesTo(busBO);
             return busBO;
         }
+        /// <summary>
+        /// convert DO bus line to BO 
+        /// </summary>
+        /// <param name="busDO">bus line DO to convert</param>
+        /// <returns>bus line in type of BO</returns>
         BO.BusLine BusLineDoBoAdapter(DO.BusLine busDO)
         {
             BO.BusLine busBO = new BO.BusLine();
             busDO.CopyPropertiesTo(busBO);
-
+            //get all lines station from dl
             busBO.LinesSta = from line in dl.GetAllLineStations(busBO.LineID)
                              orderby line.LineStationIndex
                              select LineStaDoBoAdapter(line);
             bool notFirstSta = false;
             int first = 0;
-            List<BO.LineStation> linesSta = busBO.LinesSta.ToList();
-            foreach (var item in linesSta)
+            List<BO.LineStation> linesSta = busBO.LinesSta.ToList(); // get the ienumerable into list
+            foreach (var item in linesSta) // update foreach line station his distance and time from last station
             {
                 if (notFirstSta)
                 {
@@ -116,44 +163,52 @@ namespace BL
                         item.AverageTime = pair.AverageTime;
                     }
                 }
-
                 first = item.BusStationKey;
                 notFirstSta = true;
             }
-
             busBO.LinesSta = linesSta;
-            busBO.LinesExit = from line in dl.GetAllLineTrip(busBO.LineID)
+            busBO.LinesExit = from line in dl.GetAllLineTrip(busBO.LineID) // get all lines trip from dl
                               orderby line.StartAt
                               select LineTripDOBOAdapter(line);
 
             TimeSpan time = TimeSpan.Zero;
-            foreach (var line in busBO.LinesSta)
+            foreach (var line in busBO.LinesSta) //collect the average time of travel
             {
                 time += line.AverageTime;
             }
-            List<BO.LineTrip> lines = busBO.LinesExit.ToList();
-            foreach (var line in lines)
+            List<BO.LineTrip> lines = busBO.LinesExit.ToList(); // get the ienumerable into list
+            foreach (var line in lines) // add the travel time + start to each line exsit at its finish
             {
-                line.FinishAt = line.StartAt + time;
+                line.FinishAt = line.StartAt + time; 
             }
-            busBO.LinesExit = lines;
+            busBO.LinesExit = lines; 
             return busBO;
         }
-        
-
+        /// <summary>
+        /// convert BO bus line to DO
+        /// </summary>
+        /// <param name="busBO">bus line BO to convert</param>
+        /// <returns>bus line in type of DO</returns>
         DO.BusLine BusLineBoDoAdapter(BO.BusLine busBO)
         {
             DO.BusLine busDO = new DO.BusLine();
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
-     
+        /// <summary>
+        /// gets all bus lines from dl
+        /// </summary>
+        /// <returns>all the bus lines there are in the system</returns>
         public IEnumerable<BO.BusLine> GetAllLines()
         {
             return from item in dl.GetAllLines()
                    orderby item.LineID
                    select BusLineDoBoAdapter(item);
         }
+        /// <summary>
+        /// add a new sended bus line 
+        /// </summary>
+        /// <param name="bus">bus line to add</param>
         public void AddNewBusLine(BO.BusLine bus)
         {
             try
@@ -166,24 +221,41 @@ namespace BL
             }
 
         }
+        /// <summary>
+        /// remove sended line
+        /// </summary>
+        /// <param name="line">line to remove</param>
         public void RemoveLine(BO.BusLine line)
         {
             dl.RemoveBusLine(line.LineID);
         }
-       
         #endregion
+
         #region User
-        public bool userCheck(string name, string password, bool manage)
+        /// <summary>
+        /// check if the user is registered in the system
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="manage">if he have access</param>
+        /// <returns></returns>
+        public bool userCheck(string username, string password, bool manage)
         {
-            if (dl.CheckUser(name, password, manage))
+            if (dl.CheckUser(username, password, manage))
                 return true;
             return false;
         }
-        public void AddUser(string name, string password, bool manage)
+        /// <summary>
+        /// add a new user that can have access  
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="manage">if he have access</param>
+        public void AddUser(string username, string password, bool manage)
         {
             try
             {
-                dl.AddUser(name, password, manage);
+                dl.AddUser(username, password, manage);
             }
             catch (Exception ex)
             {
