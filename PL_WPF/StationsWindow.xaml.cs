@@ -24,6 +24,11 @@ namespace PL_WPF
         IBL bl;
         List<BusStation> staList;
         ManageWindow manageWindow;
+        /// <summary>
+        /// the program shows the list of stations
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="_win">the performance of the page manageWindow</param>
         public StationsWindow(IBL _bl,ManageWindow _win)
         {
             InitializeComponent();

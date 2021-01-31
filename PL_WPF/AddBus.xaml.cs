@@ -32,7 +32,13 @@ namespace PL_WPF
         IBL bl;
         List<Bus> listOfBus;
         ListBox list;
-        public AddBus(IBL _bl,ListBox _list)
+        /// <summary>
+        /// the program get a parameters for a new bus and if thay 
+        /// are corect adding the bus and update the list of buses accordingly
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="_list">the list of the buses</param>
+        public AddBus(IBL _bl, ListBox _list)
         {
             InitializeComponent();
             bl = _bl;
@@ -201,7 +207,3 @@ namespace PL_WPF
         }
     }
 }
-//if (good)
-//{
-
-//}

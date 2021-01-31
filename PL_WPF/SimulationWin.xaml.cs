@@ -19,6 +19,15 @@ namespace PL_WPF
         BackgroundWorker worker;
         ManageWindow manageWindow;
         BusStation lsta;
+        /// <summary>
+        /// the program get a time and number of secondes to skeep in every seconde
+        /// and shows the estimated time of arrival 
+        /// of the lines to the station accordingly
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="_lsta">the list of lines that stoping in the station</param>
+        /// <param name="_manageWindow">the performance of the page manageWindow</param>
+        /// <param name="_lines">list of the lines</param>
         public SimulationWin(IBL _bl, BusStation _lsta, ManageWindow _manageWindow, IEnumerable<BusLine> _lines)
         {
             InitializeComponent();

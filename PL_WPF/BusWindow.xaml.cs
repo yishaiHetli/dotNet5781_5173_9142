@@ -26,6 +26,10 @@ namespace PL_WPF
         private static readonly Regex _regex = new Regex("[^0-9.-]+");
         IBL bl;
         List<Bus> listOfBus;
+        /// <summary>
+        /// the program shows the list of buses
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
         public BusWindow(IBL _bl)
         {
             InitializeComponent();

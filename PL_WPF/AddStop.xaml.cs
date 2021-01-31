@@ -30,9 +30,17 @@ namespace PL_WPF
         BusStation sta = new BusStation();
         IBL bl;
         ListBox list;
+        /// <summary>
+        /// the progrem get a new station and adding it to
+        /// the route of the selected line and update the list 
+        /// of the station on his route accordingly
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="bus">the line to which we want to add the station to his route</param>
+        /// <param name="_list">the list of the station on the line 
+        /// to his route we want to add the station</param>
         public AddStop(IBL _bl, BusLine bus, ListBox _list)
         {
-
             InitializeComponent();
             bl = _bl;
             listOfStation = (from number in bl.GetAllStations()

@@ -26,6 +26,12 @@ namespace PL_WPF
         IBL bl;
         BusStation station = new BusStation();
         ListBox list;
+        /// <summary>
+        /// the program get a parameters for a new station and if thay 
+        /// are corect adding the station and update the list of stations accordingly
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="_list">the list of the stations</param>
         public AddStation(IBL _bl, ListBox _list)
         {
             InitializeComponent();

@@ -29,7 +29,11 @@ namespace PL_WPF
         int station2 = -1;
         double distance = 0;
         TimeSpan averageTime = TimeSpan.Zero;
-        List<BusStation> listSta; 
+        List<BusStation> listSta;
+        /// <summary>
+        /// the program 
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
         public UpdatePairWin(IBL _bl)
         {
             InitializeComponent();

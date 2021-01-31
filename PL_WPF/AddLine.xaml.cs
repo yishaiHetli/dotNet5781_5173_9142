@@ -30,6 +30,12 @@ namespace PL_WPF
         List<BusLine> listOfLines;
         List<BusStation> listOfStation;
         ListBox boxList;
+        /// <summary>
+        /// the program get a parameters for a new line and if thay 
+        /// are corect adding the line and update the list of line accordingly
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="_boxList">the list of the lines</param>
         public AddLine(IBL _bl, ListBox _boxList)
         {
             InitializeComponent();

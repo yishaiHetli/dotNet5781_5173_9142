@@ -600,4 +600,22 @@
     <Distance>19.943836567806311</Distance>
     <AverageTime>PT31M56.63S</AverageTime>
   </PairStation>
+  <PairStation>
+    <FirstKey>38831</FirstKey>
+    <SecondKey>38833</SecondKey>
+    <Distance>100</Distance>
+    <AverageTime>PT20M</AverageTime>
+  </PairStation>
+  <PairStation>
+    <FirstKey>38839</FirstKey>
+    <SecondKey>38832</SecondKey>
+    <Distance>0.8875846589511146</Distance>
+    <AverageTime>PT1M46.51S</AverageTime>
+  </PairStation>
+  <PairStation>
+    <FirstKey>38832</FirstKey>
+    <SecondKey>38877</SecondKey>
+    <Distance>24.353816042190964</Distance>
+    <AverageTime>PT48M42.458S</AverageTime>
+  </PairStation>
 </PairStations>

@@ -15,6 +15,12 @@ namespace PL_WPF
         public BackgroundWorker worker;
         private MainWindow mainWindow;
         int rate = 1;
+        /// <summary>
+        /// the program offers the user to see the list of 
+        /// stations / lines / buses and edit them as he wishes
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="_mainWindow">the performance of the window MainWindow</param>
         public ManageWindow(IBL _bL, MainWindow _mainWindow)
         {
             InitializeComponent();
@@ -88,7 +94,7 @@ namespace PL_WPF
 
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
-            if (Simulator.Content.ToString() == "Start simulation")
+            if (Simulator.Content.ToString() == "Start simulation")//to start simulatiom
             {
                 try
                 {
@@ -107,7 +113,7 @@ namespace PL_WPF
                     MessageBox.Show("the value is not correct",ex.Message);
                 }
             }
-            else if (Simulator.Content.ToString() == "Stop simulation")
+            else if (Simulator.Content.ToString() == "Stop simulation")//to end simulatiom
             {
                 if (worker.WorkerSupportsCancellation == true)
                 {

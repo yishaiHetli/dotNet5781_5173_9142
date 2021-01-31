@@ -28,7 +28,10 @@ namespace PL_WPF
         IBL bl;
         List<BusLine> listOfLines;
         List<BusStation> listOfStation;
-
+        /// <summary>
+        /// the progrem shows the list of lines
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
         public LineWindow(IBL _bl)
         {
             InitializeComponent();

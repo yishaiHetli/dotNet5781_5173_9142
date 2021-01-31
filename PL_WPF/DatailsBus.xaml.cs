@@ -26,6 +26,13 @@ namespace PL_WPF
         public Bus myBus { get; set; }
         ListBox list;
         List<Bus> listOfBuses;
+        /// <summary>
+        /// the progrem shows the datails of the selected bus
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="bus">the bus we want to see his datails</param>
+        /// <param name="_list">the listBox of the buses that are in display</param>
+        /// <param name="_listOfBuses">the list of buses</param>
         public DatailsBus(IBL _bl, Bus bus, ListBox _list, List<Bus> _listOfBuses)
         {
             bl = _bl;

@@ -270,61 +270,87 @@ namespace BL
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
-
+        /// <summary>
+        /// Add a station to bus line in a specific position
+        /// </summary>
+        /// <param name="index">station location</param>
+        /// <param name="bus">bus line to add this stop</param>
+        /// <param name="station">new stop</param>
         public void AddStop(int index, BO.BusLine bus, BO.BusStation station)
         {
             if (index > bus.LinesSta.ToList().Count())
                 throw new IndexOutOfRangeException("index too big");
-            var linesta = bus.LinesSta.FirstOrDefault(P => P.BusStationKey == station.BusStationKey);
-            if (linesta != null)
+            if (bus.LinesSta.FirstOrDefault(P => P.BusStationKey == station.BusStationKey) != null)
             {
                 throw new DuplicateWaitObjectException("this station already exist in this bus route");
             }
             dl.AddNewStop(index, BusLineBoDoAdapter(bus), BusStationBoDoAdapter(station));
         }
+        /// <summary>
+        /// add a new station
+        /// </summary>
+        /// <param name="station">bus station to add</param>
         public void AddBusStation(BO.BusStation station)
         {
             List<BO.BusStation> busStations = GetAllStations().ToList();
-            foreach (var item in busStations)
+            foreach (var item in busStations)//check if the station alredy exsit
             {
-                if (item.Latitude == station.Latitude && item.Longitude == station.Longitude)
+                if (item.Latitude == station.Latitude && item.Longitude == station.Longitude) // if alredy have station in this location
                 {
                     throw new DuplicateWaitObjectException("there is another station at this location");
                 }
-                if (item.BusStationKey == station.BusStationKey)
+                if (item.BusStationKey == station.BusStationKey)  // if the bus station key alredy exist
                 {
                     throw new DuplicateWaitObjectException("this code already exist");
                 }
-                if (item.Name == station.Name)
+                if (item.Name == station.Name) // if the station name alredy exsit
                 {
                     throw new DuplicateWaitObjectException("this name already exist");
                 }
             }
             dl.AddBusStation(BusStationBoDoAdapter(station));
         }
+        /// <summary>
+        /// convert DO bus station to BO
+        /// </summary>
+        /// <param name="busDO">bus station DO to convert</param>
+        /// <returns>bus station in type of BO</returns>
         BO.BusStation BusStationDoBoAdapter(DO.BusStation busDO)
         {
             BO.BusStation busBO = new BO.BusStation();
             busDO.CopyPropertiesTo(busBO);
-            busBO.LineInStation = from line in GetAllLines()
+            busBO.LineInStation = from line in GetAllLines() // gets all lines that passing through this station
                                   from lines in line.LinesSta
                                   where lines.BusStationKey == busBO.BusStationKey
                                   orderby line.LineID
                                   select line;
             return busBO;
         }
+        /// <summary>
+        /// get all the station from dl
+        /// </summary>
+        /// <returns>all the buses stations there are in the system</returns>
         public IEnumerable<BO.BusStation> GetAllStations()
         {
             return from item in dl.GetAllStation()
                    orderby item.BusStationKey
                    select BusStationDoBoAdapter(item);
         }
-
+        /// <summary>
+        /// remove bus station from the system
+        /// </summary>
+        /// <param name="sta">bus station to remove</param>
         public void RemoveSta(BO.BusStation sta)
         {
             dl.RemoveSta(sta.BusStationKey);
         }
-
+        /// <summary>
+        /// Update time and distance between two station
+        /// </summary>
+        /// <param name="sta1">first station</param>
+        /// <param name="sta2">second station</param>
+        /// <param name="distance">distance between</param>
+        /// <param name="average">average time between</param>
         public void PairUpdate(int sta1,int sta2 , double distance, TimeSpan average)
         {
             if (sta1 == sta2)
@@ -340,18 +366,26 @@ namespace BL
                 throw new BO.BadStationException(ex.Message,ex);
             }
         }
+        /// <summary>
+        ///gets a time and station and check the 5 first bus lines that 
+        ///came to this bus station at this time 
+        ///and one line that already past there
+        /// </summary>
+        /// <param name="station">bus station to check</param>
+        /// <param name="time">time that the user wait in the station</param>
+        /// <returns></returns>
         public List<StationDistance> Avarge(BO.BusStation station, TimeSpan time)
         {
-            List<StationDistance> list = new List<StationDistance>();
-            foreach (var x in station.LineInStation)
+            List<StationDistance> list = new List<StationDistance>(); // list of all lines that past in this station and its time
+            foreach (var x in station.LineInStation) // loop on all lines in this station
             {
                 TimeSpan average = TimeSpan.Zero;
-                foreach (var y in x.LinesSta)
+                foreach (var y in x.LinesSta) // collect time until it came to this station 
                 {
                     average += y.AverageTime;
                     if (station.BusStationKey == y.BusStationKey)
                     {
-                        foreach (var item in x.LinesExit)
+                        foreach (var item in x.LinesExit) // loop of avrey line exsit foreach bus line and add this line and time to a new list
                         {
                             TimeSpan _average = average;
                             _average += item.StartAt;
@@ -369,15 +403,15 @@ namespace BL
                     }
                 }
             }
-            list = list.OrderBy(x => x.Average).ToList();
-            for (int i = 0; i < list.Count(); i++)
+            list = list.OrderBy(x => x.Average).ToList(); // sort the list of station distance by the time
+            for (int i = 0; i < list.Count(); i++) // loop until it came to time
             {
-                if (list[i].Average > time) 
+                if (list[i].Average >= time)
                 {
-                    List<StationDistance> list2 = new List<StationDistance>();
+                    List<StationDistance> list2 = new List<StationDistance>(); // list of only 5 first that came in this station and 1 before them
                     if (i != 0)
-                        list2.Add(list[i-1]);
-                    for (int j = 0; i < list.Count() && j < 5; j++)
+                        list2.Add(list[i - 1]);// add the last line that past in this station
+                    for (int j = 0; i < list.Count() && j < 5; j++) // add the first 5 lines that arrive to this station
                     {
                         list2.Add(new StationDistance
                         {

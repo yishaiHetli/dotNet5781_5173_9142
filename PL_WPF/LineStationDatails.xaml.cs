@@ -24,6 +24,12 @@ namespace PL_WPF
         IBL bl;
         List<LineStation> lines = new List<LineStation>();
         List<LineTrip> lineTrip = new List<LineTrip>();
+        /// <summary>
+        /// the program shows the datails  of the selected station
+        /// </summary>
+        /// <param name="_bl">the performance of the BL</param>
+        /// <param name="_lines">the list of the station</param>
+        /// <param name="_lineTrip">the list of trips</param>
         public LineStationDatails(IBL _bl, IEnumerable<LineStation> _lines, IEnumerable<LineTrip> _lineTrip)
         {
             bl = _bl;

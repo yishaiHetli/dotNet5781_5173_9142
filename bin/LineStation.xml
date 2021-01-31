@@ -83,32 +83,32 @@
   <LineStation>
     <LineID>1</LineID>
     <BusStationKey>38877</BusStationKey>
-    <LineStationIndex>5</LineStationIndex>
-  </LineStation>
-  <LineStation>
-    <LineID>1</LineID>
-    <BusStationKey>38898</BusStationKey>
     <LineStationIndex>6</LineStationIndex>
   </LineStation>
   <LineStation>
     <LineID>1</LineID>
-    <BusStationKey>38838</BusStationKey>
+    <BusStationKey>38898</BusStationKey>
     <LineStationIndex>7</LineStationIndex>
   </LineStation>
   <LineStation>
     <LineID>1</LineID>
-    <BusStationKey>38842</BusStationKey>
+    <BusStationKey>38838</BusStationKey>
     <LineStationIndex>8</LineStationIndex>
   </LineStation>
   <LineStation>
     <LineID>1</LineID>
-    <BusStationKey>38840</BusStationKey>
+    <BusStationKey>38842</BusStationKey>
     <LineStationIndex>9</LineStationIndex>
   </LineStation>
   <LineStation>
     <LineID>1</LineID>
-    <BusStationKey>38883</BusStationKey>
+    <BusStationKey>38840</BusStationKey>
     <LineStationIndex>10</LineStationIndex>
+  </LineStation>
+  <LineStation>
+    <LineID>1</LineID>
+    <BusStationKey>38883</BusStationKey>
+    <LineStationIndex>11</LineStationIndex>
   </LineStation>
   <LineStation>
     <LineID>2</LineID>
@@ -549,5 +549,10 @@
     <LineID>9</LineID>
     <BusStationKey>38888</BusStationKey>
     <LineStationIndex>10</LineStationIndex>
+  </LineStation>
+  <LineStation>
+    <LineID>1</LineID>
+    <BusStationKey>38832</BusStationKey>
+    <LineStationIndex>5</LineStationIndex>
   </LineStation>
 </LineStations>
